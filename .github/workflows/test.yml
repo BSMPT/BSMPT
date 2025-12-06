@@ -28,7 +28,7 @@ jobs:
     if: "!contains(github.event.head_commit.message, 'skip-ci')"
 
     steps:
-    - uses: actions/checkout@v5
+    - uses: actions/checkout@v6
       with:
           persist-credentials: false
         
@@ -81,4 +81,13 @@ jobs:
     
       
 
-
+  test_check:
+    needs: tests-fullSetup
+    if: |
+      always()
+      && github.event_name == 'pull_request'
+    env:
+      exit_code: ${{ fromJson('[1,0]')[contains(needs.*.result, 'success')] }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: exit $exit_code
