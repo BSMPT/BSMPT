@@ -331,7 +331,7 @@ public:
    *
    * @param Order of the potential
    */
-  void FindFlatDirections(const int &Order = 1);
+  void FindFlatDirections(const Order &order = Order::OneLoop);
 
   /**
    * @brief Convert point into minimal non-flat space, reduces dimension in case
@@ -344,7 +344,7 @@ public:
    *
    * @param Order of the potential
    */
-  void FindDiscreteSymmetries(const int &Order = 1);
+  void FindDiscreteSymmetries(const Order &order = Order::OneLoop);
 
   /**
    * @brief ConvertToVEVDim converts point from full to reduced (VEV) dimension
