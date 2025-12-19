@@ -244,7 +244,7 @@ class BSMPT(ConanFile):
             "gsl::gsl",
             # "Threads::Threads",
             "Utility",
-            # "Models",
+            "Models",
         ]
         self.cpp_info.components["Minimizer"].set_property(
             "cmake_target_name", "BSMPT::Minimizer"
@@ -272,7 +272,6 @@ class BSMPT(ConanFile):
         self.cpp_info.components["Models"].requires = [
             "gsl::gsl",
             "eigen::eigen",
-            "Minimizer",
             "ThermalFunctions",
             "Utility",
         ]

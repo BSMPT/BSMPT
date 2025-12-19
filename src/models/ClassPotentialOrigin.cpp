@@ -15,10 +15,8 @@
 
 #include <BSMPT/ThermalFunctions/NegativeBosonSpline.h>
 #include <BSMPT/ThermalFunctions/ThermalFunctions.h>
-#include <BSMPT/minimizer/Minimizer.h>
 #include <BSMPT/models/ClassPotentialOrigin.h>
 #include <BSMPT/models/IncludeAllModels.h>
-#include <BSMPT/models/modeltests/ModelTestfunctions.h>
 #include <BSMPT/utility/Logger.h>
 #include <BSMPT/utility/utility.h>
 using namespace Eigen;
