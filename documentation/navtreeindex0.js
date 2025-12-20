@@ -23,10 +23,13 @@ var NAVTREEINDEX0 =
 "ClassPotentialN2HDM_8h.html":[4,0,0,0,6,4],
 "ClassPotentialN2HDM_8h_source.html":[4,0,0,0,6,4],
 "ClassPotentialOrigin_8h.html":[4,0,0,0,6,5],
-"ClassPotentialOrigin_8h.html#a1b3a829fa1c864f44450da9df8771d64":[4,0,0,0,6,5,3],
-"ClassPotentialOrigin_8h.html#a668e05fb73b3d4ccb9bfa1bb8a623b79":[4,0,0,0,6,5,2],
-"ClassPotentialOrigin_8h.html#a8cfd2299c397c55c3f6ec497606602c6":[4,0,0,0,6,5,1],
-"ClassPotentialOrigin_8h.html#a97562ad68ec487c6b4a4cb4b1ab67357":[4,0,0,0,6,5,4],
+"ClassPotentialOrigin_8h.html#a1b3a829fa1c864f44450da9df8771d64":[4,0,0,0,6,5,4],
+"ClassPotentialOrigin_8h.html#a3d04e386a6938871d34ad1ae95d80cf8":[4,0,0,0,6,5,1],
+"ClassPotentialOrigin_8h.html#a3d04e386a6938871d34ad1ae95d80cf8a200497bff08d55054f8a2f5a86f1b829":[4,0,0,0,6,5,1,0],
+"ClassPotentialOrigin_8h.html#a3d04e386a6938871d34ad1ae95d80cf8a38c9bb0ef12593546d234ff18b294c4b":[4,0,0,0,6,5,1,1],
+"ClassPotentialOrigin_8h.html#a668e05fb73b3d4ccb9bfa1bb8a623b79":[4,0,0,0,6,5,3],
+"ClassPotentialOrigin_8h.html#a8cfd2299c397c55c3f6ec497606602c6":[4,0,0,0,6,5,2],
+"ClassPotentialOrigin_8h.html#a97562ad68ec487c6b4a4cb4b1ab67357":[4,0,0,0,6,5,5],
 "ClassPotentialOrigin_8h_source.html":[4,0,0,0,6,5],
 "ClassPotentialR2HDM_8h_source.html":[4,0,0,0,6,6],
 "ClassPotentialSM_8cpp.html":[4,0,1,4,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX0 =
 "NLOVEV_8cpp.html":[4,0,1,5,8],
 "NegativeBosonSpline_8cpp.html":[4,0,1,6,0],
 "NegativeBosonSpline_8cpp.html#a062ab089c6d9fefd5a4799a23a446b9a":[4,0,1,6,0,1],
-"NegativeBosonSpline_8cpp.html#abfde607bc1595b6eeccd62be17afbb8f":[4,0,1,6,0,2],
-"NegativeBosonSpline_8cpp.html#ae7be2f10cd4525049e5abd8460b3eabb":[4,0,1,6,0,0],
-"NegativeBosonSpline_8h.html":[4,0,0,0,7,0],
-"NegativeBosonSpline_8h.html#a062ab089c6d9fefd5a4799a23a446b9a":[4,0,0,0,7,0,2]
+"NegativeBosonSpline_8cpp.html#abfde607bc1595b6eeccd62be17afbb8f":[4,0,1,6,0,2]
 };

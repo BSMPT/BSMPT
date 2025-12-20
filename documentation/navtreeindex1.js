@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"NegativeBosonSpline_8cpp.html#ae7be2f10cd4525049e5abd8460b3eabb":[4,0,1,6,0,0],
+"NegativeBosonSpline_8h.html":[4,0,0,0,7,0],
+"NegativeBosonSpline_8h.html#a062ab089c6d9fefd5a4799a23a446b9a":[4,0,0,0,7,0,2],
 "NegativeBosonSpline_8h.html#abfde607bc1595b6eeccd62be17afbb8f":[4,0,0,0,7,0,3],
 "NegativeBosonSpline_8h.html#add366dbfd26c29f1f1af0d7085c9ef68":[4,0,0,0,7,0,1],
 "NegativeBosonSpline_8h.html#ae7be2f10cd4525049e5abd8460b3eabb":[4,0,0,0,7,0,0],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "classBSMPT_1_1BounceActionInt.html#a1537015cb4a851b7cb4b79f9d3c75edd":[2,0,0,0,53],
 "classBSMPT_1_1BounceActionInt.html#a154d273ccc9e07d7f4df5bb512b0b85c":[2,0,0,0,28],
 "classBSMPT_1_1BounceActionInt.html#a154d273ccc9e07d7f4df5bb512b0b85c":[3,0,0,6,28],
-"classBSMPT_1_1BounceActionInt.html#a182d04c01c45437c738b542836f9c61a":[3,0,0,6,10],
-"classBSMPT_1_1BounceActionInt.html#a182d04c01c45437c738b542836f9c61a":[2,0,0,0,10],
-"classBSMPT_1_1BounceActionInt.html#a1bdfa35af2862059236e530f1d2927ad":[3,0,0,6,27],
-"classBSMPT_1_1BounceActionInt.html#a1bdfa35af2862059236e530f1d2927ad":[2,0,0,0,27]
+"classBSMPT_1_1BounceActionInt.html#a182d04c01c45437c738b542836f9c61a":[3,0,0,6,10]
 };

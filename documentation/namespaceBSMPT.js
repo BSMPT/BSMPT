@@ -24,6 +24,10 @@ var namespaceBSMPT =
     [ "TransitionTracer", "classBSMPT_1_1TransitionTracer.html", "classBSMPT_1_1TransitionTracer" ],
     [ "user_input", "structBSMPT_1_1user__input.html", null ],
     [ "Vacuum", "structBSMPT_1_1Vacuum.html", "structBSMPT_1_1Vacuum" ],
+    [ "Order", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8", [
+      [ "TreeLevel", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8a200497bff08d55054f8a2f5a86f1b829", null ],
+      [ "OneLoop", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8a38c9bb0ef12593546d234ff18b294c4b", null ]
+    ] ],
     [ "StatusCoexPair", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4f", [
       [ "NotSet", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4fafaf396cbd83927b72a84d2616fac76ff", null ],
       [ "Success", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4fa505a83f220c02df2f85c3810cd9ceb38", null ],
