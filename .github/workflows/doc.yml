@@ -47,7 +47,7 @@ jobs:
         name: documentation
 
   UploadDocumentation:
-    #if:   github.event_name == 'push' && github.ref == 'refs/heads/master'
+    if:   github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: CreateDocumentation
     runs-on: ubuntu-latest
     steps:
