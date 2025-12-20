@@ -106,12 +106,12 @@ public:
   }
 
   double VEff(const std::vector<double> &v,
-              double Temp = 0,
-              int diff    = 0,
-              int Order   = 1) const override
+              double Temp        = 0,
+              int diff           = 0,
+              const Order &order = Order::OneLoop) const override
   {
     (void)diff;
-    (void)Order;
+    (void)order;
     double r = 0.152808 * (pow(Temp, 2) - pow(160, 2)) * pow(v[0], 2) +
                0.0322634 * pow(v[0], 4);
     return r;
