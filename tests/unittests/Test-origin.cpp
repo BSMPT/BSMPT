@@ -121,3 +121,32 @@ TEST_CASE("Check f_{abcd}", "[origin]")
     REQUIRE(result == Approx(expected).margin(1e-4));
   }
 }
+
+TEST_CASE("Check potential int -> Order cast", "[origin]")
+{
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::C2HDM, SMConstants);
+  modelPointer->initModel(example_point_C2HDM);
+
+  const std::vector<double> vev =
+      modelPointer->MinimizeOrderVEV({0., 20.4, 30.7, 40.2}); // random
+  const std::vector<double> T_list    = {0, 10, 50, 100, 300};
+  const std::vector<double> diff_list = {0};
+
+  for (const auto &T : T_list)
+    for (const auto &diff : diff_list)
+    {
+      REQUIRE(modelPointer->VEff(vev, T, diff, 0) ==
+              Approx(modelPointer->VEff(vev, T, diff, Order::TreeLevel))
+                  .margin(1e-8));
+      REQUIRE(modelPointer->VEff(vev, T, diff, 1) ==
+              Approx(modelPointer->VEff(vev, T, diff, Order::OneLoop))
+                  .margin(1e-8));
+      // In case we add 2-loop we get a warning from here
+      REQUIRE(modelPointer->VEff(vev, T, diff, 2) ==
+              Approx(modelPointer->VEff(vev, T, diff, Order::OneLoop))
+                  .margin(1e-8));
+    }
+}
