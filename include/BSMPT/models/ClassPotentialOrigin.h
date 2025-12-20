@@ -670,7 +670,7 @@ public:
    * @param Order 0 returns the tree level potential and 1 the NLO potential.
    * Default value is the NLO potential
    */
-  [[deprecated("Will call Veff with enum class Order. Consider using this "
+  [[deprecated("Will call VEff with enum class Order. Consider using this "
                "instead.")]] virtual double
   VEff(const std::vector<double> &v, double Temp, int diff, int Order) const;
 
@@ -684,9 +684,9 @@ public:
    * Default value is the NLO potential
    */
   virtual double VEff(const std::vector<double> &v,
-                      double Temp = 0,
-                      int diff    = 0,
-                      Order order = Order::OneLoop) const;
+                      double Temp        = 0,
+                      int diff           = 0,
+                      const Order &order = Order::OneLoop) const;
 
   /**
    * Calculates the tree-level potential and its derivatives.

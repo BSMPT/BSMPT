@@ -106,9 +106,9 @@ public:
   }
 
   double VEff(const std::vector<double> &v,
-              double Temp = 0,
-              int diff    = 0,
-              Order order = Order::OneLoop) const override
+              double Temp        = 0,
+              int diff           = 0,
+              const Order &order = Order::OneLoop) const override
   {
     (void)diff;
     (void)order;

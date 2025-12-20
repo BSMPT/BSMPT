@@ -2956,7 +2956,7 @@ double Class_Potential_Origin::VEff(const std::vector<double> &v,
 double Class_Potential_Origin::VEff(const std::vector<double> &v,
                                     double Temp,
                                     int diff,
-                                    Order order) const
+                                    const Order &order) const
 {
   if (v.size() != nVEV and v.size() != NHiggs)
   {
