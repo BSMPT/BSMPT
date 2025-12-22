@@ -15,7 +15,10 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }} 
   cancel-in-progress: true
-    
+
+
+permissions:
+  contents: write
     
 jobs:
   CreateDocumentation:
@@ -38,7 +41,7 @@ jobs:
      - run: python3 Setup.py --build-missing
      - run: cmake --preset conan-linux-x86_64-release
      - run: cmake --build --preset conan-linux-x86_64-release -j${{ steps.cpu-cores.outputs.count }} -t doc
-     - uses: actions/upload-artifact@v5
+     - uses: actions/upload-artifact@v6
        with:
         path: build/linux-x86_64-release/html
         name: documentation
@@ -49,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: actions/download-artifact@v6
+      - uses: actions/download-artifact@v7
         with:
           name: documentation
           path: documentation
