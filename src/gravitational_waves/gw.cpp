@@ -75,7 +75,8 @@ GravitationalWave::GravitationalWave(
   Logger::Write(LoggingLevel::GWDetailed, "HR = " + std::to_string(data.HR));
   Logger::Write(LoggingLevel::GWDetailed,
                 "gstar = " + std::to_string(data.gstar));
-  Logger::Write(LoggingLevel::GWDetailed, "T* = " + std::to_string(data.FGW0));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "FGW0 = " + std::to_string(data.FGW0));
   Logger::Write(LoggingLevel::GWDetailed,
                 "Hstar0 = " + std::to_string(data.Hstar0));
   Logger::Write(LoggingLevel::GWDetailed,
