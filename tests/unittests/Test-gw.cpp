@@ -942,7 +942,7 @@ TEST_CASE("Checking phase tracking and GW for BP3", "[gw]")
   trans.ListBounceSolution.at(0).UserDefined_vwall = -2;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.6539310662 ==
+  REQUIRE(0.5597359442 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 }
 
@@ -1036,7 +1036,7 @@ TEST_CASE("Checking phase tracking and GW for BP3 (low sample) and not "
   trans.ListBounceSolution.at(0).UserDefined_vwall = -2;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.6539310662 ==
+  REQUIRE(0.5597359442 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 }
 

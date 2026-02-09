@@ -1166,11 +1166,11 @@ void BounceSolution::CalculateWallVelocity(const Minimum &false_min,
     double b   = 1.704;
     double p   = -3.433;
 
-    vwall = std::pow(
-        pow(abs((3 * alpha + psi - 1) / (2 * (2 - 3 * psi + std::pow(psi, 3)))),
-            p / 2) +
-            std::pow(abs(vCJ * (1 - a * std::pow(1 - psi, b) / alpha)), p / 2),
-        1 / p);
+    const double xi_low = sqrt(
+        abs((3 * alpha + psi - 1) / (2 * (2 - 3 * psi + std::pow(psi, 3)))));
+    const double xi_high = abs(vCJ * (1 - a * std::pow(1 - psi, b) / alpha));
+
+    vwall = std::pow(pow(xi_low, p) + std::pow(xi_high, p), 1 / p);
   }
 }
 
