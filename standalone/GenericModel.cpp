@@ -139,7 +139,7 @@ int main()
       .01,                                /* compl_prbl */
       0.1,                                /* UserDefined_epsturb */
       7,                                  /* MaxPathIntegrations */
-      -1,                                 /* UseMultiStepPTMode */
+      MultiStepPTMode::Default,           /* UseMultiStepPTMode */
       10,                                 /* num_check_pts  */
       0,                                  /* CheckEWSymmetryRestoration*/
       0,                                  /* CheckNLOStability*/

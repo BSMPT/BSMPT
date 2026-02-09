@@ -411,7 +411,8 @@ TEST_CASE("Checking phase tracking for SM", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, -1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -436,7 +437,8 @@ TEST_CASE("Checking phase tracking for BP1 - Mode auto", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, -1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -461,7 +463,8 @@ TEST_CASE("Checking phase tracking for BP1 - Mode 0", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::OneStep, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -486,7 +489,8 @@ TEST_CASE("Checking phase tracking for BP1 - Mode 1", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::EdgeCoverage, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -510,7 +514,13 @@ TEST_CASE("Checking phase tracking for BP1 - Mode 2", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 2, 10, true);
+  Vacuum vac(0,
+             300,
+             MinTracer,
+             modelPointer,
+             MultiStepPTMode::CompleteCoverage,
+             10,
+             true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -535,7 +545,8 @@ TEST_CASE("Checking phase tracking for BP2 - Mode auto", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, -1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -560,7 +571,8 @@ TEST_CASE("Checking phase tracking for BP2 - Mode 0", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::OneStep, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -585,7 +597,8 @@ TEST_CASE("Checking phase tracking for BP2 - Mode 1", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::OneStep, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -610,7 +623,8 @@ TEST_CASE("Checking phase tracking for BP2 - Mode 2", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::OneStep, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -674,7 +688,8 @@ TEST_CASE("Checking phase tracking for BP3 with Mode 0", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::EdgeCoverage, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -695,7 +710,8 @@ TEST_CASE("Checking phase tracking for SM with Mode 1", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::EdgeCoverage, 10, true);
   SetLogger({"--logginglevel::mintracerdetailed=false"});
 
   REQUIRE(vac.PhasesList.size() == 2);
@@ -715,7 +731,13 @@ TEST_CASE("Checking phase tracking for SM with Mode 2", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 2, 10, true);
+  Vacuum vac(0,
+             300,
+             MinTracer,
+             modelPointer,
+             MultiStepPTMode::CompleteCoverage,
+             10,
+             true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }

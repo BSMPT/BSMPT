@@ -50,17 +50,17 @@ namespace BSMPT
 struct user_input
 {
   std::shared_ptr<Class_Potential_Origin> modelPointer;
-  double T_low            = 0;
-  double T_high           = 300;
-  double vwall            = 0.95;
-  double perc_prbl        = 0.71;
-  double compl_prbl       = 0.01;
-  double epsturb          = 0.1;
-  int maxpathintegrations = 7;
-  int multistepmode       = -1;
-  int num_points          = 10;
-  int ewsr_check          = 0;
-  int nlo_check           = 1;
+  double T_low                  = 0;
+  double T_high                 = 300;
+  double vwall                  = 0.95;
+  double perc_prbl              = 0.71;
+  double compl_prbl             = 0.01;
+  double epsturb                = 0.1;
+  int maxpathintegrations       = 7;
+  MultiStepPTMode multistepmode = MultiStepPTMode::Default;
+  int num_points                = 10;
+  int ewsr_check                = 0;
+  int nlo_check                 = 1;
 
   int which_minimizer     = Minimizer::WhichMinimizerDefault;
   bool use_multithreading = false;

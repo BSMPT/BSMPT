@@ -2304,7 +2304,7 @@ Vacuum::Vacuum(const double &T_lowIn,
                const double &T_highIn,
                std::shared_ptr<MinimumTracer> &MinTracerIn,
                std::shared_ptr<Class_Potential_Origin> &modelPointerIn,
-               const int &UseMultiStepPTModeIn,
+               const MultiStepPTMode &UseMultiStepPTModeIn,
                const int &num_pointsIn,
                const bool &do_only_tracingIn)
 {
@@ -2321,11 +2321,11 @@ Vacuum::Vacuum(const double &T_lowIn,
   status_coex_pairs = StatusCoexPair::NoCoexPairs; // flipped to success if coex
                                                    // phase pairs found
 
-  if (UseMultiStepPTMode == -1) // default
+  if (UseMultiStepPTMode == MultiStepPTMode::Default) // default
   {
     MultiStepPTTracer(T_high);
   }
-  else if (UseMultiStepPTMode >= 0)
+  else
   {
     std::vector<double> start_lowmin, start_highmin;
     for (std::size_t k = 0; k < modelPointer->get_nVEV(); k++)
@@ -2357,25 +2357,29 @@ Vacuum::Vacuum(const double &T_lowIn,
           MinTracer->GetGlobalMinimum(T_high, start_highmin));
     }
 
-    if (UseMultiStepPTMode == 0) // single-step phase transition mode
+    if (UseMultiStepPTMode ==
+        MultiStepPTMode::OneStep) // single-step phase transition mode
     {
       Logger::Write(LoggingLevel::MinTracerDetailed,
                     "Running multi-step PT mode 0.");
       MultiStepPTMode0(LowTempPoint, HighTempPoint);
     }
-    else if (UseMultiStepPTMode == 1) // enforce tracing coverage
+    else if (UseMultiStepPTMode ==
+             MultiStepPTMode::EdgeCoverage) // enforce tracing coverage
     {
       Logger::Write(LoggingLevel::MinTracerDetailed,
                     "Running multi-step PT mode 1.");
       MultiStepPTMode1(LowTempPoint, HighTempPoint);
     }
-    else if (UseMultiStepPTMode == 2) // enforce global minimum tracing coverage
+    else if (UseMultiStepPTMode ==
+             MultiStepPTMode::CompleteCoverage) // enforce global minimum
+                                                // tracing coverage
     {
       Logger::Write(LoggingLevel::MinTracerDetailed,
                     "Running multi-step PT mode 2.");
       MultiStepPTMode2(LowTempPoint, HighTempPoint);
     }
-    else if (UseMultiStepPTMode == 3) // automatic mode
+    else if (UseMultiStepPTMode == MultiStepPTMode::Auto) // automatic mode
     {
       Logger::Write(LoggingLevel::MinTracerDetailed,
                     "Running multi-step PT mode auto.");
@@ -2423,7 +2427,7 @@ Vacuum::Vacuum(const double &T_lowIn,
   }
 
   if (status_vacuum == StatusTracing::Success or
-      (UseMultiStepPTMode != 0 and
+      (UseMultiStepPTMode != MultiStepPTMode::OneStep and
        status_vacuum == StatusTracing::NoCoverage)) // no_coverage can get fixed
                                                     // in setCoexRegion
   {
@@ -2574,7 +2578,7 @@ void Vacuum::setCoexPhases()
   Logger::Write(LoggingLevel::MinTracerDetailed, ss2.str());
 }
 
-void Vacuum::setCoexRegion(const int &MultiStepPTMode)
+void Vacuum::setCoexRegion(const MultiStepPTMode &MultiStepPTMode)
 {
   std::vector<Minimum> edgesList, edgesListResult;
   std::vector<double> tempList;
@@ -2651,7 +2655,7 @@ void Vacuum::setCoexRegion(const int &MultiStepPTMode)
                           std::to_string(T_high_hole) + " GeV!");
         status_vacuum = StatusTracing::NoCoverage;
 
-        if (not(MultiStepPTMode == 0))
+        if (not(MultiStepPTMode == MultiStepPTMode::OneStep))
         {
           Logger::Write(LoggingLevel::MinTracerDetailed,
                         "\nTry to patch up gap between " +
