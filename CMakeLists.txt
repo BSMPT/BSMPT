@@ -5,9 +5,9 @@
 
 cmake_minimum_required(VERSION 3.23)
 <<<<<<< 205-infinite-loops-and-potential-memory-leaks-when-running-calctempscalcgw
-set(BSMPT_VERSION 3.1.7)
+set(BSMPT_VERSION 3.1.9)
 =======
-set(BSMPT_VERSION 3.1.8)
+set(BSMPT_VERSION 3.1.9)
 >>>>>>> master
 project(
   BSMPT
