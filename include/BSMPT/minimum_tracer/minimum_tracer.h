@@ -78,7 +78,7 @@ const std::unordered_map<StatusEWSR, std::string> StatusEWSRToString{
     {StatusEWSR::Failure, "failure"},
     {StatusEWSR::NotBFB, "non_bfb"},
     {StatusEWSR::FlatRegion, "flat_region"},
-    {StatusEWSR::EWSymNonRes, "ew_syum_non_res"},
+    {StatusEWSR::EWSymNonRes, "ew_sym_non_res"},
     {StatusEWSR::EWSymRes, "ew_sym_res"}};
 /**
  * @brief Possible tracing results
@@ -115,7 +115,7 @@ enum class StatusCoexPair
   NoCoexPairs
 };
 /**
- * @brief Map to convert StatusCoexPairToString to strins
+ * @brief Map to convert StatusCoexPairToString to strings
  *
  */
 const std::unordered_map<StatusCoexPair, std::string> StatusCoexPairToString{
@@ -135,7 +135,7 @@ enum class StatusCrit
   Failure
 };
 /**
- * @brief Map to convert StatusCritToString to strins
+ * @brief Map to convert StatusCritToString to strings
  *
  */
 const std::unordered_map<StatusCrit, std::string> StatusCritToString{
@@ -157,7 +157,7 @@ enum class StatusTemperature
   NaN
 };
 /**
- * @brief Map to convert StatusTemperature to strins
+ * @brief Map to convert StatusTemperature to strings
  *
  */
 const std::unordered_map<StatusTemperature, std::string>
@@ -176,13 +176,26 @@ enum class StatusGW
   Failure
 };
 /**
- * @brief Map to convert StatusGWToString to strins
+ * @brief Map to convert StatusGWToString to strings
  *
  */
 const std::unordered_map<StatusGW, std::string> StatusGWToString{
     {StatusGW::NotSet, "not_set"},
     {StatusGW::Success, "success"},
     {StatusGW::Failure, "failure"}};
+
+/**
+ * @brief Possible transitions temperatures
+ *
+ */
+enum class TransitionTemperature
+{
+  NotSet,
+  ApproxNucleation,
+  Nucleation,
+  Percolation,
+  Completion
+};
 
 /**
  * @brief Override << operator to handle StatusNLOStability
@@ -316,8 +329,10 @@ public:
 
   /**
    * @brief Calculates flat field directions
+   *
+   * @param Order of the potential
    */
-  void FindFlatDirections();
+  void FindFlatDirections(const Order &order = Order::OneLoop);
 
   /**
    * @brief Convert point into minimal non-flat space, reduces dimension in case
@@ -328,8 +343,9 @@ public:
   /**
    * @brief Calculates the list of symmetries that leave V unchanged
    *
+   * @param Order of the potential
    */
-  void FindDiscreteSymmetries();
+  void FindDiscreteSymmetries(const Order &order = Order::OneLoop);
 
   /**
    * @brief ConvertToVEVDim converts point from full to reduced (VEV) dimension

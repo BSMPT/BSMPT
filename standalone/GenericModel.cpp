@@ -106,12 +106,12 @@ public:
   }
 
   double VEff(const std::vector<double> &v,
-              double Temp = 0,
-              int diff    = 0,
-              int Order   = 1) const override
+              double Temp        = 0,
+              int diff           = 0,
+              const Order &order = Order::OneLoop) const override
   {
     (void)diff;
-    (void)Order;
+    (void)order;
     double r = 0.152808 * (pow(Temp, 2) - pow(160, 2)) * pow(v[0], 2) +
                0.0322634 * pow(v[0], 4);
     return r;
@@ -130,21 +130,24 @@ int main()
       std::dynamic_pointer_cast<Class_Potential_OriginDerived>(
           modelPointerDerived);
 
-  user_input input{modelPointer,          /* modelPointer */
-                   0,                     /* templow */
-                   400,                   /* temphigh */
-                   0.95,                  /* UserDefined_vwall */
-                   .71,                   /* perc_prbl */
-                   .01,                   /* compl_prbl */
-                   0.1,                   /* UserDefined_epsturb */
-                   7,                     /* MaxPathIntegrations */
-                   -1,                    /* UseMultiStepPTMode */
-                   10,                    /* num_check_pts  */
-                   0,                     /* CheckEWSymmetryRestoration*/
-                   0,                     /* CheckNLOStability*/
-                   WhichMinimizerDefault, /* WhichMinimizer*/
-                   false,                 /* GW calculation*/
-                   true};                 /* WhichTransitionTemperature*/
+  user_input input{
+      modelPointer,                       /* modelPointer */
+      0,                                  /* templow */
+      400,                                /* temphigh */
+      0.95,                               /* UserDefined_vwall */
+      .71,                                /* perc_prbl */
+      .01,                                /* compl_prbl */
+      0.1,                                /* UserDefined_epsturb */
+      7,                                  /* MaxPathIntegrations */
+      -1,                                 /* UseMultiStepPTMode */
+      10,                                 /* num_check_pts  */
+      0,                                  /* CheckEWSymmetryRestoration*/
+      0,                                  /* CheckNLOStability*/
+      WhichMinimizerDefault,              /* WhichMinimizer*/
+      false,                              /* use multithreading */
+      true,                               /* gw calculation */
+      TransitionTemperature::Percolation, /* WhichTransitionTemperature */
+      1};                                 /* UserDefined_PNLO_scaling */
 
   TransitionTracer trans(input);
 

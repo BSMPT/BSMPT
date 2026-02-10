@@ -135,7 +135,9 @@ try
                        args.CheckNLOStability,
                        args.WhichMinimizer,
                        args.UseMultithreading,
-                       false};
+                       false,
+                       TransitionTemperature::Percolation,
+                       1};
 
       TransitionTracer trans(input);
 
@@ -145,7 +147,7 @@ try
                   1000.;
 
       BSMPT::Logger::Write(BSMPT::LoggingLevel::ProgDetailed,
-                           "Took\t" + std::to_string(time) + " seconds.\n");
+                           "\nTook\t" + std::to_string(time) + " seconds.\n");
 
       auto output = trans.output_store;
 

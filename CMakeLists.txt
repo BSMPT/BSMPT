@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 cmake_minimum_required(VERSION 3.23)
-set(BSMPT_VERSION 3.0.8)
+set(BSMPT_VERSION 3.1.7)
 project(
   BSMPT
   VERSION ${BSMPT_VERSION}
@@ -55,7 +55,7 @@ if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Release")
 endif(NOT CMAKE_BUILD_TYPE)
 
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin")
 
 include(LTO)
 
@@ -98,7 +98,7 @@ endif()
 set(EXPORT_CMAES FALSE)
 include(FetchContent)
 if(UseLibCMAES)
-  find_package(cmaes CONFIG REQUIRED)
+  find_package(libcmaes 0.10.2 CONFIG REQUIRED)
 endif(UseLibCMAES)
 
 if(UseNLopt)
@@ -116,7 +116,7 @@ if(UseNLopt)
 
 endif(UseNLopt)
 
-if(NOT cmaes_FOUND AND NOT NLopt_FOUND)
+if(NOT libcmaes_FOUND AND NOT NLopt_FOUND)
   message(FATAL_ERROR "You need at least libcmaes or NLopt.")
 endif()
 

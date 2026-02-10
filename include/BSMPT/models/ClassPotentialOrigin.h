@@ -45,6 +45,16 @@ const double C_CWcbGB = 5.0 / 6.0;
 const double C_CWcbHiggs = 1.5;
 
 /**
+ * @brief Order of the potential
+ *
+ */
+enum class Order
+{
+  TreeLevel,
+  OneLoop
+};
+
+/**
  * @brief The Class_Potential_Origin class
  * Base class for all models. This class contains all numerical calculations on
  * the tensors and the inherited classes only have to set them.
@@ -660,10 +670,24 @@ public:
    * @param Order 0 returns the tree level potential and 1 the NLO potential.
    * Default value is the NLO potential
    */
+  [[deprecated("Will call VEff with enum class Order. Consider using this "
+               "instead.")]] virtual double
+  VEff(const std::vector<double> &v, double Temp, int diff, int Order) const;
+
+  /**
+   * Calculates the effective potential and its derivatives.
+   * @param v vev configuration at which the potential should be evaluated
+   * @param Temp temperature at which the potential should be evaluated
+   * @param diff Switch for the derivative of the potential. Default is 0 for
+   * the value of the potential
+   * @param Order 0 returns the tree level potential and 1 the NLO potential.
+   * Default value is the NLO potential
+   */
   virtual double VEff(const std::vector<double> &v,
-                      double Temp = 0,
-                      int diff    = 0,
-                      int Order   = 1) const;
+                      double Temp        = 0,
+                      int diff           = 0,
+                      const Order &order = Order::OneLoop) const;
+
   /**
    * Calculates the tree-level potential and its derivatives.
    * @param v the configuration of all VEVs at which the potential should be

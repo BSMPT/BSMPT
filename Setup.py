@@ -117,16 +117,14 @@ def check_profile(profile):
 
 def get_compiler_version(compiler: Compiler):
     if sys.platform == "linux" and compiler != Compiler.clang:
-        version_response = subprocess.check_output(
-            "gcc --version".split(), encoding="UTF-8"
-        ).partition("\n")[0]
-        semver_string = version_response[version_response.rfind(" ") + 1 :]
+        semver_string = subprocess.check_output(
+            "gcc -dumpversion".split(), encoding="UTF-8"
+        ).split("\n")[0]
         return semver_string.partition(".")[0]
     elif sys.platform == "darwin" or compiler == Compiler.clang:
-        version_response = subprocess.check_output(
-            "clang --version".split(), encoding="UTF-8"
-        ).partition("\n")[0]
-        semver_string = version_response[version_response.rfind("version") + 8 :]
+        semver_string = subprocess.check_output(
+            "clang -dumpversion".split(), encoding="UTF-8"
+        )
         return semver_string.partition(".")[0]
     return ""
 
@@ -145,39 +143,6 @@ def setup_profiles():
     if os.path.exists(profile_dir):
         shutil.rmtree(profile_dir)
     shutil.copytree("profiles/BSMPT", profile_dir)
-
-def setup_cmaes():
-    file_directory = Path(__file__).parent.absolute()
-    cmaes_dir = os.path.join(file_directory, "tools", "conan", "cmaes","all")
-
-    # Define the recipe name
-    recipe = "cmaes/0.10.0@bsmpt/local"
-
-    try:
-        # Run the conan search command and capture the output
-        
-        result = subprocess.check_output(f"conan list {recipe} -c".split(), stderr=subprocess.STDOUT, text=True)
-        
-        
-        # Check if the output indicates the recipe is not found
-        if "ERROR: Recipe" in result:
-            print(f"Recipe '{recipe}' not found. Exporting...")
-            subprocess.check_output("conan export conanfile.py --version 0.10.0 --user bsmpt --channel local".split(), cwd=cmaes_dir)
-            print(f"Recipe '{recipe}' successfully exported.")
-        else:
-            print(f"Recipe '{recipe}' already exists in the local cache.")
-    except subprocess.CalledProcessError as e:
-        # Handle errors from the subprocess
-        error_output = e.output.decode("utf-8")  # Decode the error output for debugging
-        if "ERROR: Recipe" in error_output:
-            print(f"Recipe '{recipe}' not found in local cache. Exporting...")
-            subprocess.check_output("conan export conanfile.py --version 0.10.0 --user bsmpt --channel local".split(), cwd=cmaes_dir)
-            print(f"Recipe '{recipe}' successfully exported.")
-        else:
-            # If another error occurs, print the error output
-            print(f"An error occurred: {error_output}")
-
-    
 
     
 
@@ -271,6 +236,8 @@ class ArgTypeEnum(Enum):
     def __str__(self):
         return self.name
 
+def prepare():
+    setup_profiles()
 
 def parse_arguments():
     parser = ArgumentParser()
@@ -320,8 +287,7 @@ def parse_arguments():
 if __name__ == "__main__":
 
     opts = parse_arguments()
-    setup_cmaes()
-    setup_profiles()
+    prepare()
 
     options = []
     if opts.options is not None:

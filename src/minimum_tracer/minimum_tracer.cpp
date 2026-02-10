@@ -704,7 +704,7 @@ void MinimumTracer::ReduceVEV(std::vector<double> &vev)
   int MaximumMeasure = -1;
   char *ptr;
   std::string BinaryNumber;
-  for (auto GroupElement : GroupElements)
+  for (const auto &GroupElement : GroupElements)
   {
     // Clean buffer
     BinaryNumber.clear();
@@ -773,7 +773,7 @@ MinimumTracer::MinimumTracer(
   FindFlatDirections();
 }
 
-void MinimumTracer::FindFlatDirections()
+void MinimumTracer::FindFlatDirections(const Order &order)
 {
   // The number 2, 100, 200 were choosen arbitrarily as an example of a S0(3)
   // rotation
@@ -798,40 +798,40 @@ void MinimumTracer::FindFlatDirections()
         point.at(j) = 100;
         point.at(k) = 200;
         res_1       = this->modelPointer->VEff(
-            this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+            this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
         point.at(i) = 2;
         point.at(j) = 200;
         point.at(k) = 100;
         res_2       = this->modelPointer->VEff(
-            this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+            this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
         if (almost_the_same(res_1, res_2, 1e-8))
         {
           point.at(i) = 100;
           point.at(j) = 2;
           point.at(k) = 200;
           res_1       = this->modelPointer->VEff(
-              this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+              this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
           if (almost_the_same(res_1, res_2, 1e-8))
           {
             point.at(i) = 100;
             point.at(j) = 200;
             point.at(k) = 2;
             res_2       = this->modelPointer->VEff(
-                this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+                this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
             if (almost_the_same(res_1, res_2, 1e-8))
             {
               point.at(i) = 200;
               point.at(j) = 2;
               point.at(k) = 100;
               res_1       = this->modelPointer->VEff(
-                  this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+                  this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
               if (almost_the_same(res_1, res_2, 1e-8))
               {
                 point.at(i) = 200;
                 point.at(j) = 100;
                 point.at(k) = 2;
                 res_2       = this->modelPointer->VEff(
-                    this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+                    this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
                 if (almost_the_same(res_1, res_2, 1e-8))
                 {
                   NonFlatDirections.at(j) = 0; // choose one point in sphere
@@ -861,11 +861,11 @@ void MinimumTracer::FindFlatDirections()
       point.at(i) = 2;
       point.at(j) = 100;
       res_1       = this->modelPointer->VEff(
-          this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+          this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
       point.at(i) = 100;
       point.at(j) = 2;
       res_2       = this->modelPointer->VEff(
-          this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+          this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
       point.at(i) = 1;
       point.at(j) = 1;
 
@@ -883,10 +883,10 @@ void MinimumTracer::FindFlatDirections()
   {
     point.at(i) = 2;
     res_1       = this->modelPointer->VEff(
-        this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+        this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
     point.at(i) = 100;
     res_2       = this->modelPointer->VEff(
-        this->modelPointer->MinimizeOrderVEV(point), 0, 0, 0);
+        this->modelPointer->MinimizeOrderVEV(point), 0, 0, order);
     point.at(i) = 1;
 
     if (almost_the_same(res_1, res_2, 1e-8))
@@ -962,7 +962,7 @@ void MinimumTracer::ConvertToNonFlatDirections(std::vector<double> &point)
   return;
 }
 
-void MinimumTracer::FindDiscreteSymmetries()
+void MinimumTracer::FindDiscreteSymmetries(const Order &order)
 {
   const double GroupElementslMaximumRelativeError =
       1e-8; // Maximum value of |V/GroupElements(V)-1|
@@ -975,7 +975,7 @@ void MinimumTracer::FindDiscreteSymmetries()
     // Potential wrapper at T=0 for tree-level potential
     std::vector<double> res = this->modelPointer->MinimizeOrderVEV(
         std::vector<double>(vev.data(), vev.data() + vev.size()));
-    return this->modelPointer->VEff(res, 0, 0, 0);
+    return this->modelPointer->VEff(res, 0, 0, order);
   };
 
   // Generate random VEV
@@ -2902,17 +2902,26 @@ std::vector<std::string> MinimumTracer::GetLegend(const int &num_coex_phases,
     if (do_gw_calc)
     {
       legend.push_back("status_gw_" + std::to_string(i));
-      legend.push_back("trans_temp_" + std::to_string(i));
+      legend.push_back("T_star_" + std::to_string(i));
+      legend.push_back("T_reh_" + std::to_string(i));
       legend.push_back("v_wall_" + std::to_string(i));
       legend.push_back("alpha_PT_" + std::to_string(i));
       legend.push_back("beta/H_" + std::to_string(i));
-      legend.push_back("K_sw_" + std::to_string(i));
-      legend.push_back("fpeak_sw_" + std::to_string(i));
-      legend.push_back("h2OmegaPeak_sw_" + std::to_string(i));
+      legend.push_back("kappa_col_" + std::to_string(i));
+      legend.push_back("kappa_sw_" + std::to_string(i));
+      legend.push_back("eps_turb_" + std::to_string(i));
+      legend.push_back("cs_f_" + std::to_string(i));
+      legend.push_back("cs_t_" + std::to_string(i));
+      legend.push_back("fb_col_" + std::to_string(i));
+      legend.push_back("h2Omegab_col_" + std::to_string(i));
+      legend.push_back("f_1_sw_" + std::to_string(i));
+      legend.push_back("f_2_sw_" + std::to_string(i));
+      legend.push_back("h2Omega_2_sw_" + std::to_string(i));
+      legend.push_back("f_1_turb_" + std::to_string(i));
+      legend.push_back("f_2_turb_" + std::to_string(i));
+      legend.push_back("h2Omega_2_turb_" + std::to_string(i));
+      legend.push_back("SNR(LISA-3yrs)_col_" + std::to_string(i));
       legend.push_back("SNR(LISA-3yrs)_sw_" + std::to_string(i));
-      legend.push_back("K_turb_" + std::to_string(i));
-      legend.push_back("fpeak_turb_" + std::to_string(i));
-      legend.push_back("h2OmegaPeak_turb_" + std::to_string(i));
       legend.push_back("SNR(LISA-3yrs)_turb_" + std::to_string(i));
       legend.push_back("SNR(LISA-3yrs)_" + std::to_string(i));
     }

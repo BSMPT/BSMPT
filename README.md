@@ -4,18 +4,18 @@ SPDX-FileCopyrightText: 2021 Philipp Basler, Margarete Mühlleitner and Jonas M�
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-Program: BSMPT version 3.0.8
+Program: BSMPT version 3.1.7
 
 Released by: Philipp Basler, Lisa Biermann, Margarete Mühlleitner, Jonas Müller, Rui Santos and João Viana
 
-[![GitHub Discussions](https://img.shields.io/badge/%20GitHub-%20Discussions-gray.svg?longCache=true&logo=github&colorB=purple)](https://github.com/phbasler/BSMPT/discussions)
-[![Unit tests](https://github.com/phbasler/BSMPT/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/phbasler/BSMPT/actions/workflows/test.yml)
-[![codecov master](https://codecov.io/gh/phbasler/BSMPT/branch/master/graph/badge.svg?token=LDGNQTADB5)](https://codecov.io/gh/phbasler/BSMPT)
+[![GitHub Discussions](https://img.shields.io/badge/%20GitHub-%20Discussions-gray.svg?longCache=true&logo=github&colorB=purple)](https://github.com/BSMPT/BSMPT/discussions)
+[![Unit tests](https://github.com/BSMPT/BSMPT/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/BSMPT/BSMPT/actions/workflows/test.yml)
+[![codecov master](https://codecov.io/gh/BSMPT/BSMPT/branch/master/graph/badge.svg?token=LDGNQTADB5)](https://codecov.io/gh/BSMPT/BSMPT)
 [![Documentation](https://img.shields.io/badge/Documentation-master-success)][DoxygenLink]
-[![Benchmarks](https://img.shields.io/badge/Benchmark-master-success)](https://phbasler.github.io/BSMPT/benchmarks/)
-[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/phbasler/bsmpt/graphs/commit-activity)
-[![GitHub license](https://img.shields.io/github/license/phbasler/bsmpt.svg)](https://github.com/phbasler/BSMPT/blob/master/LICENSE.md)
-[![Latest release](https://badgen.net/github/release/phbasler/bsmpt)](https://github.com/phbasler/bsmpt/releases)
+[![Benchmarks](https://img.shields.io/badge/Benchmark-master-success)](https://BSMPT.github.io/BSMPT/benchmarks/)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/BSMPT/bsmpt/graphs/commit-activity)
+[![GitHub license](https://img.shields.io/github/license/BSMPT/bsmpt.svg)](https://github.com/BSMPT/BSMPT/blob/master/LICENSE.md)
+[![Latest release](https://badgen.net/github/release/BSMPT/bsmpt)](https://github.com/BSMPT/bsmpt/releases)
 
 
 Manual: version 3.0
@@ -46,9 +46,9 @@ The code is structured such that users can add their own models.
 
 
 The program package can be downloaded at:
-https://github.com/phbasler/BSMPT
+https://github.com/BSMPT/BSMPT
 
-The documentation of the code is provided at [https://phbasler.github.io/BSMPT/documentation][DoxygenLink].
+The documentation of the code is provided at [https://BSMPT.github.io/BSMPT/documentation][DoxygenLink].
 
 Sample input and output files are provided in the directory 'example'.
 
@@ -56,7 +56,7 @@ Modifications and corrected bugs are reported in the file 'Changelog.md'.
 
 
 
-For additional information, comments, complaints or suggestions open a corresponding [issue](https://github.com/phbasler/BSMPT/issues) or start a [discussion](https://github.com/phbasler/BSMPT/discussions). For non-public matters please send an e-mail to bsmpt@lists.kit.edu.
+For additional information, comments, complaints or suggestions open a corresponding [issue](https://github.com/BSMPT/BSMPT/issues) or start a [discussion](https://github.com/BSMPT/BSMPT/discussions). For non-public matters please send an e-mail to bsmpt@lists.kit.edu.
 
 ---
 
@@ -146,12 +146,11 @@ To add a new model, you have to modify/create five files (for further details, a
         case ModelIDs::YourModel: return std::make_unique<Class_YourModel>(); break;
 
 ### Generate the C++ code for a model
-We provide currently two methods to generate the tensors and calculate the counter terms for a new model.
+We provide currently three methods to generate the tensors and calculate the counter terms for a new model.
 
-1. At `tools/ModelGeneration/Maple` we provide the maple Worksheet `CreateModel.mw` which you can use to implement your model and get the tensors.
-2. At `tools/ModelGeneration/sympy` we provide a setup using only `python3` with `sympy` (at least version 1.10!, if your packet manager only has an older installed, e.g. ubuntu 20.04 only has v1.6, then you have to install v1.10 or up with pip). Here we provide two examples, `SM.py` and `G2HDM.py` (generic 2HDM) which both use the `ModelGenerator.py` module to calculate the tensors and CT. You can get the CT using `python3 SM.py --show ct` and the tensors by calling `python3 SM.py --show tensors`. If your counterterms don't have a unique solution, then the solution space will be shown to you and you have to add additional equations until you have a unique solution (e.g. in the G2HDM example).
-3. To show the simplified tree-level and counterterm potentials, you can use `python3 SM.py --show treeSimpl` and `python3 SM.py --show CTSimpl`.
-
+1. At `tools/ModelGeneration/sympy` we provide a setup using only `python3` with `sympy` (at least version 1.10!, if your packet manager only has an older installed, e.g. ubuntu 20.04 only has v1.6, then you have to install v1.10 or up with pip). Here we provide two examples, `SM.py` and `G2HDM.py` (generic 2HDM) which both use the `ModelGenerator.py` module to calculate the tensors and CT. You can get the CT using `python3 SM.py --show ct` and the tensors by calling `python3 SM.py --show tensors`. If your counterterms don't have a unique solution, then the solution space will be shown to you and you have to add additional equations until you have a unique solution (e.g. in the G2HDM example). To show the simplified tree-level and counterterm potentials, you can use `python3 SM.py --show treeSimpl` and `python3 SM.py --show CTSimpl`.
+2. At `tools/ModelGeneration/Mathematica` we provide a Mathematica framework to implement your model.
+3. At `tools/ModelGeneration/Maple` we provide the maple Worksheet `CreateModel.mw` which you can use to implement your model and get the tensors.
 
 
 You can use the Test executable to detect possible errors in your implementation. If the Test executable does not show you an error, but something is still wrong, contact us at bsmpt@lists.kit.edu
@@ -219,4 +218,4 @@ wall as a function of the distance to the bubble wall.
 
 
 
-[DoxygenLink]: https://phbasler.github.io/BSMPT/documentation
+[DoxygenLink]: https://BSMPT.github.io/BSMPT/documentation

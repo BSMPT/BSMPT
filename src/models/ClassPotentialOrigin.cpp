@@ -15,10 +15,8 @@
 
 #include <BSMPT/ThermalFunctions/NegativeBosonSpline.h>
 #include <BSMPT/ThermalFunctions/ThermalFunctions.h>
-#include <BSMPT/minimizer/Minimizer.h>
 #include <BSMPT/models/ClassPotentialOrigin.h>
 #include <BSMPT/models/IncludeAllModels.h>
-#include <BSMPT/models/modeltests/ModelTestfunctions.h>
 #include <BSMPT/utility/Logger.h>
 #include <BSMPT/utility/utility.h>
 using namespace Eigen;
@@ -2950,6 +2948,14 @@ double Class_Potential_Origin::VEff(const std::vector<double> &v,
                                     int diff,
                                     int Order) const
 {
+  return VEff(v, Temp, diff, (Order == 0) ? Order::TreeLevel : Order::OneLoop);
+}
+
+double Class_Potential_Origin::VEff(const std::vector<double> &v,
+                                    double Temp,
+                                    int diff,
+                                    const Order &order) const
+{
   if (v.size() != nVEV and v.size() != NHiggs)
   {
     std::string ErrorString =
@@ -2978,7 +2984,7 @@ double Class_Potential_Origin::VEff(const std::vector<double> &v,
 
   double resOut = 0;
   resOut        = VTree(v, diff);
-  if (Order != 0 and not UseTreeLevel)
+  if (order != Order::TreeLevel and not UseTreeLevel)
   {
     resOut += CounterTerm(v, diff);
     resOut += V1Loop(v, Temp, diff);
