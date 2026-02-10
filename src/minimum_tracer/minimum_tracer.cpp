@@ -2230,6 +2230,12 @@ void Vacuum::PrintPhasesDiagram(int size)
   if (not Logger::GetLoggingLevelStatus(LoggingLevel::MinTracerDetailed))
     return;
 
+  if (PhasesList.size() == 0)
+  {
+    Logger::Write(LoggingLevel::MinTracerDetailed,
+                  "Cannot print phase diagram. No phase found.");
+    return;
+  }
   std::stringstream ss;
   std::vector<double> T_list;
   std::vector<std::vector<double>> PhaseListPlot;
@@ -2433,6 +2439,8 @@ Vacuum::Vacuum(const double &T_lowIn,
   {
     orderPhases();
   }
+
+  PrintPhasesDiagram();
 
   return;
 }
@@ -2808,11 +2816,6 @@ void Vacuum::orderPhases()
 
   // identify coexisiting phase regions
   setCoexRegion(UseMultiStepPTMode); // can flip status_vacuum to error code
-
-  if (PhasesList.size() > 0)
-  {
-    PrintPhasesDiagram();
-  }
 
   if ((status_coex_pairs == StatusCoexPair::Success) and (not do_only_tracing))
   {
