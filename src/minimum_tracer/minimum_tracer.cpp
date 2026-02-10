@@ -2518,8 +2518,9 @@ void Vacuum::MultiStepPTTracer(const double &Temp, const double &deltaT)
     Phase phase(Temp, T_high, T_low, MinTracer);
     addPhase(phase);
     print(phase);
-
-    MultiStepPTTracer(phase.T_low, -1);
+    // phase found and we managed to go lower in temperature
+    if (phase.MinimumPhaseVector.size() > 1 and phase.T_low != Temp)
+      MultiStepPTTracer(phase.T_low, -1);
   }
   else // found last traced phase again
   {
