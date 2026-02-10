@@ -416,6 +416,3 @@ baseQuarks] (*Quark fields*)
 
 
 
-
-
-
