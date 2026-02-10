@@ -61,7 +61,9 @@ include(LTO)
 
 find_package(PkgConfig)
 find_package(Eigen3 CONFIG REQUIRED)
-find_package(Boost CONFIG)
+if(BSMPTCompileBaryo)
+  find_package(Boost CONFIG)
+endif()
 find_package(GSL CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG)
 
