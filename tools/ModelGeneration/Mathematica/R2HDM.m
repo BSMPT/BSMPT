@@ -13,7 +13,7 @@
 
 
 (*Default renormalization scheme is ~246.22 GeV. Do you want to use a different one?*)
-CustomRenormalizationScheme = True;
+CustomRenormalizationScheme = False;
 
 
 (*Define higgs fields*)
@@ -413,6 +413,9 @@ CTCurvatureL4, (*Counterterm scalar curvatures L4 (calculated automatically)*)
 GaugeBasis, (*Gauge fields*)
 LepBase, (*Leptonic fields*)
 baseQuarks] (*Quark fields*)
+
+
+
 
 
 

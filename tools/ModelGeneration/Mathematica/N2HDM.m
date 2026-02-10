@@ -13,7 +13,7 @@
 
 
 (*Default renormalization scheme is ~246.22 GeV. Do you want to use a different one?*)
-CustomRenormalizationScheme = True;
+CustomRenormalizationScheme = False;
 
 
 (*Define higgs fields*)
