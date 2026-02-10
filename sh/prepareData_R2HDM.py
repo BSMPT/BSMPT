@@ -43,13 +43,6 @@ def convert(IndexCol, InputFILE, OutputFILE, Seperator):
     m12squared = get_column_names(m12squared_names, df)
     tanbeta = get_column_names(tanbeta_names, df)
 
-def convert(IndexCol):
-    df = pd.DataFrame()
-    if IndexCol == "False":
-        df = pd.read_table(InputFILE, index_col=False, sep=Seperator)
-    else:
-        df = pd.read_table(InputFILE, index_col=int(IndexCol), sep=Seperator)
-
     frontcol = [Type, Lambda1, Lambda2, Lambda3, Lambda4, Lambda5, m12squared, tanbeta]
 
     Col = [c for c in frontcol if c in df] + [c for c in df if c not in frontcol]
