@@ -58,7 +58,7 @@ class BSMPT(ConanFile):
     def requirements(self):
         self.requires("eigen/3.4.0", transitive_headers=True, transitive_libs=True)
         self.requires("gsl/2.7.1", transitive_headers=True, transitive_libs=True)
-        self.requires("nlohmann_json/3.11.3", transitive_headers=True)
+        self.requires("nlohmann_json/3.11.3", transitive_headers=False)
 
         if self.options.CompileBaryo:
             self.requires("boost/1.84.0", transitive_headers=True, transitive_libs=True)
