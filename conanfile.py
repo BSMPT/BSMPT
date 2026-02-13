@@ -175,22 +175,13 @@ class BSMPT(ConanFile):
 
     def package_info(self):
         self.cpp_info.components["ASCIIPlotter"].libs = ["ASCIIPlotter"]
-        self.cpp_info.components["ASCIIPlotter"].requires = [
-            "nlohmann_json::nlohmann_json",
-        ]
+
         self.cpp_info.components["ASCIIPlotter"].set_property(
             "cmake_target_name", "BSMPT::ASCIIPlotter"
         )
 
-        if self.options.CompileBaryo:
-            self.cpp_info.components["ASCIIPlotter"].requires.append(
-                "boost::boost",
-            )
-
         self.cpp_info.components["Spline"].libs = ["Spline"]
-        self.cpp_info.components["Spline"].requires = [
-            "nlohmann_json::nlohmann_json",
-        ]
+
         self.cpp_info.components["Spline"].set_property(
             "cmake_target_name", "BSMPT::Spline"
         )
