@@ -443,7 +443,12 @@ CLIOptions::CLIOptions(const BSMPT::parser &argparser)
       case 1: UseMultiStepPTMode = MultiStepPTMode::EdgeCoverage; break;
       case 2: UseMultiStepPTMode = MultiStepPTMode::CompleteCoverage; break;
 
-      default: ss << "--multistepmode invalid using default instead"; break;
+      default:
+      {
+        ss << "--multistepmode invalid using 'default' instead";
+        UseMultiStepPTMode = MultiStepPTMode::Default;
+        break;
+      }
       }
     }
   }
