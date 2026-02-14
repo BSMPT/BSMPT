@@ -27,10 +27,10 @@ jobs:
         if: "!contains(github.event.head_commit.message, 'skip-ci')"
     
         steps:
-          - uses: actions/checkout@v4
+          - uses: actions/checkout@v6
             with:
               persist-credentials: false
-          - uses: actions/setup-python@v5
+          - uses: actions/setup-python@v6
             with:
               python-version: '3.x'
               architecture: 'x64'
@@ -40,3 +40,14 @@ jobs:
           - run: python3 Setup.py --build-missing
 
           - run: python3 Setup.py --create --build-missing --options EnableTests=True
+
+    conan_check:
+      needs: conan
+      if: |
+        always()
+        && github.event_name == 'pull_request'
+      env:
+        exit_code: ${{ fromJson('[1,0]')[contains(needs.*.result, 'success')] }}
+      runs-on: ubuntu-latest
+      steps:
+        - run: exit $exit_code
