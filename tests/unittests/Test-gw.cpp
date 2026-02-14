@@ -612,6 +612,36 @@ TEST_CASE("Checking phase tracking for BP3 with Mode 0", "[gw]")
   REQUIRE(vac.PhasesList.size() == 2);
 }
 
+TEST_CASE("Checking cxsm minimum tracer for unstable point", "[gw]")
+{
+  const std::vector<double> example_point_CXSM{
+      /* v = */ 246.2196507941373,
+      /* vs = */ 97.86188905787236,
+      /* va = */ 5854.836718722312,
+      /* msq = */ 2978624.443924315,
+      /* lambda = */ 1.3954770017388805,
+      /* delta2 = */ -0.1762052868308751,
+      /* b2 = */ -595974.1019400867,
+      /* d2 = */ 0.0362256561577312,
+      /* Reb1 = */ 19749.899301323545,
+      /* Imb1 = */ 0,
+      /* Rea1 = */ -1366669.4378796923,
+      /* Ima1 = */ 0};
+
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::CXSM, SMConstants);
+  modelPointer->initModel(example_point_CXSM);
+
+  std::shared_ptr<MinimumTracer> MinTracer(
+      new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
+
+  REQUIRE(vac.PhasesList.size() == 2);
+}
+
 TEST_CASE("Checking phase tracking for SM with Mode 1", "[gw]")
 {
   const std::vector<double> example_point_SM{
