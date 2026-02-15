@@ -58,7 +58,7 @@ class BSMPT(ConanFile):
     def requirements(self):
         self.requires("eigen/3.4.0", transitive_headers=True, transitive_libs=True)
         self.requires("gsl/2.7.1", transitive_headers=True, transitive_libs=True)
-        self.requires("nlohmann_json/3.11.3", transitive_headers=True)
+        self.requires("nlohmann_json/3.11.3", transitive_headers=False)
 
         if self.options.CompileBaryo:
             self.requires("boost/1.84.0", transitive_headers=True, transitive_libs=True)
@@ -175,22 +175,13 @@ class BSMPT(ConanFile):
 
     def package_info(self):
         self.cpp_info.components["ASCIIPlotter"].libs = ["ASCIIPlotter"]
-        self.cpp_info.components["ASCIIPlotter"].requires = [
-            "nlohmann_json::nlohmann_json",
-        ]
+
         self.cpp_info.components["ASCIIPlotter"].set_property(
             "cmake_target_name", "BSMPT::ASCIIPlotter"
         )
 
-        if self.options.CompileBaryo:
-            self.cpp_info.components["ASCIIPlotter"].requires.append(
-                "boost::boost",
-            )
-
         self.cpp_info.components["Spline"].libs = ["Spline"]
-        self.cpp_info.components["Spline"].requires = [
-            "nlohmann_json::nlohmann_json",
-        ]
+
         self.cpp_info.components["Spline"].set_property(
             "cmake_target_name", "BSMPT::Spline"
         )
