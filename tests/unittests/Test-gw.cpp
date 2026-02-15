@@ -796,6 +796,17 @@ TEST_CASE("Checking EnsureHighTemperatureGlobalMininum()", "[gw]")
   // Check that it puts the global minimum at T_high in the first position
   REQUIRE(vac.PhasesList[0].Get(vac.T_high).potential <
           vac.PhasesList[1].Get(vac.T_high).potential);
+
+  // Remove first element
+  vac.PhasesList.erase(vac.PhasesList.begin());
+  vac.PhasesList.at(0).T_high /= 2.;
+  vac.EnsureHighTemperatureGlobalMininum();
+  REQUIRE(vac.status_vacuum == StatusTracing::NoMinsAtBoundaries);
+
+  // Remove only element
+  vac.PhasesList.clear();
+  vac.EnsureHighTemperatureGlobalMininum();
+  REQUIRE(vac.status_vacuum == StatusTracing::Failure);
 }
 
 TEST_CASE("Check maximal thermal mass squared over temperature ratio", "[gw]")
