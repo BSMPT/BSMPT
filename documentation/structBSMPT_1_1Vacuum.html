@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.10</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.11</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -112,9 +112,9 @@ $(document).ready(function(){initNavTree('structBSMPT_1_1Vacuum.html',''); initR
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3940d5c5171cf742f94c7a4a17a3f603" id="r_a3940d5c5171cf742f94c7a4a17a3f603"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a3940d5c5171cf742f94c7a4a17a3f603">Vacuum</a> (const double &amp;T_lowIn, const double &amp;T_highIn, std::shared_ptr&lt; <a class="el" href="classBSMPT_1_1MinimumTracer.html">MinimumTracer</a> &gt; &amp;MinTracerIn, std::shared_ptr&lt; <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html">Class_Potential_Origin</a> &gt; &amp;modelPointerIn, const int &amp;UseMultiStepPTModeIn, const int &amp;num_pointsIn=10, const bool &amp;do_only_tracing=false)</td></tr>
-<tr class="memdesc:a3940d5c5171cf742f94c7a4a17a3f603"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structBSMPT_1_1Vacuum.html" title="Complete vacuum structure of the theory for this parameter point.">Vacuum</a> object.  <br /></td></tr>
-<tr class="separator:a3940d5c5171cf742f94c7a4a17a3f603"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c45bfa7d6c9ee6d5aa6adf586b39990" id="r_a1c45bfa7d6c9ee6d5aa6adf586b39990"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a1c45bfa7d6c9ee6d5aa6adf586b39990">Vacuum</a> (const double &amp;T_lowIn, const double &amp;T_highIn, std::shared_ptr&lt; <a class="el" href="classBSMPT_1_1MinimumTracer.html">MinimumTracer</a> &gt; &amp;MinTracerIn, std::shared_ptr&lt; <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html">Class_Potential_Origin</a> &gt; &amp;modelPointerIn, const <a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a> &amp;UseMultiStepPTModeIn, const int &amp;num_pointsIn=10, const bool &amp;do_only_tracingIn=false)</td></tr>
+<tr class="memdesc:a1c45bfa7d6c9ee6d5aa6adf586b39990"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="structBSMPT_1_1Vacuum.html" title="Complete vacuum structure of the theory for this parameter point.">Vacuum</a> object.  <br /></td></tr>
+<tr class="separator:a1c45bfa7d6c9ee6d5aa6adf586b39990"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4637508335789b6a24f09769a8d12990" id="r_a4637508335789b6a24f09769a8d12990"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a4637508335789b6a24f09769a8d12990">MultiStepPTTracer</a> (const double &amp;Temp, const double &amp;deltaT=0)</td></tr>
 <tr class="memdesc:a4637508335789b6a24f09769a8d12990"><td class="mdescLeft">&#160;</td><td class="mdescRight">MultiStepPTTracer traces all phases between T_high and T_low assuming that we start and end in a global minimum (absolute stability)  <br /></td></tr>
 <tr class="separator:a4637508335789b6a24f09769a8d12990"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,12 +125,16 @@ Public Member Functions</h2></td></tr>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setCoexPhases</b> ()</td></tr>
 <tr class="memdesc:acae11c1e476a1023792c51ae97bc2178"><td class="mdescLeft">&#160;</td><td class="mdescRight">setCoexPhases Calculates all coexisting phase pairs irrespective of borders of coexisiting phase regions, this way we take into account the full region of coexistance for coexisting phases and do not split at the border of coexisting regions which are split as soon as the number of coexisting phases changes which excludes transitions that have a critical temperature in the first region but only complete in the second region (in case the critical temperature is close to the region border or the temperature difference is large enough) <br /></td></tr>
 <tr class="separator:acae11c1e476a1023792c51ae97bc2178"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af26df1b35c5c13b6515b43d7ced4955b" id="r_af26df1b35c5c13b6515b43d7ced4955b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#af26df1b35c5c13b6515b43d7ced4955b">setCoexRegion</a> (const int &amp;UseMultiStepPTMode)</td></tr>
-<tr class="memdesc:af26df1b35c5c13b6515b43d7ced4955b"><td class="mdescLeft">&#160;</td><td class="mdescRight">setCoexRegion Calculates all coexisting phase regions with phase pairs included from the phase vector  <br /></td></tr>
-<tr class="separator:af26df1b35c5c13b6515b43d7ced4955b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f61e6414e0589ea96f0c698a046a81a" id="r_a6f61e6414e0589ea96f0c698a046a81a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a6f61e6414e0589ea96f0c698a046a81a">setCoexRegion</a> (const <a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a> &amp;<a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a>)</td></tr>
+<tr class="memdesc:a6f61e6414e0589ea96f0c698a046a81a"><td class="mdescLeft">&#160;</td><td class="mdescRight">setCoexRegion Calculates all coexisting phase regions with phase pairs included from the phase vector  <br /></td></tr>
+<tr class="separator:a6f61e6414e0589ea96f0c698a046a81a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c242c262d65b3f98a321bd67f63f1a1" id="r_a2c242c262d65b3f98a321bd67f63f1a1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a2c242c262d65b3f98a321bd67f63f1a1">addPhase</a> (<a class="el" href="structBSMPT_1_1Phase.html">Phase</a> &amp;phase)</td></tr>
 <tr class="memdesc:a2c242c262d65b3f98a321bd67f63f1a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a phase to the phase list.  <br /></td></tr>
 <tr class="separator:a2c242c262d65b3f98a321bd67f63f1a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef82f7aff00574058b2fdcba5eb90df6" id="r_aef82f7aff00574058b2fdcba5eb90df6"><td class="memItemLeft" align="right" valign="top"><a id="aef82f7aff00574058b2fdcba5eb90df6" name="aef82f7aff00574058b2fdcba5eb90df6"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>orderPhases</b> ()</td></tr>
+<tr class="memdesc:aef82f7aff00574058b2fdcba5eb90df6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Orders the phases. <br /></td></tr>
+<tr class="separator:aef82f7aff00574058b2fdcba5eb90df6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a400a34830042f23d6cbef483e6d45ab1" id="r_a400a34830042f23d6cbef483e6d45ab1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a400a34830042f23d6cbef483e6d45ab1">MinimumFoundAlready</a> (const <a class="el" href="structBSMPT_1_1Minimum.html">Minimum</a> &amp;minimum)</td></tr>
 <tr class="memdesc:a400a34830042f23d6cbef483e6d45ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks if the minimum already exists in one of the phases in the phase list.  <br /></td></tr>
 <tr class="separator:a400a34830042f23d6cbef483e6d45ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +181,14 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>T_high_lowTempPhase
 int&#160;</td><td class="memItemRight" valign="bottom"><b>num_points</b> = 0</td></tr>
 <tr class="memdesc:a70fac0ee7c733d7303213f72c3832d1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of equally-spaced intermediate points to check for new phases <br /></td></tr>
 <tr class="separator:a70fac0ee7c733d7303213f72c3832d1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6cebc9ba844f713bd5611e97b6f4a8e" id="r_ad6cebc9ba844f713bd5611e97b6f4a8e"><td class="memItemLeft" align="right" valign="top"><a id="ad6cebc9ba844f713bd5611e97b6f4a8e" name="ad6cebc9ba844f713bd5611e97b6f4a8e"></a>
+<a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a>&#160;</td><td class="memItemRight" valign="bottom"><b>UseMultiStepPTMode</b> = MultiStepPTMode::Default</td></tr>
+<tr class="memdesc:ad6cebc9ba844f713bd5611e97b6f4a8e"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structBSMPT_1_1Minimum.html" title="struct to store minimum and temperature">Minimum</a> tracing mode. <br /></td></tr>
+<tr class="separator:ad6cebc9ba844f713bd5611e97b6f4a8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57da9499e9db2a2c861fa388ae4b2f7f" id="r_a57da9499e9db2a2c861fa388ae4b2f7f"><td class="memItemLeft" align="right" valign="top"><a id="a57da9499e9db2a2c861fa388ae4b2f7f" name="a57da9499e9db2a2c861fa388ae4b2f7f"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>do_only_tracing</b> = false</td></tr>
+<tr class="memdesc:a57da9499e9db2a2c861fa388ae4b2f7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">if true only tracing and no identification of all possible coexisting phase pairs and their critical temperatures is done, if false identification and calculation of Tc is done <br /></td></tr>
+<tr class="separator:a57da9499e9db2a2c861fa388ae4b2f7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af831d0d1c409eaa7faaad49e1a10e78a" id="r_af831d0d1c409eaa7faaad49e1a10e78a"><td class="memItemLeft" align="right" valign="top"><a id="af831d0d1c409eaa7faaad49e1a10e78a" name="af831d0d1c409eaa7faaad49e1a10e78a"></a>
 <a class="el" href="namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314">StatusTracing</a>&#160;</td><td class="memItemRight" valign="bottom"><b>status_vacuum</b> = StatusTracing::NotSet</td></tr>
 <tr class="memdesc:af831d0d1c409eaa7faaad49e1a10e78a"><td class="mdescLeft">&#160;</td><td class="mdescRight">vacuum status code = success, no_coverage, no_glob_min_coverage <br /></td></tr>
@@ -205,8 +217,8 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Complete vacuum structure of the theory for this parameter point. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3940d5c5171cf742f94c7a4a17a3f603" name="a3940d5c5171cf742f94c7a4a17a3f603"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3940d5c5171cf742f94c7a4a17a3f603">&#9670;&#160;</a></span>Vacuum()</h2>
+<a id="a1c45bfa7d6c9ee6d5aa6adf586b39990" name="a1c45bfa7d6c9ee6d5aa6adf586b39990"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1c45bfa7d6c9ee6d5aa6adf586b39990">&#9670;&#160;</a></span>Vacuum()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -238,7 +250,7 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const int &amp;&#160;</td>
+          <td class="paramtype">const <a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a> &amp;&#160;</td>
           <td class="paramname"><em>UseMultiStepPTModeIn</em>, </td>
         </tr>
         <tr>
@@ -251,7 +263,7 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const bool &amp;&#160;</td>
-          <td class="paramname"><em>do_only_tracing</em> = <code>false</code>&#160;</td>
+          <td class="paramname"><em>do_only_tracingIn</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -268,9 +280,9 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
     <tr><td class="paramname">T_highIn</td><td>Highest temperature, 300 GeV or set in input file </td></tr>
     <tr><td class="paramname">MinTracerIn</td><td>MinTracer object </td></tr>
     <tr><td class="paramname">modelPointerIn</td><td>Model pointer </td></tr>
-    <tr><td class="paramname">UseMultiStepPTModeIn</td><td>choose multi-step PT modes: default (= -1), 0, 1, 2, auto (= 3) </td></tr>
+    <tr><td class="paramname">UseMultiStepPTModeIn</td><td>choose multi-step PT modes </td></tr>
     <tr><td class="paramname">num_pointsIn</td><td>number of equally-spaced intermediate points to check for new phases </td></tr>
-    <tr><td class="paramname">do_only_tracing</td><td>if true only tracing and no identification of all possible coexisting phase pairs and their critical temperatures is done, if false identification and calculation of Tc is done </td></tr>
+    <tr><td class="paramname">do_only_tracingIn</td><td>if true only tracing and no identification of all possible coexisting phase pairs and their critical temperatures is done, if false identification and calculation of Tc is done </td></tr>
   </table>
   </dd>
 </dl>
@@ -531,8 +543,8 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
 
 </div>
 </div>
-<a id="af26df1b35c5c13b6515b43d7ced4955b" name="af26df1b35c5c13b6515b43d7ced4955b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af26df1b35c5c13b6515b43d7ced4955b">&#9670;&#160;</a></span>setCoexRegion()</h2>
+<a id="a6f61e6414e0589ea96f0c698a046a81a" name="a6f61e6414e0589ea96f0c698a046a81a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6f61e6414e0589ea96f0c698a046a81a">&#9670;&#160;</a></span>setCoexRegion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -540,8 +552,8 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
         <tr>
           <td class="memname">void BSMPT::Vacuum::setCoexRegion </td>
           <td>(</td>
-          <td class="paramtype">const int &amp;&#160;</td>
-          <td class="paramname"><em>UseMultiStepPTMode</em></td><td>)</td>
+          <td class="paramtype">const <a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a> &amp;&#160;</td>
+          <td class="paramname"><em>MultiStepPTMode</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -550,7 +562,7 @@ std::vector&lt; <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</
 <p>setCoexRegion Calculates all coexisting phase regions with phase pairs included from the phase vector </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">UseMultiStepPTMode</td><td>int to distinguish multistep PT mode, for all modes except mode 0 we try to patch up holes in tracing </td></tr>
+    <tr><td class="paramname">MultiStepPTMode</td><td>MultiStepPTMode to distinguish multistep PT mode </td></tr>
   </table>
   </dd>
 </dl>

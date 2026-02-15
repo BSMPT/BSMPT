@@ -24,6 +24,13 @@ var namespaceBSMPT =
     [ "TransitionTracer", "classBSMPT_1_1TransitionTracer.html", "classBSMPT_1_1TransitionTracer" ],
     [ "user_input", "structBSMPT_1_1user__input.html", null ],
     [ "Vacuum", "structBSMPT_1_1Vacuum.html", "structBSMPT_1_1Vacuum" ],
+    [ "MultiStepPTMode", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c", [
+      [ "Default", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca7a1920d61156abc05a60135aefe8bc67", null ],
+      [ "OneStep", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca93a3d0301727134912a98c91b33b0e2f", null ],
+      [ "EdgeCoverage", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055caa86b6d038501f4cffae8a2f9a540ffa8", null ],
+      [ "CompleteCoverage", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca7f3031f0965369258d68c3af0fdcc7ec", null ],
+      [ "Auto", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca06b9281e396db002010bde1de57262eb", null ]
+    ] ],
     [ "Order", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8", [
       [ "TreeLevel", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8a200497bff08d55054f8a2f5a86f1b829", null ],
       [ "OneLoop", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8a38c9bb0ef12593546d234ff18b294c4b", null ]
@@ -38,7 +45,8 @@ var namespaceBSMPT =
       [ "Success", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5aca505a83f220c02df2f85c3810cd9ceb38", null ],
       [ "FalseLower", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acaeb2e62b5d57cafc7166fcb4e336b7409", null ],
       [ "TrueLower", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acaba2d541070f4c98762c4098ebb3f953d", null ],
-      [ "Failure", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acae139a585510a502bbf1841cf589f5086", null ]
+      [ "Failure", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acae139a585510a502bbf1841cf589f5086", null ],
+      [ "CoincideSinglePoint", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acaad2e434d3bffd6508dadfa783bc214d6", null ]
     ] ],
     [ "StatusEWSR", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766e", [
       [ "NotSet", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766eafaf396cbd83927b72a84d2616fac76ff", null ],

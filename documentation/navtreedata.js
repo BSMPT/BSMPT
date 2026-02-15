@@ -131,7 +131,7 @@ var NAVTREEINDEX =
 "classBSMPT_1_1MinimumTracer.html#a377bcf8f8e330845f725eae4b601072f",
 "classcvspline.html#a4eba3c4a0025e66e71c3776a173b56e0",
 "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5a505a83f220c02df2f85c3810cd9ceb38",
-"structBSMPT_1_1Minimizer_1_1GSLPlaneReturn.html#ab9cfc63b133b1f2184f65565de41e5b7"
+"structBSMPT_1_1ISMConstants.html#af53e77b7ae9d80435a00055ddb5fc1f8"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

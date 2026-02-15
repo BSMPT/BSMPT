@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.10</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.11</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -126,17 +126,17 @@ $(document).ready(function(){initNavTree('transition__tracer_8h_source.html','')
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structBSMPT_1_1user__input.html">   50</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structBSMPT_1_1user__input.html">user_input</a></div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>{</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>  std::shared_ptr&lt;Class_Potential_Origin&gt; modelPointer;</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keywordtype">double</span> T_low            = 0;</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">double</span> T_high           = 300;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">double</span> vwall            = 0.95;</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordtype">double</span> perc_prbl        = 0.71;</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordtype">double</span> compl_prbl       = 0.01;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordtype">double</span> epsturb          = 0.1;</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordtype">int</span> maxpathintegrations = 7;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <span class="keywordtype">int</span> multistepmode       = -1;</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">int</span> num_points          = 10;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">int</span> ewsr_check          = 0;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">int</span> nlo_check           = 1;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  <span class="keywordtype">double</span> T_low                  = 0;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keywordtype">double</span> T_high                 = 300;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  <span class="keywordtype">double</span> vwall                  = 0.95;</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>  <span class="keywordtype">double</span> perc_prbl              = 0.71;</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>  <span class="keywordtype">double</span> compl_prbl             = 0.01;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keywordtype">double</span> epsturb                = 0.1;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>  <span class="keywordtype">int</span> maxpathintegrations       = 7;</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>  <a class="code hl_enumeration" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a> multistepmode = MultiStepPTMode::Default;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>  <span class="keywordtype">int</span> num_points                = 10;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>  <span class="keywordtype">int</span> ewsr_check                = 0;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>  <span class="keywordtype">int</span> nlo_check                 = 1;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>  <span class="keywordtype">int</span> which_minimizer     = Minimizer::WhichMinimizerDefault;</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>  <span class="keywordtype">bool</span> use_multithreading = <span class="keyword">false</span>;</div>
@@ -275,10 +275,11 @@ $(document).ready(function(){initNavTree('transition__tracer_8h_source.html','')
 <div class="ttc" id="anamespaceBSMPT_html"><div class="ttname"><a href="namespaceBSMPT.html">BSMPT</a></div><div class="ttdoc">This classes calculates the Bounce action of the potential with a set temperature.</div><div class="ttdef"><b>Definition</b> CalculateEtaInterface.h:24</div></div>
 <div class="ttc" id="anamespaceBSMPT_html_a027d918f62e839a8cfed4fd16341766e"><div class="ttname"><a href="namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766e">BSMPT::StatusEWSR</a></div><div class="ttdeci">StatusEWSR</div><div class="ttdoc">Possible electroweak symmetry restoration status.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:61</div></div>
 <div class="ttc" id="anamespaceBSMPT_html_a3c0b51265ad016cb2ffeb47da838b3f5"><div class="ttname"><a href="namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5">BSMPT::StatusNLOStability</a></div><div class="ttdeci">StatusNLOStability</div><div class="ttdoc">Possible NLO stability status.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:40</div></div>
-<div class="ttc" id="anamespaceBSMPT_html_a548174fac1d1e5e7bf7f17893d37e80d"><div class="ttname"><a href="namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80d">BSMPT::StatusGW</a></div><div class="ttdeci">StatusGW</div><div class="ttdoc">Possible results for the GW and bounce_sol class.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:172</div></div>
+<div class="ttc" id="anamespaceBSMPT_html_a4bab35d80a520bd282a39792d20d055c"><div class="ttname"><a href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">BSMPT::MultiStepPTMode</a></div><div class="ttdeci">MultiStepPTMode</div><div class="ttdoc">Available multistep modes.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:215</div></div>
+<div class="ttc" id="anamespaceBSMPT_html_a548174fac1d1e5e7bf7f17893d37e80d"><div class="ttname"><a href="namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80d">BSMPT::StatusGW</a></div><div class="ttdeci">StatusGW</div><div class="ttdoc">Possible results for the GW and bounce_sol class.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:174</div></div>
 <div class="ttc" id="anamespaceBSMPT_html_a55fd1ad353563eab5383fe07eefe7314"><div class="ttname"><a href="namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314">BSMPT::StatusTracing</a></div><div class="ttdeci">StatusTracing</div><div class="ttdoc">Possible tracing results.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:87</div></div>
 <div class="ttc" id="anamespaceBSMPT_html_a572a958ee192b7b00500562c3f1c8b4f"><div class="ttname"><a href="namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4f">BSMPT::StatusCoexPair</a></div><div class="ttdeci">StatusCoexPair</div><div class="ttdoc">Possible status for the coex phase.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:111</div></div>
-<div class="ttc" id="anamespaceBSMPT_html_a5f2a6b7efc9d6695e40543d323613ee0"><div class="ttname"><a href="namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0">BSMPT::TransitionTemperature</a></div><div class="ttdeci">TransitionTemperature</div><div class="ttdoc">Possible transitions temperatures.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:191</div></div>
+<div class="ttc" id="anamespaceBSMPT_html_a5f2a6b7efc9d6695e40543d323613ee0"><div class="ttname"><a href="namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0">BSMPT::TransitionTemperature</a></div><div class="ttdeci">TransitionTemperature</div><div class="ttdoc">Possible transitions temperatures.</div><div class="ttdef"><b>Definition</b> minimum_tracer.h:193</div></div>
 <div class="ttc" id="astructBSMPT_1_1gw__data_html"><div class="ttname"><a href="structBSMPT_1_1gw__data.html">BSMPT::gw_data</a></div><div class="ttdoc">gravitational wave data struct</div><div class="ttdef"><b>Definition</b> transition_tracer.h:120</div></div>
 <div class="ttc" id="astructBSMPT_1_1output_html"><div class="ttname"><a href="structBSMPT_1_1output.html">BSMPT::output</a></div><div class="ttdef"><b>Definition</b> transition_tracer.h:154</div></div>
 <div class="ttc" id="astructBSMPT_1_1status__codes_html"><div class="ttname"><a href="structBSMPT_1_1status__codes.html">BSMPT::status_codes</a></div><div class="ttdoc">status codes struct</div><div class="ttdef"><b>Definition</b> transition_tracer.h:79</div></div>

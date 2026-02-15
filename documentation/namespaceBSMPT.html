@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.10</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.11</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -221,6 +221,7 @@ Enumerations</h2></td></tr>
 , <b>TrueLower</b>
 , <br />
 &#160;&#160;<b>Failure</b>
+, <b>CoincideSinglePoint</b>
 <br />
  }</td></tr>
 <tr class="memdesc:a6103b25f2b801f1256cf73a2547bc5ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Possible status for the critical temperature. <br /></td></tr>
@@ -249,6 +250,17 @@ Enumerations</h2></td></tr>
  }</td></tr>
 <tr class="memdesc:a5f2a6b7efc9d6695e40543d323613ee0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Possible transitions temperatures. <br /></td></tr>
 <tr class="separator:a5f2a6b7efc9d6695e40543d323613ee0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4bab35d80a520bd282a39792d20d055c" id="r_a4bab35d80a520bd282a39792d20d055c"><td class="memItemLeft" align="right" valign="top">enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">MultiStepPTMode</a> { <br />
+&#160;&#160;<b>Default</b>
+, <b>OneStep</b>
+, <b>EdgeCoverage</b>
+, <b>CompleteCoverage</b>
+, <br />
+&#160;&#160;<b>Auto</b>
+<br />
+ }</td></tr>
+<tr class="memdesc:a4bab35d80a520bd282a39792d20d055c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Available multistep modes.  <a href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">More...</a><br /></td></tr>
+<tr class="separator:a4bab35d80a520bd282a39792d20d055c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d04e386a6938871d34ad1ae95d80cf8" id="r_a3d04e386a6938871d34ad1ae95d80cf8"><td class="memItemLeft" align="right" valign="top"><a id="a3d04e386a6938871d34ad1ae95d80cf8" name="a3d04e386a6938871d34ad1ae95d80cf8"></a>enum class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8">Order</a> { <b>TreeLevel</b>
 , <b>OneLoop</b>
  }</td></tr>
@@ -539,7 +551,39 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>sep</b> 
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This classes calculates the Bounce action of the potential with a set temperature. </p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Enumeration Type Documentation</h2>
+<a id="a4bab35d80a520bd282a39792d20d055c" name="a4bab35d80a520bd282a39792d20d055c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4bab35d80a520bd282a39792d20d055c">&#9670;&#160;</a></span>MultiStepPTMode</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum class <a class="el" href="namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c">BSMPT::MultiStepPTMode</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Available multistep modes. </p>
+<ul>
+<li>Default - default</li>
+<li>OneStep - 0</li>
+<li>EdgeCoverage - 1</li>
+<li>CompleteCoverage - 2</li>
+<li>Auto - auto </li>
+</ul>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="a7ef27f7780c7d96480ff01a91dc88a17" name="a7ef27f7780c7d96480ff01a91dc88a17"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7ef27f7780c7d96480ff01a91dc88a17">&#9670;&#160;</a></span>almost_the_same() <span class="overload">[1/2]</span></h2>
 
@@ -1879,6 +1923,7 @@ f(\dots ,\vec{\phi}_i - 2  \epsilon )\right)\)</p>
 <div class="line">    {StatusCrit::Success, <span class="stringliteral">&quot;success&quot;</span>},</div>
 <div class="line">    {StatusCrit::FalseLower, <span class="stringliteral">&quot;false_lower&quot;</span>},</div>
 <div class="line">    {StatusCrit::TrueLower, <span class="stringliteral">&quot;true_lower&quot;</span>},</div>
+<div class="line">    {StatusCrit::CoincideSinglePoint, <span class="stringliteral">&quot;coincide_single_point&quot;</span>},</div>
 <div class="line">    {StatusCrit::Failure, <span class="stringliteral">&quot;failure&quot;</span>}}</div>
 </div><!-- fragment -->
 <p>Map to convert StatusCritToString to strings. </p>
