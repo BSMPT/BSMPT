@@ -642,6 +642,19 @@ TEST_CASE("Checking cxsm minimum tracer for unstable point", "[gw]")
   REQUIRE(vac.PhasesList.size() == 2);
 }
 
+TEST_CASE("Checked for SinglePoint at Tc", "[gw]")
+{
+  using namespace BSMPT;
+  CoexPhases coex;
+
+  coex.T_low  = 0;
+  coex.T_high = 0;
+
+  coex.CalculateTc();
+
+  REQUIRE(coex.crit_status == StatusCrit::CoincideSinglePoint);
+}
+
 TEST_CASE("Checking phase tracking for SM with Mode 1", "[gw]")
 {
   const std::vector<double> example_point_SM{
