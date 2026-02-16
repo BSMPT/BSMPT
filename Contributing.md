@@ -9,7 +9,7 @@ To contribute to BSMPT follow the given procedure
  - Fork the BSMPT Repository
  - Clone it to your system
  - Add the BSMPT repo as an upstream through `git remote add upstream https://github.com/BSMPT/BSMPT.git`
- - Change to the develop branch with `git checkout develop`
+ - Create a new branch
  - Implement your changes
  - Commit them
  - Request a pull request with `New pull request`on the github web interface
