@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 cmake_minimum_required(VERSION 3.23)
-set(BSMPT_VERSION 3.1.9)
+set(BSMPT_VERSION 3.1.12)
 project(
   BSMPT
   VERSION ${BSMPT_VERSION}
@@ -61,7 +61,9 @@ include(LTO)
 
 find_package(PkgConfig)
 find_package(Eigen3 CONFIG REQUIRED)
-find_package(Boost CONFIG)
+if(BSMPTCompileBaryo)
+  find_package(Boost CONFIG)
+endif()
 find_package(GSL CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG)
 
