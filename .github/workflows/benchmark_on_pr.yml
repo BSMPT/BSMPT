@@ -20,7 +20,7 @@ jobs:
   PRbenchmark:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
           persist-credentials: false
     - name : installPackages
@@ -35,7 +35,7 @@ jobs:
     - name: run benchmarks
       run: cd build && ./bin/benchmarks --benchmark_format=json --benchmark_out=benchmark_result.json
     - name: Archive benchmark results
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v6
       with:
         name: benchmark_result
         path: build/benchmark_result.json

@@ -411,7 +411,8 @@ TEST_CASE("Checking phase tracking for SM", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, -1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -436,7 +437,8 @@ TEST_CASE("Checking phase tracking for BP1 - Mode auto", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, -1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -461,7 +463,8 @@ TEST_CASE("Checking phase tracking for BP1 - Mode 0", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::OneStep, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -486,31 +489,8 @@ TEST_CASE("Checking phase tracking for BP1 - Mode 1", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 1, 10, true);
-
-  REQUIRE(vac.PhasesList.size() == 2);
-}
-TEST_CASE("Checking phase tracking for BP1 - Mode 2", "[gw]")
-{
-  const std::vector<double> example_point_R2HDM{
-      /* lambda_1 = */ 6.9309437685026,
-      /* lambda_2 = */ 0.26305141403285998,
-      /* lambda_3 = */ 1.2865950045595,
-      /* lambda_4 = */ 4.7721306931875001,
-      /* lambda_5 = */ 4.7275722046239004,
-      /* m_{12}^2 = */ 18933.440789693999,
-      /* tan(beta) = */ 16.577896825227999,
-      /* Yukawa Type = */ 1};
-
-  using namespace BSMPT;
-  const auto SMConstants = GetSMConstants();
-  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
-      ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
-  modelPointer->initModel(example_point_R2HDM);
-
-  std::shared_ptr<MinimumTracer> MinTracer(
-      new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 2, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::EdgeCoverage, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -535,7 +515,8 @@ TEST_CASE("Checking phase tracking for BP2 - Mode auto", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, -1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -560,59 +541,46 @@ TEST_CASE("Checking phase tracking for BP2 - Mode 0", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::OneStep, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
 
-TEST_CASE("Checking phase tracking for BP2 - Mode 1", "[gw]")
+TEST_CASE("Checking negative alpha case R2HDM", "[gw]")
 {
   const std::vector<double> example_point_R2HDM{
-      /* lambda_1 = */ 6.8467197321288999,
-      /* lambda_2 = */ 0.25889890874393001,
-      /* lambda_3 = */ 1.4661775278406,
-      /* lambda_4 = */ 4.4975594646125998,
-      /* lambda_5 = */ 4.4503516057569996,
-      /* m_{12}^2 = */ 6629.9728323804002,
-      /* tan(beta) = */ 45.319927369307997,
+      /* lambda_1 = */ 6.1790997800878733,
+      /* lambda_2 = */ 0.25833592686924883,
+      /* lambda_3 = */ 1.4365660325357121,
+      /* lambda_4 = */ -0.88084250125747032,
+      /* lambda_5 = */ -0.58605039437291362,
+      /* m_{12}^2 = */ 405.82270614210461,
+      /* tan(beta) = */ 14.110965513994532,
       /* Yukawa Type = */ 1};
 
   using namespace BSMPT;
+  SetLogger({"--logginglevel::complete=true"});
   const auto SMConstants = GetSMConstants();
   std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
       ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
   modelPointer->initModel(example_point_R2HDM);
 
-  std::shared_ptr<MinimumTracer> MinTracer(
-      new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  user_input input;
+  input.modelPointer   = modelPointer;
+  input.gw_calculation = true;
+  input.T_high         = 1000;
+  TransitionTracer trans(input);
 
-  REQUIRE(vac.PhasesList.size() == 2);
-}
+  trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
+      TransitionTemperature::Percolation);
 
-TEST_CASE("Checking phase tracking for BP2 - Mode 2", "[gw]")
-{
-  const std::vector<double> example_point_R2HDM{
-      /* lambda_1 = */ 6.8467197321288999,
-      /* lambda_2 = */ 0.25889890874393001,
-      /* lambda_3 = */ 1.4661775278406,
-      /* lambda_4 = */ 4.4975594646125998,
-      /* lambda_5 = */ 4.4503516057569996,
-      /* m_{12}^2 = */ 6629.9728323804002,
-      /* tan(beta) = */ 45.319927369307997,
-      /* Yukawa Type = */ 1};
+  auto output = trans.output_store;
 
-  using namespace BSMPT;
-  const auto SMConstants = GetSMConstants();
-  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
-      ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
-  modelPointer->initModel(example_point_R2HDM);
+  REQUIRE(output.vec_gw_data.at(0).alpha.value() < 0);
 
-  std::shared_ptr<MinimumTracer> MinTracer(
-      new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
-
-  REQUIRE(vac.PhasesList.size() == 2);
+  REQUIRE(trans.ListBounceSolution.at(0).status_bounce_sol ==
+          StatusGW::Failure);
 }
 
 TEST_CASE("Checking phase tracking for BP3 with Mode 0", "[gw]")
@@ -638,9 +606,53 @@ TEST_CASE("Checking phase tracking for BP3 with Mode 0", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 0, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::EdgeCoverage, 10, true);
 
   REQUIRE(vac.PhasesList.size() == 2);
+}
+
+TEST_CASE("Checking cxsm minimum tracer for unstable point", "[gw]")
+{
+  const std::vector<double> example_point_CXSM{
+      /* v = */ 246.2196507941373,
+      /* vs = */ 97.86188905787236,
+      /* va = */ 5854.836718722312,
+      /* msq = */ 2978624.443924315,
+      /* lambda = */ 1.3954770017388805,
+      /* delta2 = */ -0.1762052868308751,
+      /* b2 = */ -595974.1019400867,
+      /* d2 = */ 0.0362256561577312,
+      /* Reb1 = */ 19749.899301323545,
+      /* Imb1 = */ 0,
+      /* Rea1 = */ -1366669.4378796923,
+      /* Ima1 = */ 0};
+
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::CXSM, SMConstants);
+  modelPointer->initModel(example_point_CXSM);
+
+  std::shared_ptr<MinimumTracer> MinTracer(
+      new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::Default, 10, true);
+
+  REQUIRE(vac.PhasesList.size() == 2);
+}
+
+TEST_CASE("Checked for SinglePoint at Tc", "[gw]")
+{
+  using namespace BSMPT;
+  CoexPhases coex;
+
+  coex.T_low  = 0;
+  coex.T_high = 0;
+
+  coex.CalculateTc();
+
+  REQUIRE(coex.crit_status == StatusCrit::CoincideSinglePoint);
 }
 
 TEST_CASE("Checking phase tracking for SM with Mode 1", "[gw]")
@@ -659,7 +671,8 @@ TEST_CASE("Checking phase tracking for SM with Mode 1", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 1, 10, true);
+  Vacuum vac(
+      0, 300, MinTracer, modelPointer, MultiStepPTMode::EdgeCoverage, 10, true);
   SetLogger({"--logginglevel::mintracerdetailed=false"});
 
   REQUIRE(vac.PhasesList.size() == 2);
@@ -679,7 +692,13 @@ TEST_CASE("Checking phase tracking for SM with Mode 2", "[gw]")
 
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  Vacuum vac(0, 300, MinTracer, modelPointer, 2, 10, true);
+  Vacuum vac(0,
+             300,
+             MinTracer,
+             modelPointer,
+             MultiStepPTMode::CompleteCoverage,
+             10,
+             true);
 
   REQUIRE(vac.PhasesList.size() == 2);
 }
@@ -906,7 +925,7 @@ TEST_CASE("Checking phase tracking and GW for BP3", "[gw]")
   trans.ListBounceSolution.at(0).UserDefined_vwall = -2;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.6539310662 ==
+  REQUIRE(0.5597359442 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 }
 
@@ -1000,7 +1019,7 @@ TEST_CASE("Checking phase tracking and GW for BP3 (low sample) and not "
   trans.ListBounceSolution.at(0).UserDefined_vwall = -2;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.6539310662 ==
+  REQUIRE(0.5597359442 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 }
 
@@ -1086,7 +1105,7 @@ TEST_CASE("Test for SO(3)", "[gw]")
   modelPointer->initModel(example_point_CXSM);
   std::shared_ptr<MinimumTracer> MinTracer(
       new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-  MinTracer->FindFlatDirections();
+  MinTracer->FindFlatDirections(Order::TreeLevel);
   REQUIRE(MinTracer->flat_3D_dirs.size() == 1);
 }
 
@@ -2799,7 +2818,12 @@ TEST_CASE("Test kappa_sw", "[gw]")
                  0.7773502691896259,
                  3.1622776601683795,
                  0.95,
-                 1.6452148494846968});
+                 1.6452148494846968},
+      std::tuple{0.32058,
+                 0.312787,
+                 -6.60866e-05,
+                 0.95,
+                 -0.000096061} /* negative kappa is unphysical */);
   REQUIRE(BSMPT::kappa::kappaNuMuModel(cs2b, cs2s, al, vw) ==
           Approx(expected).epsilon(1e-3));
 }

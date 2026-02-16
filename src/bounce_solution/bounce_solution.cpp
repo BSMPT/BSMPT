@@ -134,9 +134,9 @@ std::vector<double> BounceSolution::TransformIntoOptimalDiscreteSymmetry(
 
 void BounceSolution::GWInitialScan()
 {
-  if (Tc < 0)
+  if ((Tc < 0) or (Tc == phase_pair.T_low))
   {
-    // Transition is never viable
+    // Transition is never viable or coexphase is a single point.
     return;
   }
 
@@ -1104,7 +1104,11 @@ void BounceSolution::CalculatePTStrength()
     double rho_gam = CalculateRhoGamma(GetTransitionTemp());
     alpha = 1 / rho_gam * (Vi - Vf - GetTransitionTemp() / 4. * (dTVi - dTVf));
     CalculateWallVelocity(false_min, true_min);
-    if (abs(alpha / old_alpha - 1) < 1e-7) return; // Found a solution
+    if (abs(alpha / old_alpha - 1) < 1e-7)
+    {
+      if (alpha < 0) status_bounce_sol = StatusGW::Failure; // Unphysical
+      return;                                               // Found a solution
+    }
   }
   // We could not find the solution for the system. use default value of .95
   // instead
@@ -1159,11 +1163,11 @@ void BounceSolution::CalculateWallVelocity(const Minimum &false_min,
     double b   = 1.704;
     double p   = -3.433;
 
-    vwall = std::pow(
-        pow(abs((3 * alpha + psi - 1) / (2 * (2 - 3 * psi + std::pow(psi, 3)))),
-            p / 2) +
-            std::pow(abs(vCJ * (1 - a * std::pow(1 - psi, b) / alpha)), p / 2),
-        1 / p);
+    const double xi_low = sqrt(
+        abs((3 * alpha + psi - 1) / (2 * (2 - 3 * psi + std::pow(psi, 3)))));
+    const double xi_high = abs(vCJ * (1 - a * std::pow(1 - psi, b) / alpha));
+
+    vwall = std::pow(pow(xi_low, p) + std::pow(xi_high, p), 1 / p);
   }
 }
 

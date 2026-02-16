@@ -43,7 +43,7 @@ struct CLIOptions
   bool UseNLopt{Minimizer::UseNLoptDefault};
   int WhichMinimizer{Minimizer::WhichMinimizerDefault};
   bool UseMultithreading{false};
-  int UseMultiStepPTMode{-1};
+  MultiStepPTMode UseMultiStepPTMode{MultiStepPTMode::Default};
   int CheckEWSymmetryRestoration{1};
   int num_check_pts{10};
 
@@ -265,7 +265,7 @@ try
                   1000.;
 
       BSMPT::Logger::Write(BSMPT::LoggingLevel::ProgDetailed,
-                           "Took\t" + std::to_string(time) + " seconds.\n");
+                           "\nTook\t" + std::to_string(time) + " seconds.\n");
     }
     linecounter++;
     if (infile.eof()) break;
@@ -333,11 +333,6 @@ bool CLIOptions::good() const
   {
     Logger::Write(LoggingLevel::Default,
                   "Invalid temperature choice. Thigh has to be > 0 GeV.");
-    return false;
-  }
-  if (UseMultiStepPTMode > 3 or UseMultiStepPTMode < -1)
-  {
-    Logger::Write(LoggingLevel::Default, "Invalid choice for MultiStepPTMode.");
     return false;
   }
   if (num_check_pts < 0)
@@ -422,15 +417,28 @@ CLIOptions::CLIOptions(const BSMPT::parser &argparser)
     auto multistepPT_string = argparser.get_value("multistepmode");
     if (multistepPT_string == "default")
     {
-      UseMultiStepPTMode = -1;
+      UseMultiStepPTMode = MultiStepPTMode::Default;
     }
     else if (multistepPT_string == "auto")
     {
-      UseMultiStepPTMode = 3;
+      UseMultiStepPTMode = MultiStepPTMode::Auto;
     }
     else
     {
-      UseMultiStepPTMode = std::stoi(multistepPT_string);
+      int intUseMultiStepPTMode = std::stoi(multistepPT_string);
+      switch (intUseMultiStepPTMode)
+      {
+      case 0: UseMultiStepPTMode = MultiStepPTMode::OneStep; break;
+      case 1: UseMultiStepPTMode = MultiStepPTMode::EdgeCoverage; break;
+      case 2: UseMultiStepPTMode = MultiStepPTMode::CompleteCoverage; break;
+
+      default:
+      {
+        ss << "--multistepmode invalid using 'default' instead";
+        UseMultiStepPTMode = MultiStepPTMode::Default;
+        break;
+      }
+      }
     }
   }
   catch (BSMPT::parserException &)

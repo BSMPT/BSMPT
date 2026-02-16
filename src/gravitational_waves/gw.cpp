@@ -17,16 +17,36 @@ GravitationalWave::GravitationalWave(
     const TransitionTemperature &which_transition_temp)
 {
   BACalc.SetAndCalculateGWParameters(which_transition_temp);
+
+  if (BACalc.status_bounce_sol == StatusGW::Failure)
+    data.status = StatusGW::Failure;
+
   data.transitionTemp = BACalc.GetTransitionTemp();
   data.reheatingTemp  = BACalc.GetReheatingTemp();
   data.PTStrength     = BACalc.GetPTStrength();
   data.betaH          = BACalc.GetInvTimeScale();
   data.vw             = BACalc.GetWallVelocity();
+  Logger::Write(LoggingLevel::GWDetailed,
+                "\n--------------- Transition parameters ---------------\n");
+  Logger::Write(LoggingLevel::GWDetailed,
+                "T* = " + std::to_string(data.transitionTemp));
 
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Th = " + std::to_string(data.reheatingTemp));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "alpha = " + std::to_string(data.PTStrength));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "beta/H = " + std::to_string(data.betaH));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "vw = " + std::to_string(data.vw) + "\n");
   // Sound speeds
   data.Csound_false = BACalc.GetSoundSpeedFalse();
   data.Csound_true  = BACalc.GetSoundSpeedTrue();
 
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Csound_false = " + std::to_string(data.Csound_false));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Csound_true = " + std::to_string(data.Csound_true));
   // General purpose GW parameters
   data.HR    = BACalc.GetRstar() * BACalc.HubbleRate(data.transitionTemp);
   data.gstar = BACalc.GetGstar(data.transitionTemp);
@@ -52,6 +72,22 @@ GravitationalWave::GravitationalWave(
                                         alpha_eff,
                                         BACalc.vwall,
                                         vprofile);
+  Logger::Write(LoggingLevel::GWDetailed, "HR = " + std::to_string(data.HR));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "gstar = " + std::to_string(data.gstar));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "FGW0 = " + std::to_string(data.FGW0));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Hstar0 = " + std::to_string(data.Hstar0));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "kappa_col = " + std::to_string(data.kappa_col));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Epsilon_Turb = " + std::to_string(data.Epsilon_Turb));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "alpha_eff = " + std::to_string(alpha_eff));
+  Logger::Write(LoggingLevel::GWDetailed, "vCJ = " + std::to_string(data.vCJ));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "kappa_sw = " + std::to_string(data.kappa_sw));
   // XiShock = fastest fluid shell
   if (data.kappa_sw > 0)
   {
@@ -63,6 +99,10 @@ GravitationalWave::GravitationalWave(
   }
 
   data.K_sw = GetK_sw(data.PTStrength, data.kappa_sw);
+  Logger::Write(LoggingLevel::GWDetailed,
+                "XiShock= " + std::to_string(data.XiShock));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "K_sw = " + std::to_string(data.K_sw));
   if (data.betaH < 1)
   {
     data.status = StatusGW::Failure;
@@ -135,6 +175,14 @@ void GravitationalWave::CalcPeakCollision()
       Omega_p * pow(1. / 2. * pow(-n2 / n1, n1 / (n1 - n2)) +
                         1. / 2. * pow(-n1 / n2, -n2 / (n1 - n2)),
                     (n1 - n2) / a1);
+
+  Logger::Write(LoggingLevel::GWDetailed,
+                "\n--------------- Collision ---------------\n");
+  Logger::Write(LoggingLevel::GWDetailed,
+                "f_b = " + std::to_string(data.CollisionParameter.f_b.value()));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Omega_b = " +
+                    std::to_string(data.CollisionParameter.Omega_b.value()));
 }
 
 double GravitationalWave::CalculateXiShell()
@@ -182,6 +230,15 @@ void GravitationalWave::CalcPeakSoundWave()
   data.SoundWaveParameter.f_2 = f_2;
   data.SoundWaveParameter.Omega_2 =
       Omega_int * (sqrt(2) + (2 * f_2 / f_1) / (1 + pow(f_2 / f_1, 2))) / M_PI;
+  Logger::Write(LoggingLevel::GWDetailed,
+                "\n--------------- Sound Wave ---------------\n");
+  Logger::Write(LoggingLevel::GWDetailed,
+                "f_1 = " + std::to_string(data.SoundWaveParameter.f_1.value()));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "f_2 = " + std::to_string(data.SoundWaveParameter.f_2.value()));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Omega_2 = " +
+                    std::to_string(data.SoundWaveParameter.Omega_2.value()));
 }
 
 void GravitationalWave::CalcPeakTurbulence()
@@ -208,6 +265,18 @@ void GravitationalWave::CalcPeakTurbulence()
 
   data.TurbulanceParameter.Omega_2 =
       data.FGW0 * A_MHD * pow(Omega_s, 2) * pow(data.HR, 2);
+
+  Logger::Write(LoggingLevel::GWDetailed,
+                "\n--------------- Turbulence ---------------\n");
+  Logger::Write(LoggingLevel::GWDetailed,
+                "f_1 = " +
+                    std::to_string(data.TurbulanceParameter.f_1.value()));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "f_2 = " +
+                    std::to_string(data.TurbulanceParameter.f_2.value()));
+  Logger::Write(LoggingLevel::GWDetailed,
+                "Omega_2 = " +
+                    std::to_string(data.TurbulanceParameter.Omega_2.value()));
 }
 
 double GravitationalWave::BPL(const double &f, const BPLParameters &par) const
@@ -399,8 +468,9 @@ std::vector<std::vector<double>> solve_ode(double vw, double v0, double cs2)
 {
   const size_t dim          = 2;
   gsl_odeiv2_system sys     = {dfdv, nullptr, dim, &cs2};
+  const double step         = (v0 > 0) ? (-1.e-10) : (1.e-10);
   gsl_odeiv2_driver *driver = gsl_odeiv2_driver_alloc_y_new(
-      &sys, gsl_odeiv2_step_rkf45, -1e-10, 1e-10, 0.0);
+      &sys, gsl_odeiv2_step_rkf45, step, 1e-10, 0.0);
 
   std::vector<std::vector<double>> results;
 

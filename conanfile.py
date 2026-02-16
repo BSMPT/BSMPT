@@ -6,6 +6,7 @@ from conan.tools.files import load
 from conan.tools.scm import Git
 import os, re
 from conan.tools.env import Environment
+from conan.errors import ConanException
 
 required_conan_version = ">=2.0.0 <3"
 
@@ -57,7 +58,7 @@ class BSMPT(ConanFile):
     def requirements(self):
         self.requires("eigen/3.4.0", transitive_headers=True, transitive_libs=True)
         self.requires("gsl/2.7.1", transitive_headers=True, transitive_libs=True)
-        self.requires("nlohmann_json/3.11.3", transitive_headers=True)
+        self.requires("nlohmann_json/3.11.3", transitive_headers=False)
 
         if self.options.CompileBaryo:
             self.requires("boost/1.84.0", transitive_headers=True, transitive_libs=True)
@@ -67,7 +68,7 @@ class BSMPT(ConanFile):
 
         if self.options.UseLibCMAES:
             self.requires(
-                "cmaes/0.10.0@bsmpt/local",
+                "cmaes/0.10.2",
                 transitive_headers=True,
                 transitive_libs=True,
             )
@@ -101,8 +102,13 @@ class BSMPT(ConanFile):
             self.version = extracted_version
         else:
             # if not tag -> pre-release version
-            commit_hash = git.get_commit()[:8]
-            self.version = f"{extracted_version}.{commit_hash}"
+            try:
+                commit_hash = git.get_commit()[:8]
+                self.version = f"{extracted_version}.{commit_hash}"
+            except ConanException:
+                # In this case (no git tag but also no git available) the source code was downloaded in a different way.
+                # We don't know if it is a changed code or the zip from the download, so we stick to the cmake defined version
+                self.version = extracted_version
 
     def layout(self):
         cmake_layout(self)
@@ -169,22 +175,13 @@ class BSMPT(ConanFile):
 
     def package_info(self):
         self.cpp_info.components["ASCIIPlotter"].libs = ["ASCIIPlotter"]
-        self.cpp_info.components["ASCIIPlotter"].requires = [
-            "nlohmann_json::nlohmann_json",
-        ]
+
         self.cpp_info.components["ASCIIPlotter"].set_property(
             "cmake_target_name", "BSMPT::ASCIIPlotter"
         )
 
-        if self.options.CompileBaryo:
-            self.cpp_info.components["ASCIIPlotter"].requires.append(
-                "boost::boost",
-            )
-
         self.cpp_info.components["Spline"].libs = ["Spline"]
-        self.cpp_info.components["Spline"].requires = [
-            "nlohmann_json::nlohmann_json",
-        ]
+
         self.cpp_info.components["Spline"].set_property(
             "cmake_target_name", "BSMPT::Spline"
         )
@@ -238,7 +235,7 @@ class BSMPT(ConanFile):
             "gsl::gsl",
             # "Threads::Threads",
             "Utility",
-            # "Models",
+            "Models",
         ]
         self.cpp_info.components["Minimizer"].set_property(
             "cmake_target_name", "BSMPT::Minimizer"
@@ -266,7 +263,6 @@ class BSMPT(ConanFile):
         self.cpp_info.components["Models"].requires = [
             "gsl::gsl",
             "eigen::eigen",
-            "Minimizer",
             "ThermalFunctions",
             "Utility",
         ]
