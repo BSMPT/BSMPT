@@ -1430,7 +1430,7 @@ void BounceActionInt::PathDeformation(std::vector<double> &l,
   }
 
   // Reshift all point to their correct locations
-  if (best_path.size() == 0)
+  if (best_path.empty())
   {
     StateOfBounceActionInt = ActionStatus::PathDeformationCrashed;
     BSMPT::Logger::Write(BSMPT::LoggingLevel::BounceDetailed,

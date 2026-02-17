@@ -40,7 +40,7 @@ void spline::set_boundary(spline::bd_type left,
                           spline::bd_type right,
                           double right_value)
 {
-  assert(m_x.size() == 0); // set_points() must not have happened yet
+  assert(m_x.empty()); // set_points() must not have happened yet
   m_left        = left;
   m_right       = right;
   m_left_value  = left_value;

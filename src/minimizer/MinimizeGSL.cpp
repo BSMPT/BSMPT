@@ -276,7 +276,7 @@ GSL_Minimize_gen_all(const Class_Potential_Origin &model,
     saveAllMinima.push_back(row);
   }
 
-  if (saveAllMinima.size() == 0)
+  if (saveAllMinima.empty())
   {
     Logger::Write(LoggingLevel::Default,
                   "No solutions found during the GSL minimization at T = " +

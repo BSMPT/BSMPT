@@ -2426,7 +2426,7 @@ Class_Potential_Origin::HiggsMassesSquared(const std::vector<double> &v,
 
   double ZeroMass = std::pow(10, -5);
 
-  if (diff == 0 and res.size() == 0)
+  if (diff == 0 and res.empty())
   {
     SelfAdjointEigenSolver<MatrixXd> es(MassMatrix, EigenvaluesOnly);
     const auto EV = es.eigenvalues();

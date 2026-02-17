@@ -724,7 +724,7 @@ MinimumTracer::TrackPhase(const std::vector<double> &point_In,
 void MinimumTracer::ReduceVEV(std::vector<double> &vev)
 {
   // Saveguard if GroupElements is not populated
-  if (GroupElements.size() == 0) return;
+  if (GroupElements.empty()) return;
   int MaximumMeasure = -1;
   char *ptr;
   std::string BinaryNumber;
@@ -1526,7 +1526,7 @@ Phase::Phase(const std::vector<double> &phase_start,
   std::vector<Minimum> MinimumList =
       MinTracer->TrackPhase(globMinEndT, phase, initialT, finalT);
 
-  if (MinimumList.size() == 0) return; // Minimum tracker failed
+  if (MinimumList.empty()) return; // Minimum tracker failed
 
   for (auto Min : MinimumList)
   {
@@ -1566,7 +1566,7 @@ Phase::Phase(const double &initialT,
     Add(Min);
   }
 
-  if (MinimumPhaseVector.size() == 0) return; // Found no minimum
+  if (MinimumPhaseVector.empty()) return; // Found no minimum
 
   T_low  = MinimumPhaseVector.front().temp;
   T_high = MinimumPhaseVector.back().temp;
@@ -1588,7 +1588,7 @@ Phase::Phase(const std::vector<double> &phase_start,
   std::vector<Minimum> MinimumList =
       MinTracer->TrackPhase(phase, initialT, finalT);
 
-  if (MinimumList.size() == 0) return; // Minimum tracker failed
+  if (MinimumList.empty()) return; // Minimum tracker failed
 
   for (auto Min : MinimumList)
   {
@@ -1627,7 +1627,7 @@ Phase::Phase(const double &initialT,
     Add(Min);
   }
 
-  if (MinimumPhaseVector.size() == 0) return; // Found no minimum
+  if (MinimumPhaseVector.empty()) return; // Found no minimum
 
   T_low  = MinimumPhaseVector.front().temp;
   T_high = MinimumPhaseVector.back().temp;
@@ -1652,7 +1652,7 @@ Phase::Phase(const double &initialT,
     std::vector<Minimum> MinimumList =
         MinTracer->TrackPhase(phase_start, initialT, HighT);
 
-    if (MinimumList.size() == 0) return; // Minimum tracker failed
+    if (MinimumList.empty()) return; // Minimum tracker failed
 
     for (auto Min : MinimumList)
     {
@@ -1664,7 +1664,7 @@ Phase::Phase(const double &initialT,
     std::vector<Minimum> MinimumList =
         MinTracer->TrackPhase(phase_start, initialT, LowT);
 
-    if (MinimumList.size() == 0) return; // Minimum tracker failed
+    if (MinimumList.empty()) return; // Minimum tracker failed
 
     for (auto Min : MinimumList)
     {
@@ -1693,7 +1693,7 @@ Phase::Phase(const double &initialT,
     throw std::invalid_argument("Initial temperature out of bounds.");
   }
 
-  if (MinimumPhaseVector.size() == 0) return; // Found no minimum
+  if (MinimumPhaseVector.empty()) return; // Found no minimum
 
   T_low  = MinimumPhaseVector.front().temp;
   T_high = MinimumPhaseVector.back().temp;
@@ -1762,7 +1762,7 @@ void Phase::Add(Minimum min)
     }
   }
   // If the list is empty add that value in.
-  if (MinimumPhaseVector.size() == 0)
+  if (MinimumPhaseVector.empty())
   {
     MinimumPhaseVector = {min};
     return;
@@ -2230,7 +2230,7 @@ void Vacuum::PrintPhasesDiagram(int size)
   if (not Logger::GetLoggingLevelStatus(LoggingLevel::MinTracerDetailed))
     return;
 
-  if (PhasesList.size() == 0)
+  if (PhasesList.empty())
   {
     Logger::Write(LoggingLevel::MinTracerDetailed,
                   "Cannot print phase diagram. No phase found.");
@@ -2427,7 +2427,7 @@ Vacuum::Vacuum(const double &T_lowIn,
     print(newPhase);
   }
 
-  if (PhasesList.size() == 0) // no phases could be found
+  if (PhasesList.empty()) // no phases could be found
   {
     status_vacuum = StatusTracing::Failure;
   }
@@ -2454,7 +2454,7 @@ void Vacuum::EnsureHighTemperatureGlobalMininum()
   orderPhases();
 
   // Check if Phase list is empty
-  if (PhasesList.size() == 0)
+  if (PhasesList.empty())
   {
     Logger::Write(LoggingLevel::MinTracerDetailed,
                   "No traceable phase found. Abort.");
@@ -2651,7 +2651,7 @@ void Vacuum::setCoexRegion(const MultiStepPTMode &MultiStepPTMode)
                 "Total number of phases identified: " +
                     std::to_string(PhasesList.size()));
 
-  if (PhasesList.size() == 0) return; // no phase found
+  if (PhasesList.empty()) return; // no phase found
 
   // create edge list
   for (auto i : PhasesList)
