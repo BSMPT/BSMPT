@@ -7,8 +7,20 @@
  * @file minimum tracer class
  */
 
+#include "Eigen/Eigenvalues"           // Eigenvalues utility
+#include <BSMPT/minimizer/Minimizer.h> // for Minimizer
 #include <BSMPT/minimum_tracer/minimum_tracer.h>
+#include <BSMPT/utility/Logger.h> // for Logger Class
 #include <BSMPT/utility/NumericalDerivatives.h>
+#include <BSMPT/utility/asciiplotter/asciiplotter.h>
+#include <BSMPT/utility/utility.h>
+#include <Eigen/Dense> // Eigenvalues matrix
+#include <algorithm>   // std::swap
+#include <chrono>
+#include <cmath>    // std::pow
+#include <memory>   // for shared_ptr
+#include <optional> // std::optional
+#include <stdlib.h> // std::strtol
 
 using namespace Eigen;
 

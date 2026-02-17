@@ -8,7 +8,7 @@
  */
 
 #include <BSMPT/bounce_solution/bounce_solution.h>
-
+#include <BSMPT/utility/asciiplotter/asciiplotter.h>
 namespace BSMPT
 {
 
