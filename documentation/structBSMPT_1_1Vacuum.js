@@ -4,6 +4,7 @@ var structBSMPT_1_1Vacuum =
     [ "addPhase", "structBSMPT_1_1Vacuum.html#a2c242c262d65b3f98a321bd67f63f1a1", null ],
     [ "DoGlobMinOverlap", "structBSMPT_1_1Vacuum.html#ad05bc23a3a5cd444d44b1fea01e20f59", null ],
     [ "DoPhasesOverlap", "structBSMPT_1_1Vacuum.html#aeeaf7a1f9261d3fa38461b74864de52d", null ],
+    [ "EnsureHighTemperatureGlobalMininum", "structBSMPT_1_1Vacuum.html#a49c1ffd3bf9e89ca68efefe9d300742b", null ],
     [ "MinimumFoundAlready", "structBSMPT_1_1Vacuum.html#a400a34830042f23d6cbef483e6d45ab1", null ],
     [ "MultiStepPTMode0", "structBSMPT_1_1Vacuum.html#a00260c3e9282f61929a758d678ccfc33", null ],
     [ "MultiStepPTMode1", "structBSMPT_1_1Vacuum.html#affb074e3f69841d3ee6686bc8d8e0bc4", null ],

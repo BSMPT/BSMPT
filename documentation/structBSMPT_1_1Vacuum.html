@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.12</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.13</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -138,6 +138,10 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>orderPhases</b> ()</t
 <tr class="memitem:a400a34830042f23d6cbef483e6d45ab1" id="r_a400a34830042f23d6cbef483e6d45ab1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a400a34830042f23d6cbef483e6d45ab1">MinimumFoundAlready</a> (const <a class="el" href="structBSMPT_1_1Minimum.html">Minimum</a> &amp;minimum)</td></tr>
 <tr class="memdesc:a400a34830042f23d6cbef483e6d45ab1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function checks if the minimum already exists in one of the phases in the phase list.  <br /></td></tr>
 <tr class="separator:a400a34830042f23d6cbef483e6d45ab1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49c1ffd3bf9e89ca68efefe9d300742b" id="r_a49c1ffd3bf9e89ca68efefe9d300742b"><td class="memItemLeft" align="right" valign="top"><a id="a49c1ffd3bf9e89ca68efefe9d300742b" name="a49c1ffd3bf9e89ca68efefe9d300742b"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>EnsureHighTemperatureGlobalMininum</b> ()</td></tr>
+<tr class="memdesc:a49c1ffd3bf9e89ca68efefe9d300742b"><td class="mdescLeft">&#160;</td><td class="mdescRight">If the global minimizer, incorrectly, finds a high temperature non-global minimum and but then another phase turns out to be the minimum at high temperature will break our logic. This is a safety check to ensure that at high temperature \( T_{high} \) the Universe is on the global minimum. <br /></td></tr>
+<tr class="separator:a49c1ffd3bf9e89ca68efefe9d300742b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00260c3e9282f61929a758d678ccfc33" id="r_a00260c3e9282f61929a758d678ccfc33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structBSMPT_1_1Vacuum.html#a00260c3e9282f61929a758d678ccfc33">MultiStepPTMode0</a> (const std::vector&lt; double &gt; &amp;LowTempPoint, const std::vector&lt; double &gt; &amp;HighTempPoint)</td></tr>
 <tr class="memdesc:a00260c3e9282f61929a758d678ccfc33"><td class="mdescLeft">&#160;</td><td class="mdescRight">MultiStepPTMode0 single-step PT mode.  <br /></td></tr>
 <tr class="separator:a00260c3e9282f61929a758d678ccfc33"><td class="memSeparator" colspan="2">&#160;</td></tr>
