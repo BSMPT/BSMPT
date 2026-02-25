@@ -4,6 +4,7 @@ var classBSMPT_1_1Models_1_1Class__SM =
     [ "addLegendTemp", "classBSMPT_1_1Models_1_1Class__SM.html#ab5afa308607705383b3f3b9956e84fee", null ],
     [ "addLegendTripleCouplings", "classBSMPT_1_1Models_1_1Class__SM.html#a13067b5b36fd7276d9530e5755d0b66f", null ],
     [ "addLegendVEV", "classBSMPT_1_1Models_1_1Class__SM.html#a7fed44141f59c577ee5a68ec55935b31", null ],
+    [ "AdjustRotationMatrix", "classBSMPT_1_1Models_1_1Class__SM.html#a519c372cf5637994e2c08ed265188ecd", null ],
     [ "calc_CT", "classBSMPT_1_1Models_1_1Class__SM.html#a6be79c08ea9d7b8f63285b7aec9d6210", null ],
     [ "CalculateDebyeGaugeSimplified", "classBSMPT_1_1Models_1_1Class__SM.html#af53a105917e92c182e60052a61507b63", null ],
     [ "CalculateDebyeSimplified", "classBSMPT_1_1Models_1_1Class__SM.html#a7f04a0d5a43f5638292885ef86523fd9", null ],

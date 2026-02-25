@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.13</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.14</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -140,6 +140,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad33746ae303f5e3073bb65e47a6a6cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa654048135a06928922f771c1361a806" id="r_aa654048135a06928922f771c1361a806"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Models_1_1Class__Potential__N2HDM.html#aa654048135a06928922f771c1361a806">write</a> () const override</td></tr>
 <tr class="separator:aa654048135a06928922f771c1361a806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeb5baeb1a0c2f3035497519726c6b5f3" id="r_aeb5baeb1a0c2f3035497519726c6b5f3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Models_1_1Class__Potential__N2HDM.html#aeb5baeb1a0c2f3035497519726c6b5f3">FindMassBasisIndices</a> (const std::vector&lt; double &gt; &amp;HiggsMasses, const Eigen::MatrixXd &amp;HiggsRot)</td></tr>
+<tr class="separator:aeb5baeb1a0c2f3035497519726c6b5f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb40d701ea88d478004504917534933f" id="r_afb40d701ea88d478004504917534933f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Models_1_1Class__Potential__N2HDM.html#afb40d701ea88d478004504917534933f">AdjustRotationMatrix</a> () override</td></tr>
+<tr class="separator:afb40d701ea88d478004504917534933f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b05a32416081767227dd7c00438e9be" id="r_a8b05a32416081767227dd7c00438e9be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Models_1_1Class__Potential__N2HDM.html#a8b05a32416081767227dd7c00438e9be">TripleHiggsCouplings</a> () override</td></tr>
 <tr class="separator:a8b05a32416081767227dd7c00438e9be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a559e76fc46dab099104e40963c91e136" id="r_a559e76fc46dab099104e40963c91e136"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Models_1_1Class__Potential__N2HDM.html#a559e76fc46dab099104e40963c91e136">calc_CT</a> () const override</td></tr>
@@ -250,6 +254,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a72321b103e3057953cb0f48c9481029f inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a72321b103e3057953cb0f48c9481029f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a72321b103e3057953cb0f48c9481029f">get_TripleHiggsCorrectionsCWPhysical</a> (std::size_t i, std::size_t j, std::size_t k) const</td></tr>
 <tr class="memdesc:a72321b103e3057953cb0f48c9481029f inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_TripleHiggsCorrectionsCWPhysical  <br /></td></tr>
 <tr class="separator:a72321b103e3057953cb0f48c9481029f inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba827c985e4089012ef92b7b379e8072 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_aba827c985e4089012ef92b7b379e8072"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#aba827c985e4089012ef92b7b379e8072">get_HiggsRotationMatrix</a> (std::size_t i, std::size_t j) const</td></tr>
+<tr class="memdesc:aba827c985e4089012ef92b7b379e8072 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_HiggsRotationMatrix  <br /></td></tr>
+<tr class="separator:aba827c985e4089012ef92b7b379e8072 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ede394d51c72a0d08a2c947410e1383 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a9ede394d51c72a0d08a2c947410e1383"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a9ede394d51c72a0d08a2c947410e1383">get_HiggsRotationMatrixEnsuredConvention</a> (std::size_t i, std::size_t j) const</td></tr>
+<tr class="memdesc:a9ede394d51c72a0d08a2c947410e1383 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">get_HiggsRotationMatrixEnsuredConvention  <br /></td></tr>
+<tr class="separator:a9ede394d51c72a0d08a2c947410e1383 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5165934f71bbfa1fcb000c7122996299 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a5165934f71bbfa1fcb000c7122996299"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a5165934f71bbfa1fcb000c7122996299">setUseIndexCol</a> (std::string legend)</td></tr>
 <tr class="separator:a5165934f71bbfa1fcb000c7122996299 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a71eedbca5ee57179d65123a27a979eca inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a71eedbca5ee57179d65123a27a979eca"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a71eedbca5ee57179d65123a27a979eca">getUseIndexCol</a> ()</td></tr>
@@ -321,6 +331,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af46b793fb2a42eb2c015dddabb3c1cf3 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_af46b793fb2a42eb2c015dddabb3c1cf3"><td class="memItemLeft" align="right" valign="top">Eigen::MatrixXcd&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#af46b793fb2a42eb2c015dddabb3c1cf3">LeptonMassMatrix</a> (const std::vector&lt; double &gt; &amp;v) const</td></tr>
 <tr class="memdesc:af46b793fb2a42eb2c015dddabb3c1cf3 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">LeptonMassMatrix calculates the Mass Matrix for the Leptons of the form $ M^{IJ} = Y^{IJ} + Y^{IJk} v_k $.  <br /></td></tr>
 <tr class="separator:af46b793fb2a42eb2c015dddabb3c1cf3 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6035873e14f081b7207c2db806248987 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a6035873e14f081b7207c2db806248987"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a6035873e14f081b7207c2db806248987">CheckRotationMatrix</a> ()</td></tr>
+<tr class="separator:a6035873e14f081b7207c2db806248987 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5263fc7975148453add75acc1d794f4c inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a5263fc7975148453add75acc1d794f4c"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a5263fc7975148453add75acc1d794f4c">fbase</a> (double MassSquaredA, double MassSquaredB) const</td></tr>
 <tr class="separator:a5263fc7975148453add75acc1d794f4c inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade6fef24b58a094c0f970810d3a2490f inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_ade6fef24b58a094c0f970810d3a2490f"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#ade6fef24b58a094c0f970810d3a2490f">fbaseTri</a> (double MassSquaredA, double MassSquaredB, double MassSquaredC) const</td></tr>
@@ -365,8 +377,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>FindSignSymmetries</b
 <tr class="separator:aadbdf149f3e53426a12a1bbe4aafadf7 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae68f6352df1661e94331c17e156896f0 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_ae68f6352df1661e94331c17e156896f0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::vector&lt; double &gt;, std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#ae68f6352df1661e94331c17e156896f0">initModel</a> (std::string linestr)</td></tr>
 <tr class="separator:ae68f6352df1661e94331c17e156896f0 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a15c0f9b10a492e2aa859a70a8dcb26fc inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_a15c0f9b10a492e2aa859a70a8dcb26fc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a15c0f9b10a492e2aa859a70a8dcb26fc">initModel</a> (const std::vector&lt; double &gt; &amp;par)</td></tr>
-<tr class="separator:a15c0f9b10a492e2aa859a70a8dcb26fc inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee31cec7bf55091594c7156f93d288f9 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_aee31cec7bf55091594c7156f93d288f9"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#aee31cec7bf55091594c7156f93d288f9">initModel</a> (const std::vector&lt; double &gt; &amp;par, const bool &amp;adjust_rot_matrix=true)</td></tr>
+<tr class="separator:aee31cec7bf55091594c7156f93d288f9 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af26d07c48897459522164616bab31409 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin" id="r_af26d07c48897459522164616bab31409"><td class="memItemLeft" align="right" valign="top">std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#af26d07c48897459522164616bab31409">resetScale</a> (const double &amp;newScale)</td></tr>
 <tr class="memdesc:af26d07c48897459522164616bab31409 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">resetScale changes the MSBar scale to newScale  <br /></td></tr>
 <tr class="separator:af26d07c48897459522164616bab31409 inherit pub_methods_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -525,6 +537,69 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>NDTS</b> = 0</td></
 <tr class="memitem:add3e940b1a0b7551fb3a06bbe9d09024" id="r_add3e940b1a0b7551fb3a06bbe9d09024"><td class="memItemLeft" align="right" valign="top"><a id="add3e940b1a0b7551fb3a06bbe9d09024" name="add3e940b1a0b7551fb3a06bbe9d09024"></a>
 double&#160;</td><td class="memItemRight" valign="bottom"><b>DTCharged</b> = 0</td></tr>
 <tr class="separator:add3e940b1a0b7551fb3a06bbe9d09024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed3635c422299ae72a3ab0a45cd7eea3" id="r_aed3635c422299ae72a3ab0a45cd7eea3"><td class="memItemLeft" align="right" valign="top"><a id="aed3635c422299ae72a3ab0a45cd7eea3" name="aed3635c422299ae72a3ab0a45cd7eea3"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_G0</b></td></tr>
+<tr class="separator:aed3635c422299ae72a3ab0a45cd7eea3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a261bdd0b40d4aa852f80305bfeea6ea5" id="r_a261bdd0b40d4aa852f80305bfeea6ea5"><td class="memItemLeft" align="right" valign="top"><a id="a261bdd0b40d4aa852f80305bfeea6ea5" name="a261bdd0b40d4aa852f80305bfeea6ea5"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_Gp</b></td></tr>
+<tr class="separator:a261bdd0b40d4aa852f80305bfeea6ea5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9681c4fa657d25fee1df96947d6a3a71" id="r_a9681c4fa657d25fee1df96947d6a3a71"><td class="memItemLeft" align="right" valign="top"><a id="a9681c4fa657d25fee1df96947d6a3a71" name="a9681c4fa657d25fee1df96947d6a3a71"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_Gm</b></td></tr>
+<tr class="separator:a9681c4fa657d25fee1df96947d6a3a71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80ffff78541a17a4f4ca54189b4aa067" id="r_a80ffff78541a17a4f4ca54189b4aa067"><td class="memItemLeft" align="right" valign="top"><a id="a80ffff78541a17a4f4ca54189b4aa067" name="a80ffff78541a17a4f4ca54189b4aa067"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_Hp</b></td></tr>
+<tr class="separator:a80ffff78541a17a4f4ca54189b4aa067"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d6652f6f4261496bbd3e371fcf91c6" id="r_ae9d6652f6f4261496bbd3e371fcf91c6"><td class="memItemLeft" align="right" valign="top"><a id="ae9d6652f6f4261496bbd3e371fcf91c6" name="ae9d6652f6f4261496bbd3e371fcf91c6"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_Hm</b></td></tr>
+<tr class="separator:ae9d6652f6f4261496bbd3e371fcf91c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29d9333975811c55f262505fea6c3ca0" id="r_a29d9333975811c55f262505fea6c3ca0"><td class="memItemLeft" align="right" valign="top"><a id="a29d9333975811c55f262505fea6c3ca0" name="a29d9333975811c55f262505fea6c3ca0"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_h1</b></td></tr>
+<tr class="separator:a29d9333975811c55f262505fea6c3ca0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a521802a8468b040ee885c3ab05114b95" id="r_a521802a8468b040ee885c3ab05114b95"><td class="memItemLeft" align="right" valign="top"><a id="a521802a8468b040ee885c3ab05114b95" name="a521802a8468b040ee885c3ab05114b95"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_h2</b></td></tr>
+<tr class="separator:a521802a8468b040ee885c3ab05114b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b4666bf2b740076287cdf9e993a2c18" id="r_a9b4666bf2b740076287cdf9e993a2c18"><td class="memItemLeft" align="right" valign="top"><a id="a9b4666bf2b740076287cdf9e993a2c18" name="a9b4666bf2b740076287cdf9e993a2c18"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_h3</b></td></tr>
+<tr class="separator:a9b4666bf2b740076287cdf9e993a2c18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaefb43ecbc9a7e791b01c795b3fcead5" id="r_aaefb43ecbc9a7e791b01c795b3fcead5"><td class="memItemLeft" align="right" valign="top"><a id="aaefb43ecbc9a7e791b01c795b3fcead5" name="aaefb43ecbc9a7e791b01c795b3fcead5"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_A</b></td></tr>
+<tr class="separator:aaefb43ecbc9a7e791b01c795b3fcead5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb74ea7d6ad0903818a114118c0868b5" id="r_acb74ea7d6ad0903818a114118c0868b5"><td class="memItemLeft" align="right" valign="top"><a id="acb74ea7d6ad0903818a114118c0868b5" name="acb74ea7d6ad0903818a114118c0868b5"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_h_SM</b></td></tr>
+<tr class="separator:acb74ea7d6ad0903818a114118c0868b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a268005a41cdda8e303a78acb5a1894a0" id="r_a268005a41cdda8e303a78acb5a1894a0"><td class="memItemLeft" align="right" valign="top"><a id="a268005a41cdda8e303a78acb5a1894a0" name="a268005a41cdda8e303a78acb5a1894a0"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_h_l</b></td></tr>
+<tr class="separator:a268005a41cdda8e303a78acb5a1894a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34d0c5fd80626e039cdf1a6503618006" id="r_a34d0c5fd80626e039cdf1a6503618006"><td class="memItemLeft" align="right" valign="top"><a id="a34d0c5fd80626e039cdf1a6503618006" name="a34d0c5fd80626e039cdf1a6503618006"></a>
+std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_h_H</b></td></tr>
+<tr class="separator:a34d0c5fd80626e039cdf1a6503618006"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5255ce1d337f1f1d4d2d14d12445eac3" id="r_a5255ce1d337f1f1d4d2d14d12445eac3"><td class="memItemLeft" align="right" valign="top"><a id="a5255ce1d337f1f1d4d2d14d12445eac3" name="a5255ce1d337f1f1d4d2d14d12445eac3"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_rho1</b> = 0</td></tr>
+<tr class="separator:a5255ce1d337f1f1d4d2d14d12445eac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acccc38feeaf5fc017aba68ed5df75ccb" id="r_acccc38feeaf5fc017aba68ed5df75ccb"><td class="memItemLeft" align="right" valign="top"><a id="acccc38feeaf5fc017aba68ed5df75ccb" name="acccc38feeaf5fc017aba68ed5df75ccb"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_rho2</b> = 1</td></tr>
+<tr class="separator:acccc38feeaf5fc017aba68ed5df75ccb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92d2a523ba331b3e8112e3d632e10e6c" id="r_a92d2a523ba331b3e8112e3d632e10e6c"><td class="memItemLeft" align="right" valign="top"><a id="a92d2a523ba331b3e8112e3d632e10e6c" name="a92d2a523ba331b3e8112e3d632e10e6c"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_eta1</b> = 2</td></tr>
+<tr class="separator:a92d2a523ba331b3e8112e3d632e10e6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92bb6a489dcb0ade0b02d207c16a2ea8" id="r_a92bb6a489dcb0ade0b02d207c16a2ea8"><td class="memItemLeft" align="right" valign="top"><a id="a92bb6a489dcb0ade0b02d207c16a2ea8" name="a92bb6a489dcb0ade0b02d207c16a2ea8"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_eta2</b> = 3</td></tr>
+<tr class="separator:a92bb6a489dcb0ade0b02d207c16a2ea8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6f8a92daa5e3aa80e9a56b9334f5504c" id="r_a6f8a92daa5e3aa80e9a56b9334f5504c"><td class="memItemLeft" align="right" valign="top"><a id="a6f8a92daa5e3aa80e9a56b9334f5504c" name="a6f8a92daa5e3aa80e9a56b9334f5504c"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_psi1</b> = 4</td></tr>
+<tr class="separator:a6f8a92daa5e3aa80e9a56b9334f5504c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7875cc3ee0391bd62b33a2336c062bdc" id="r_a7875cc3ee0391bd62b33a2336c062bdc"><td class="memItemLeft" align="right" valign="top"><a id="a7875cc3ee0391bd62b33a2336c062bdc" name="a7875cc3ee0391bd62b33a2336c062bdc"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_psi2</b> = 5</td></tr>
+<tr class="separator:a7875cc3ee0391bd62b33a2336c062bdc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4dc25732ea61d64b06b5f4861e0c2ac" id="r_aa4dc25732ea61d64b06b5f4861e0c2ac"><td class="memItemLeft" align="right" valign="top"><a id="aa4dc25732ea61d64b06b5f4861e0c2ac" name="aa4dc25732ea61d64b06b5f4861e0c2ac"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_zeta1</b> = 6</td></tr>
+<tr class="separator:aa4dc25732ea61d64b06b5f4861e0c2ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a928c0d20cfb4124029e6560f04f600" id="r_a6a928c0d20cfb4124029e6560f04f600"><td class="memItemLeft" align="right" valign="top"><a id="a6a928c0d20cfb4124029e6560f04f600" name="a6a928c0d20cfb4124029e6560f04f600"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_zeta2</b> = 7</td></tr>
+<tr class="separator:a6a928c0d20cfb4124029e6560f04f600"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f38ea777bfa2ac9411ba37bd522891f" id="r_a3f38ea777bfa2ac9411ba37bd522891f"><td class="memItemLeft" align="right" valign="top"><a id="a3f38ea777bfa2ac9411ba37bd522891f" name="a3f38ea777bfa2ac9411ba37bd522891f"></a>
+const std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>pos_rhoS</b> = 8</td></tr>
+<tr class="separator:a3f38ea777bfa2ac9411ba37bd522891f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_attribs_classBSMPT_1_1Class__Potential__Origin"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classBSMPT_1_1Class__Potential__Origin')"><img src="closed.png" alt="-"/>&#160;Public Attributes inherited from <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html">BSMPT::Class_Potential_Origin</a></td></tr>
 <tr class="memitem:a392cca20cc3964bd4dddcc48e25baacb inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a392cca20cc3964bd4dddcc48e25baacb"><td class="memItemLeft" align="right" valign="top">
 const <a class="el" href="structBSMPT_1_1ISMConstants.html">ISMConstants</a>&#160;</td><td class="memItemRight" valign="bottom"><b>SMConstants</b></td></tr>
@@ -538,6 +613,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>UseVTreeSimplified</b
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>UseVCounterSimplified</b> = false</td></tr>
 <tr class="memdesc:a9f5b1fc4312b08807683d0bd4fde6cba inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">UseVCounterSimplified Decides wether VCounterSimplified will be used or not. VCounterSimplified returns 0 if UseVCounterSimplified is false Set in constructor of the implemented models. <br /></td></tr>
 <tr class="separator:a9f5b1fc4312b08807683d0bd4fde6cba inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6258f71ce50afd4a4252a27abb3a22a inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_ab6258f71ce50afd4a4252a27abb3a22a"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#ab6258f71ce50afd4a4252a27abb3a22a">ARMZeroThreshold</a> = 1e-5</td></tr>
+<tr class="separator:ab6258f71ce50afd4a4252a27abb3a22a inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a105701013dedcfb38d44c4dda3c0f1e0 inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a105701013dedcfb38d44c4dda3c0f1e0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a105701013dedcfb38d44c4dda3c0f1e0">SignSymmetries</a></td></tr>
 <tr class="separator:a105701013dedcfb38d44c4dda3c0f1e0 inherit pub_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -596,10 +673,10 @@ std::size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NColour</b> = 
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>SetCurvatureDone</b> = false</td></tr>
 <tr class="memdesc:a8d42c3286c5bbfd816c325f47aa0aa67 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">SetCurvatureDone Used to check if the tensors are set. <br /></td></tr>
 <tr class="separator:a8d42c3286c5bbfd816c325f47aa0aa67 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a762eed521dae06c4d5dae99dc9c6f3bc inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a762eed521dae06c4d5dae99dc9c6f3bc"><td class="memItemLeft" align="right" valign="top">
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalcCouplingsdone</b> = false</td></tr>
-<tr class="memdesc:a762eed521dae06c4d5dae99dc9c6f3bc inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">CalcCouplingsdone Used to check if CalculatePhysicalCouplings has already been called. <br /></td></tr>
-<tr class="separator:a762eed521dae06c4d5dae99dc9c6f3bc inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a86ecc4c8022f362e877789228c6f00d9 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a86ecc4c8022f362e877789228c6f00d9"><td class="memItemLeft" align="right" valign="top">
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalcCouplingsDone</b> = false</td></tr>
+<tr class="memdesc:a86ecc4c8022f362e877789228c6f00d9 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">CalcCouplingsDone Used to check if CalculatePhysicalCouplings has already been called. <br /></td></tr>
+<tr class="separator:a86ecc4c8022f362e877789228c6f00d9 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a519a313f4beca7c3c36dfd265f2441de inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a519a313f4beca7c3c36dfd265f2441de"><td class="memItemLeft" align="right" valign="top">
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>CalculatedTripleCopulings</b> = false</td></tr>
 <tr class="memdesc:a519a313f4beca7c3c36dfd265f2441de inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">CalculatedTripleCopulings Used to check if TripleHiggsCouplings has already been called. <br /></td></tr>
@@ -656,6 +733,8 @@ std::vector&lt; double &gt;&#160;</td><td class="memItemRight" valign="bottom"><
 <tr class="separator:a9a6d351ec6750ecf35c23df15cb7b440 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e383fd333a8fdc4f7539a5790bdd64b inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a0e383fd333a8fdc4f7539a5790bdd64b"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a0e383fd333a8fdc4f7539a5790bdd64b">HiggsRotationMatrix</a></td></tr>
 <tr class="separator:a0e383fd333a8fdc4f7539a5790bdd64b inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd75c050405362a7904d946e3970c819 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_afd75c050405362a7904d946e3970c819"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::vector&lt; double &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#afd75c050405362a7904d946e3970c819">HiggsRotationMatrixEnsuredConvention</a></td></tr>
+<tr class="separator:afd75c050405362a7904d946e3970c819 inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23524ba96332d81b38491af13d4c829e inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin" id="r_a23524ba96332d81b38491af13d4c829e"><td class="memItemLeft" align="right" valign="top">
 std::vector&lt; std::vector&lt; std::vector&lt; std::vector&lt; double &gt; &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>Couplings_Higgs_Quartic</b></td></tr>
 <tr class="memdesc:a23524ba96332d81b38491af13d4c829e inherit pro_attribs_classBSMPT_1_1Class__Potential__Origin"><td class="mdescLeft">&#160;</td><td class="mdescRight">Couplings_Higgs_Quartic Stores the quartic Higgs couplings in the mass base. <br /></td></tr>
@@ -897,6 +976,34 @@ e_R, \overline{\mu}_L , \mu_R, \overline{\tau}_L, \tau_R,
 
 </div>
 </div>
+<a id="afb40d701ea88d478004504917534933f" name="afb40d701ea88d478004504917534933f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb40d701ea88d478004504917534933f">&#9670;&#160;</a></span>AdjustRotationMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BSMPT::Models::Class_Potential_N2HDM::AdjustRotationMatrix </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Ensures the correct rotation matrix convention </p>
+
+<p>Implements <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a33ea464154a5021cd36ec157a3f6793e">BSMPT::Class_Potential_Origin</a>.</p>
+
+</div>
+</div>
 <a id="a559e76fc46dab099104e40963c91e136" name="a559e76fc46dab099104e40963c91e136"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a559e76fc46dab099104e40963c91e136">&#9670;&#160;</a></span>calc_CT()</h2>
 
@@ -1017,6 +1124,41 @@ e_R, \overline{\mu}_L , \mu_R, \overline{\tau}_L, \tau_R,
 <p>This is a possible debugging function. </p>
 
 <p>Implements <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a6ed874568701eab1e7e498070df2e1e5">BSMPT::Class_Potential_Origin</a>.</p>
+
+</div>
+</div>
+<a id="aeb5baeb1a0c2f3035497519726c6b5f3" name="aeb5baeb1a0c2f3035497519726c6b5f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeb5baeb1a0c2f3035497519726c6b5f3">&#9670;&#160;</a></span>FindMassBasisIndices()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void BSMPT::Models::Class_Potential_N2HDM::FindMassBasisIndices </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; double &gt; &amp;&#160;</td>
+          <td class="paramname"><em>HiggsMasses</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const Eigen::MatrixXd &amp;&#160;</td>
+          <td class="paramname"><em>HiggsRot</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Helper function to determine mass indices of rotation matrix </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">HiggsMasses</td><td>: vector with squared Higgs masses allocated in AdjustRotationMatrix </td></tr>
+    <tr><td class="paramname">HiggsRot</td><td>: rotation matrix from interaction to mass basis as calculated in AdjustRotationMatrix </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

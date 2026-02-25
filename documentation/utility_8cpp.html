@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.13</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.14</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -105,6 +105,7 @@ $(document).ready(function(){initNavTree('utility_8cpp.html',''); initResizable(
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="IncludeAllModels_8h_source.html">BSMPT/models/IncludeAllModels.h</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="utility_8h_source.html">BSMPT/utility/utility.h</a>&gt;</code><br />
+<code>#include &lt;complex&gt;</code><br />
 <code>#include &lt;ostream&gt;</code><br />
 <code>#include &lt;sstream&gt;</code><br />
 <code>#include &lt;string&gt;</code><br />
@@ -144,6 +145,15 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>BSMPT::factorial</b> (
 <tr class="memitem:adcb7a745c3dcbb7dac3319dc94f792f1" id="r_adcb7a745c3dcbb7dac3319dc94f792f1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBSMPT.html#adcb7a745c3dcbb7dac3319dc94f792f1">BSMPT::EllipIntSecond</a> (const double &amp;x)</td></tr>
 <tr class="memdesc:adcb7a745c3dcbb7dac3319dc94f792f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incomplete elliptic integral of the second kind of x with a different parameterization and k^2 = -2.  <br /></td></tr>
 <tr class="separator:adcb7a745c3dcbb7dac3319dc94f792f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c3b59dc7c02a46fe99213740fbabaac" id="r_a3c3b59dc7c02a46fe99213740fbabaac"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBSMPT.html#a3c3b59dc7c02a46fe99213740fbabaac">BSMPT::almost_the_same</a> (const double &amp;a, const double &amp;b, const double &amp;rel_precision, const double &amp;num_zero=1e-10)</td></tr>
+<tr class="memdesc:a3c3b59dc7c02a46fe99213740fbabaac"><td class="mdescLeft">&#160;</td><td class="mdescRight">almost_the_same check if two doubles  <br /></td></tr>
+<tr class="separator:a3c3b59dc7c02a46fe99213740fbabaac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3064ebf1c186332a80b4523704699dce" id="r_a3064ebf1c186332a80b4523704699dce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBSMPT.html#a3064ebf1c186332a80b4523704699dce">BSMPT::almost_the_same</a> (const std::complex&lt; double &gt; &amp;a, const std::complex&lt; double &gt; &amp;b, const double &amp;rel_precision, const double &amp;num_zero=1e-10)</td></tr>
+<tr class="memdesc:a3064ebf1c186332a80b4523704699dce"><td class="mdescLeft">&#160;</td><td class="mdescRight">almost_the_same check if two complex doubles  <br /></td></tr>
+<tr class="separator:a3064ebf1c186332a80b4523704699dce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48a65cfaa309225724885338185f355c" id="r_a48a65cfaa309225724885338185f355c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceBSMPT.html#a48a65cfaa309225724885338185f355c">BSMPT::almost_the_same</a> (const std::vector&lt; double &gt; &amp;a, const std::vector&lt; double &gt; &amp;b, const bool &amp;allow_for_sign_flip, const double &amp;rel_precision, const double &amp;num_zero=1e-10)</td></tr>
+<tr class="memdesc:a48a65cfaa309225724885338185f355c"><td class="mdescLeft">&#160;</td><td class="mdescRight">almost_the_same check if two vectors (element-wise)  <br /></td></tr>
+<tr class="separator:a48a65cfaa309225724885338185f355c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

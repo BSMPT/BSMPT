@@ -89,8 +89,9 @@ var namespaceBSMPT =
       [ "Percolation", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0ae234ab7b9afbd014f22b8790d87861a1", null ],
       [ "Completion", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0a2fea59b7e470acac5ec1589d504da14e", null ]
     ] ],
-    [ "almost_the_same", "namespaceBSMPT.html#a7ef27f7780c7d96480ff01a91dc88a17", null ],
-    [ "almost_the_same", "namespaceBSMPT.html#ac5dd574f107251ff284bc79473d4c5c5", null ],
+    [ "almost_the_same", "namespaceBSMPT.html#a3c3b59dc7c02a46fe99213740fbabaac", null ],
+    [ "almost_the_same", "namespaceBSMPT.html#a3064ebf1c186332a80b4523704699dce", null ],
+    [ "almost_the_same", "namespaceBSMPT.html#a48a65cfaa309225724885338185f355c", null ],
     [ "Create1DimGrid", "namespaceBSMPT.html#a15e19b31fc051bf042a6e8b00fd68800", null ],
     [ "Create1DimGrid", "namespaceBSMPT.html#afbf3c83ace0916267ddd939a9c3a75c0", null ],
     [ "EllipIntSecond", "namespaceBSMPT.html#adcb7a745c3dcbb7dac3319dc94f792f1", null ],
