@@ -29,6 +29,9 @@ if(BSMPTBuildExecutables)
 
 endif()
 
+target_compile_definitions(GenericTests
+                           PRIVATE TEST_DATA_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+
 target_compile_features(GenericTests PUBLIC cxx_std_17)
 
 include(Catch)

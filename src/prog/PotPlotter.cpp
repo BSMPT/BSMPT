@@ -167,7 +167,7 @@ try
                   "Temperature is set to T = " + std::to_string(temp));
 
     std::vector<double> vevStart;
-    if (args.point.size() == 0)
+    if (args.point.empty())
     {
       vevStart = std::vector<double>(modelPointer->get_nVEV(), 0);
     }
@@ -388,7 +388,7 @@ bool CLIOptions::good() const
       Logger::Write(LoggingLevel::Default, "Invalid input for temperature.");
     return false;
   }
-  if (use_slice_plotter and ((min_start.size() == 0 or min_end.size() == 0)))
+  if (use_slice_plotter and ((min_start.empty() or min_end.empty())))
   {
     Logger::Write(
         LoggingLevel::Default,

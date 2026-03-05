@@ -83,6 +83,12 @@ public:
 
   double vh, vs, va;
 
+  double alpha1 = 0, alpha2 = 0, alpha3 = 0;
+
+  std::size_t pos_Gp, pos_Gm, pos_G0;
+  std::size_t pos_h1, pos_h2, pos_h3;
+  std::size_t pos_h_SM, pos_h_l, pos_h_H;
+
   void ReadAndSet(const std::string &linestr,
                   std::vector<double> &par) override;
   std::vector<std::string> addLegendCT() const override;
@@ -109,6 +115,25 @@ public:
   void set_CT_Pot_Par(const std::vector<double> &par) override;
   void write() const override;
 
+  /*
+   * CxSM interaction basis:
+   * 0   1   2   3      4      5
+   * Gp, Gm, G0, zeta1, zeta2, zeta3
+   */
+  const std::size_t pos_i_Gp = 0, pos_i_Gm = 1, pos_i_G0 = 2, pos_zeta1 = 3,
+                    pos_zeta2 = 4, pos_zeta3 = 5;
+
+  /**
+   * Helper function to determine mass indices of rotation matrix
+   * @param HiggsMasses : vector with squared Higgs masses allocated
+   *                      in AdjustRotationMatrix
+   * @param HiggsRot : rotation matrix from interaction to mass basis
+   *                   as calculated in AdjustRotationMatrix
+   */
+  void FindMassBasisIndices(const std::vector<double> &HiggsMasses,
+                            const Eigen::MatrixXd &HiggsRot);
+
+  void AdjustRotationMatrix() override;
   void TripleHiggsCouplings() override;
   std::vector<double> calc_CT() const override;
 

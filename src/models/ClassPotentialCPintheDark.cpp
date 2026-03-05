@@ -21,6 +21,9 @@
 #include <BSMPT/models/IncludeAllModels.h>
 #include <BSMPT/utility/Logger.h>
 #include <BSMPT/utility/utility.h>
+
+#include <optional>
+
 using namespace Eigen;
 
 namespace BSMPT
@@ -1175,71 +1178,19 @@ void Class_Potential_CPintheDark::write() const
 
   ss << "The scale is given by mu = " << scale << " GeV \n";
 
-  const double ZeroThreshold = 1e-5;
-
-  std::size_t posGp  = 0;
-  std::size_t posGm  = 0;
-  std::size_t posHp  = 0;
-  std::size_t posHm  = 0;
-  std::size_t posHSM = 0;
-  std::size_t posG0  = 0;
-  std::size_t posh1  = 0;
-  std::size_t posh2  = 0;
-  std::size_t posh3  = 0;
-
-  for (size_t i = 0; i < NHiggs; i++)
-  {
-    // the rotation matrix is diagonal besides for the neutral dark scalars
-    if (std::abs(HiggsRotationMatrix[i][0]) > ZeroThreshold)
-      posGp = i;
-    else if (std::abs(HiggsRotationMatrix[i][1]) > ZeroThreshold)
-      posGm = i;
-    else if (std::abs(HiggsRotationMatrix[i][2]) > ZeroThreshold)
-      posHp = i;
-    else if (std::abs(HiggsRotationMatrix[i][3]) > ZeroThreshold)
-      posHm = i;
-    else if (std::abs(HiggsRotationMatrix[i][4]) > ZeroThreshold)
-      posHSM = i;
-    else if (std::abs(HiggsRotationMatrix[i][5]) > ZeroThreshold)
-      posG0 = i;
-
-    // the neutral dark scalars mix
-    if ((std::abs(HiggsRotationMatrix[i][6]) +
-         std::abs(HiggsRotationMatrix[i][7]) +
-         std::abs(HiggsRotationMatrix[i][8])) > ZeroThreshold)
-    {
-      // use that scalars are sorted by mass
-      if (posh1 == 0)
-      {
-        posh1 = i;
-      }
-      else
-      {
-        if (posh2 == 0)
-        {
-          posh2 = i;
-        }
-        else
-        {
-          posh3 = i;
-        }
-      }
-    }
-  }
-
   std::vector<double> HiggsMasses;
   HiggsMasses = HiggsMassesSquared(vevTree, 0);
 
   ss << "The mass spectrum is given by :\n";
-  ss << "m_{G^+} = " << std::sqrt(HiggsMasses[posGp]) << " GeV \n"
-     << "m_{G^-} = " << std::sqrt(HiggsMasses[posGm]) << " GeV \n"
-     << "m_{H^+} = " << std::sqrt(HiggsMasses[posHp]) << " GeV \n"
-     << "m_{H^-} = " << std::sqrt(HiggsMasses[posHm]) << " GeV \n"
-     << "m_{hSM} = " << std::sqrt(HiggsMasses[posHSM]) << " GeV \n"
-     << "m_{G^0} = " << std::sqrt(HiggsMasses[posG0]) << " GeV \n"
-     << "m_{h_1} = " << std::sqrt(HiggsMasses[posh1]) << " GeV \n"
-     << "m_{h_2} = " << std::sqrt(HiggsMasses[posh2]) << " GeV \n"
-     << "m_{h_3} = " << std::sqrt(HiggsMasses[posh3]) << " GeV \n";
+  ss << "m_{G^+} = " << std::sqrt(HiggsMasses[pos_Gp]) << " GeV \n"
+     << "m_{G^-} = " << std::sqrt(HiggsMasses[pos_Gm]) << " GeV \n"
+     << "m_{H^+} = " << std::sqrt(HiggsMasses[pos_Hp]) << " GeV \n"
+     << "m_{H^-} = " << std::sqrt(HiggsMasses[pos_Hm]) << " GeV \n"
+     << "m_{hSM} = " << std::sqrt(HiggsMasses[pos_HSM]) << " GeV \n"
+     << "m_{G^0} = " << std::sqrt(HiggsMasses[pos_G0]) << " GeV \n"
+     << "m_{h_1} = " << std::sqrt(HiggsMasses[pos_h1]) << " GeV \n"
+     << "m_{h_2} = " << std::sqrt(HiggsMasses[pos_h2]) << " GeV \n"
+     << "m_{h_3} = " << std::sqrt(HiggsMasses[pos_h3]) << " GeV \n";
 
   Logger::Write(LoggingLevel::Default, ss.str());
 }
@@ -1258,7 +1209,7 @@ std::vector<double> Class_Potential_CPintheDark::calc_CT() const
     retmes += " was called before SetCurvatureArrays()!\n";
     throw std::runtime_error(retmes);
   }
-  if (!CalcCouplingsdone)
+  if (!CalcCouplingsDone)
   {
     std::string retmes = __func__;
     retmes += " was called before CalculatePhysicalCouplings()!\n";
@@ -1314,22 +1265,181 @@ std::vector<double> Class_Potential_CPintheDark::calc_CT() const
   return parCT;
 }
 
-// mass basis triple couplings
-void Class_Potential_CPintheDark::TripleHiggsCouplings()
+void Class_Potential_CPintheDark::FindMassBasisIndices(
+    const std::vector<double> &HiggsMasses,
+    const MatrixXd &HiggsRot)
+{
+  // Indices of mass eigenstates for rotation from interaction to mass basis
+  std::optional<std::size_t> tpos_Gp, tpos_Gm, tpos_Hp, tpos_Hm, tpos_HSM,
+      tpos_G0, tpos_h1, tpos_h2, tpos_h3;
+
+  // basis = {rho1, eta1, rho2, eta2, zeta1, psi1, zeta2, psi2, rhoS}
+  // the rotation matrix is diagonal besides for the neutral dark scalars
+  for (std::size_t i = 0; i < NHiggs; i++)
+  // mass base index i corresponds to mass vector sorted in ascending mass
+  {
+    bool hasZeroMass = std::abs(HiggsMasses[i]) < ARMZeroThreshold;
+    if (std::abs(HiggsRot(i, pos_rho1)) > ARMZeroThreshold)
+    {
+      if (not tpos_Gp.has_value() and hasZeroMass)
+      {
+        tpos_Gp = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Goldstone Gp not massless "
+                                 "or not diagonal.");
+      }
+    }
+    else if (std::abs(HiggsRot(i, pos_eta1)) > ARMZeroThreshold)
+    {
+      if (not tpos_Gm.has_value() and hasZeroMass)
+      {
+        tpos_Gm = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Goldstone Gm not massless "
+                                 "or not diagonal.");
+      }
+    }
+    else if (std::abs(HiggsRot(i, pos_rho2)) > ARMZeroThreshold)
+    {
+      if (not tpos_Hp.has_value())
+      {
+        tpos_Hp = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Charged Higgs Hp not diagonal.");
+      }
+    }
+    else if (std::abs(HiggsRot(i, pos_eta2)) > ARMZeroThreshold)
+    {
+      if (not tpos_Hm.has_value())
+      {
+        tpos_Hm = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Charged Higgs Hm not diagonal.");
+      }
+    }
+    else if (std::abs(HiggsRot(i, pos_zeta1)) > ARMZeroThreshold)
+    {
+      if (not tpos_HSM.has_value())
+      {
+        tpos_HSM = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Higgs HSM not diagonal.");
+      }
+    }
+    else if (std::abs(HiggsRot(i, pos_psi1)) > ARMZeroThreshold)
+    {
+      if (not tpos_G0.has_value() and hasZeroMass)
+      {
+        tpos_G0 = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Goldstone G0 not massless "
+                                 "or not diagonal.");
+      }
+    }
+    // the neutral dark scalars mix
+    else if ((std::abs(HiggsRot(i, pos_zeta2)) +
+              std::abs(HiggsRot(i, pos_psi2)) +
+              std::abs(HiggsRot(i, pos_rhoS))) > ARMZeroThreshold)
+    {
+      // use that scalars are sorted by mass
+      if (not tpos_h1.has_value())
+      {
+        tpos_h1 = i;
+      }
+      else if (not tpos_h2.has_value())
+      {
+        tpos_h2 = i;
+      }
+      else if (not tpos_h3.has_value())
+      {
+        tpos_h3 = i;
+      }
+      else
+      {
+        throw std::runtime_error("Error. Neutral submatrix mixing "
+                                 "with other components.");
+      }
+    }
+    else
+    {
+      throw std::runtime_error("Error. Invalid mixing matrix containing row "
+                               "with all zeroes.");
+    }
+  }
+
+  // Sanity check if all position indices are set
+  if (not(tpos_Gp.has_value() and tpos_Gm.has_value() and
+          tpos_Hp.has_value() and tpos_Hm.has_value() and
+          tpos_HSM.has_value() and tpos_G0.has_value() and
+          tpos_h1.has_value() and tpos_h2.has_value() and tpos_h3.has_value()))
+  {
+    throw std::runtime_error("Error. Not all position indices are set.");
+  }
+
+  pos_Gp  = tpos_Gp.value();
+  pos_Gm  = tpos_Gm.value();
+  pos_Hp  = tpos_Hp.value();
+  pos_Hm  = tpos_Hm.value();
+  pos_HSM = tpos_HSM.value();
+  pos_G0  = tpos_G0.value();
+  pos_h1  = tpos_h1.value();
+  pos_h2  = tpos_h2.value();
+  pos_h3  = tpos_h3.value();
+
+  // check if all other elements of rotation matrix are zero
+  bool zero_element = false;
+  for (std::size_t i = 0; i < NHiggs; i++)
+  {
+    for (std::size_t j = 0; j < NHiggs; j++)
+    {
+      bool IsChargedHiggsP =
+          (j == pos_rho1 and i == pos_Gp) or (j == pos_rho2 and i == pos_Hp);
+      bool IsChargedHiggsM =
+          (j == pos_eta1 and i == pos_Gm) or (j == pos_eta2 and i == pos_Hm);
+      bool IsNeutralSMHiggs   = (j == pos_zeta1 and i == pos_HSM);
+      bool IsNeutralGoldstone = (j == pos_psi1 and i == pos_G0);
+      bool IsNeutralDarkHiggs =
+          (j == pos_zeta2 and (i == pos_h1 or i == pos_h2 or i == pos_h3)) or
+          (j == pos_psi2 and (i == pos_h1 or i == pos_h2 or i == pos_h3)) or
+          (j == pos_rhoS and (i == pos_h1 or i == pos_h2 or i == pos_h3));
+
+      if (not(IsChargedHiggsP or IsChargedHiggsM or IsNeutralSMHiggs or
+              IsNeutralGoldstone or IsNeutralDarkHiggs))
+      {
+        zero_element = true;
+      }
+
+      if (zero_element and std::abs(HiggsRot(i, j)) > ARMZeroThreshold)
+      {
+        throw std::runtime_error("Error. Invalid rotation matrix detected.");
+      }
+      zero_element = false;
+    }
+  }
+}
+
+void Class_Potential_CPintheDark::AdjustRotationMatrix()
 {
   if (!SetCurvatureDone) SetCurvatureArrays();
-  if (!CalcCouplingsdone) CalculatePhysicalCouplings();
+  if (!CalcCouplingsDone) CalculatePhysicalCouplings();
 
-  // position indices store the position of the physical fields
-  std::size_t posGp  = 0;
-  std::size_t posGm  = 0;
-  std::size_t posHp  = 0;
-  std::size_t posHm  = 0;
-  std::size_t posHSM = 0;
-  std::size_t posG0  = 0;
-  std::size_t posh1  = 0;
-  std::size_t posh2  = 0;
-  std::size_t posh3  = 0;
+  if (!CheckRotationMatrix()) // Check whether generically generated rotation
+                              // matrix is proper rotation matrix
+  {
+    throw std::runtime_error("Error in rotation matrix.");
+  }
 
   MatrixXd HiggsRot(NHiggs, NHiggs);
   for (std::size_t i = 0; i < NHiggs; i++)
@@ -1340,59 +1450,137 @@ void Class_Potential_CPintheDark::TripleHiggsCouplings()
     }
   }
 
-  const double ZeroThreshold = 1e-5;
-
-  for (size_t i = 0; i < NHiggs; i++)
+  std::vector<double> HiggsMasses = HiggsMassesSquared(vevTree, 0);
+  if (HiggsMasses.front() <= -ARMZeroThreshold)
   {
-    // the rotation matrix is diagonal besides for the neutral dark scalars
-    if (std::abs(HiggsRot(i, 0)) > ZeroThreshold)
-      posGp = i;
-    else if (std::abs(HiggsRot(i, 1)) > ZeroThreshold)
-      posGm = i;
-    else if (std::abs(HiggsRot(i, 2)) > ZeroThreshold)
-      posHp = i;
-    else if (std::abs(HiggsRot(i, 3)) > ZeroThreshold)
-      posHm = i;
-    else if (std::abs(HiggsRot(i, 4)) > ZeroThreshold)
-      posHSM = i;
-    else if (std::abs(HiggsRot(i, 5)) > ZeroThreshold)
-      posG0 = i;
+    std::stringstream ss;
+    ss.precision(std::numeric_limits<double>::max_digits10);
+    ss << "Warning, at least one negative mass squared in spectrum: "
+       << HiggsMasses.front() << std::endl;
+    Logger::Write(LoggingLevel::Default, ss.str());
+  }
 
-    // the neutral dark scalars mix
-    if ((std::abs(HiggsRot(i, 6)) + std::abs(HiggsRot(i, 7)) +
-         std::abs(HiggsRot(i, 8))) > ZeroThreshold)
+  FindMassBasisIndices(HiggsMasses, HiggsRot);
+
+  if (HiggsRot(pos_Gp, pos_rho1) < 0) // Gp rho1 (= +1)
+  {
+    HiggsRot.row(pos_Gp) *= -1;
+  }
+  if (HiggsRot(pos_Gm, pos_eta1) < 0) // Gm eta1 (= +1)
+  {
+    HiggsRot.row(pos_Gm) *= -1;
+  }
+  if (HiggsRot(pos_Hp, pos_rho2) < 0) // Hp rho2 (= +1)
+  {
+    HiggsRot.row(pos_Hp) *= -1;
+  }
+  if (HiggsRot(pos_Hm, pos_eta2) < 0) // Hm eta2 (= +1)
+  {
+    HiggsRot.row(pos_Hm) *= -1;
+  }
+  if (HiggsRot(pos_HSM, pos_zeta1) < 0) // HSM zeta1 (= +1)
+  {
+    HiggsRot.row(pos_HSM) *= -1;
+  }
+  if (HiggsRot(pos_G0, pos_psi1) < 0) // G0 psi1 (= +1)
+  {
+    HiggsRot.row(pos_G0) *= -1;
+  }
+
+  /*
+   * Check dark neutral submatrix
+   * Use the "ScannerS" criteria from arXiv:2007.02985 Eq. (6)
+   * (since ScannerS uses the same parametrisation of the angles as BSMPT):
+   * * (1) if R[1][1] < 0: h1 -> -h1 (i.e. multiply the h1 row with -1)
+   * * (2) if R[3][3] < 0: h3 -> -h3 (i.e. multiply the h3 row with -1)
+   * * (3) if det R < 0: h2 -> -h2 (i.e. multiply the h2 row with -1)
+   */
+
+  // h1 zeta2 (condition (1) above, R11 < 0)
+  if (HiggsRot(pos_h1, pos_zeta2) < 0)
+  {
+    // if negative, flip sign of h1
+    HiggsRot.row(pos_h1) *= -1;
+  }
+
+  // h3 rhoS (condition (2) above, R33 < 0)
+  if (HiggsRot(pos_h3, pos_rhoS) < 0)
+  {
+    // if negative, flip sign of h3
+    HiggsRot.row(pos_h3) *= -1;
+  }
+
+  // Calculate the determinant AFTER flipping the signs for rows 1 and 3 above
+  MatrixXd HiggsRotNeutral(3, 3);
+  HiggsRotNeutral(0, 0) = HiggsRot(pos_h1, pos_zeta2);
+  HiggsRotNeutral(0, 1) = HiggsRot(pos_h1, pos_psi2);
+  HiggsRotNeutral(0, 2) = HiggsRot(pos_h1, pos_rhoS);
+
+  HiggsRotNeutral(1, 0) = HiggsRot(pos_h2, pos_zeta2);
+  HiggsRotNeutral(1, 1) = HiggsRot(pos_h2, pos_psi2);
+  HiggsRotNeutral(1, 2) = HiggsRot(pos_h2, pos_rhoS);
+
+  HiggsRotNeutral(2, 0) = HiggsRot(pos_h3, pos_zeta2);
+  HiggsRotNeutral(2, 1) = HiggsRot(pos_h3, pos_psi2);
+  HiggsRotNeutral(2, 2) = HiggsRot(pos_h3, pos_rhoS);
+
+  // condition (3) above, det(R) < 0
+  if (HiggsRotNeutral.determinant() < 0)
+  {
+    // if negative, flip sign of h2
+    HiggsRot.row(pos_h2) *= -1;
+  }
+
+  // Extract the fixed mixing angles
+  double sina2 = HiggsRot(pos_h1, pos_rhoS); // +sin(a2)
+  double cosa2 = std::sqrt(1.0 - sina2 * sina2);
+  alpha1 = std::asin(HiggsRot(pos_h1, pos_zeta2) / cosa2); // +sin(a1) cos(a2)
+  alpha2 = std::asin(sina2);
+  alpha3 = std::asin(HiggsRot(pos_h2, pos_rhoS) / cosa2); // +cos(a2) sin(a3)
+
+  for (std::size_t i = 0; i < NHiggs; i++)
+  {
+    for (std::size_t j = 0; j < NHiggs; j++)
     {
-      // use that scalars are sorted by mass
-      if (posh1 == 0)
-      {
-        posh1 = i;
-      }
-      else
-      {
-        if (posh2 == 0)
-        {
-          posh2 = i;
-        }
-        else
-        {
-          posh3 = i;
-        }
-      }
+      HiggsRotationMatrixEnsuredConvention[i][j] = HiggsRot(i, j);
+    }
+  }
+}
+
+// mass basis triple couplings
+void Class_Potential_CPintheDark::TripleHiggsCouplings()
+{
+  if (!SetCurvatureDone) SetCurvatureArrays();
+  if (!CalcCouplingsDone) CalculatePhysicalCouplings();
+
+  if (CalculatedTripleCopulings) return;
+  CalculatedTripleCopulings = true;
+
+  MatrixXd HiggsRot(NHiggs, NHiggs);
+  for (std::size_t i = 0; i < NHiggs; i++)
+  {
+    for (std::size_t j = 0; j < NHiggs; j++)
+    {
+      HiggsRot(i, j) = HiggsRotationMatrixEnsuredConvention[i][j];
     }
   }
 
-  // new rotation matrix with
-  MatrixXd HiggsRotSort(NHiggs, NHiggs);
+  std::vector<std::size_t> HiggsOrder(NHiggs);
+  HiggsOrder[0] = pos_Gp;
+  HiggsOrder[1] = pos_Gm;
+  HiggsOrder[2] = pos_Hp;
+  HiggsOrder[3] = pos_Hm;
+  HiggsOrder[4] = pos_HSM;
+  HiggsOrder[5] = pos_G0;
+  HiggsOrder[6] = pos_h1;
+  HiggsOrder[7] = pos_h2;
+  HiggsOrder[8] = pos_h3;
 
-  HiggsRotSort.row(0) = HiggsRot.row(posGp);
-  HiggsRotSort.row(1) = HiggsRot.row(posGm);
-  HiggsRotSort.row(2) = HiggsRot.row(posHp);
-  HiggsRotSort.row(3) = HiggsRot.row(posHm);
-  HiggsRotSort.row(4) = HiggsRot.row(posHSM);
-  HiggsRotSort.row(5) = HiggsRot.row(posG0);
-  HiggsRotSort.row(6) = HiggsRot.row(posh1);
-  HiggsRotSort.row(7) = HiggsRot.row(posh2);
-  HiggsRotSort.row(8) = HiggsRot.row(posh3);
+  MatrixXd HiggsRotSort(NHiggs, NHiggs);
+  for (std::size_t i = 0; i < NHiggs; i++)
+  {
+    HiggsRotSort.row(i) = HiggsRot.row(HiggsOrder[i]);
+  }
 
   std::vector<double> TripleDeriv;
   TripleDeriv = WeinbergThirdDerivative();

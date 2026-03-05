@@ -17,6 +17,7 @@
 #include <BSMPT/utility/parser.h>
 #include <BSMPT/utility/utility.h>
 #include <Eigen/Dense>
+#include <chrono>
 #include <fstream>
 #include <iomanip>
 #include <iostream>

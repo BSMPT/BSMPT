@@ -126,7 +126,7 @@ bool GSL_Find_Maximum_line(
       solV.at(i) = tmax * vcritical.at(i);
     }
   }
-  else if (solV.size() == 0)
+  else if (solV.empty())
   {
     for (std::size_t i = 0; i < vcritical.size(); i++)
     {

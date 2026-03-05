@@ -8,7 +8,7 @@
  */
 
 #include <BSMPT/gravitational_waves/gw.h>
-
+#include <algorithm> // std::pow
 namespace BSMPT
 {
 
@@ -130,7 +130,7 @@ double GetHtauSH(const double HR, const double K_sw)
 
 double GetHtauSW(const double HR, const double K_sw)
 {
-  return min(GetHtauSH(HR, K_sw), 1.);
+  return std::min(GetHtauSH(HR, K_sw), 1.);
 }
 
 double GetYpsilon(const double HR, const double K_sw)
@@ -212,7 +212,7 @@ void GravitationalWave::CalcPeakSoundWave()
   // Characteristic frequencies
 
   const double xi_shell = CalculateXiShell();
-  const double delta_w  = xi_shell / max(data.vw, data.Csound_false);
+  const double delta_w  = xi_shell / std::max(data.vw, data.Csound_false);
 
   const double f_1 = 0.2 * data.Hstar0 / data.HR;
   const double f_2 = 0.5 * data.Hstar0 / (data.HR * delta_w);
@@ -807,7 +807,7 @@ double Getkappa_col(const double &Tstar,
   const double gamma_eq = pow((dV - P_LO) / P_NLO, 1. / pnlo_scaling);
   if (gamma_eq < 1) return 0.; // unphysical: dV - P_LO < P_NLO
   const double R_eq       = 3. * R0 * gamma_eq;
-  const double gamma_star = min(gamma_eq, gamma_run_away);
+  const double gamma_star = std::min(gamma_eq, gamma_run_away);
   const double kappa_col  = (1 - alpha_infty / BACalc.GetPTStrength()) *
                            (1 - 1 / pow(gamma_eq, pnlo_scaling)) *
                            (R_eq / Rstar) * (gamma_star / gamma_eq);

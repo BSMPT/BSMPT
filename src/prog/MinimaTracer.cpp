@@ -19,6 +19,7 @@
 #include <BSMPT/utility/parser.h>
 #include <BSMPT/utility/utility.h>
 #include <algorithm> // for copy, max
+#include <chrono>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
