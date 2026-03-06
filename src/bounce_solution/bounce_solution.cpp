@@ -837,12 +837,11 @@ double BounceSolution::CalcFalseVacFraction(const double &temp)
 
 double BounceSolution::CalcTempAtFalseVacFraction(const double &false_vac_frac)
 {
-  double res_Temp = -1;
-
+  double res_Temp              = -1;
   double int_at_false_vac_frac = -std::log(false_vac_frac);
   double T_up                  = -1;
   double T_down                = -1;
-
+  double IatT                  = -1;
   double T_middle;
 
   for (auto sol = SolutionList.rbegin(); sol != SolutionList.rend(); sol++)
@@ -860,49 +859,35 @@ double BounceSolution::CalcTempAtFalseVacFraction(const double &false_vac_frac)
                     " ) is in interval [ " + std::to_string(T_down) + ", " +
                     std::to_string(T_up) + " ]");
 
-  if (T_up > 0 and T_down > 0)
+  if (T_up < 0 or T_down < 0) return res_Temp;
+
+  for (size_t it = 0; it < 100; it++)
   {
-    T_middle    = (T_up + T_down) / 2.;
-    double IatT = FalseVacFractionExponent_I(T_middle);
+    T_middle = (T_up + T_down) / 2.;
+    IatT     = FalseVacFractionExponent_I(T_middle);
 
-    while ((std::abs(T_up / T_down - 1) >
-            RelativeTemperatureInCalcTempAtFalseVacFraction *
-                MarginOfCalcTempAtFalseVacFractionBeforeFailure) and
-           (not almost_the_same(
-               int_at_false_vac_frac,
-               IatT,
-               RelativeErrorInCalcTempAtFalseVacFraction *
-                   MarginOfCalcTempAtFalseVacFractionBeforeFailure)))
+    Logger::Write(LoggingLevel::BounceDetailed,
+                  "Pf ( T = " + std::to_string(T_middle) +
+                      " ) = " + std::to_string(std::exp(-IatT)));
+
+    if (IatT < int_at_false_vac_frac)
     {
-      T_middle = (T_up + T_down) / 2.;
-      IatT     = FalseVacFractionExponent_I(T_middle);
-
-      Logger::Write(LoggingLevel::BounceDetailed,
-                    "Pf ( T = " + std::to_string(T_middle) +
-                        " ) = " + std::to_string(std::exp(-IatT)));
-
-      if (IatT < int_at_false_vac_frac)
-      {
-        T_up = T_middle;
-      }
-      else
-      {
-        T_down = T_middle;
-      }
-
-      // Condition for success
-      if (std::abs(T_up / T_down - 1) <
-              RelativeTemperatureInCalcTempAtFalseVacFraction and
-          almost_the_same(int_at_false_vac_frac,
-                          IatT,
-                          RelativeErrorInCalcTempAtFalseVacFraction))
-      {
-        res_Temp = T_middle;
-        break;
-      }
+      T_up = T_middle;
     }
+    else
+    {
+      T_down = T_middle;
+    }
+
+    // Condition for success
+    if (std::abs(T_up / T_down - 1) <
+            RelativeTemperatureInCalcTempAtFalseVacFraction and
+        almost_the_same(int_at_false_vac_frac,
+                        IatT,
+                        RelativeErrorInCalcTempAtFalseVacFraction))
+      return T_middle;
   }
-  // Not numerically stable
+  // Not numerically stable. Return -1
   return res_Temp;
 }
 
