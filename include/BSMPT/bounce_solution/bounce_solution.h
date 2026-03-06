@@ -88,21 +88,6 @@ public:
   size_t NumberOfInitialScanTemperatures;
 
   /**
-   * @brief set to true if nucleation temperature is set
-   */
-  bool nucleation_temp_set = false;
-
-  /**
-   * @brief set to true if percolation temperature is set
-   */
-  bool percolation_temp_set = false;
-
-  /**
-   * @brief set to true if completion temperature is set
-   */
-  bool completion_temp_set = false;
-
-  /**
    * @brief Temperature at which to calculate parameters
    */
   TransitionTemperature which_transition_temp = TransitionTemperature::NotSet;

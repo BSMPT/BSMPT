@@ -747,9 +747,8 @@ void BounceSolution::CalculateNucleationTemp()
         }
         if (std::abs(T_up / T_down - 1) < 1e-10)
         {
-          Tnucl               = T_middle;
-          nucleation_temp_set = true;
-          status_nucl         = BSMPT::StatusTemperature::Success;
+          Tnucl       = T_middle;
+          status_nucl = BSMPT::StatusTemperature::Success;
           return;
         }
       }
@@ -909,61 +908,64 @@ double BounceSolution::CalcTempAtFalseVacFraction(const double &false_vac_frac)
 
 void BounceSolution::CalculatePercolationTemp(const double &false_vac_frac)
 {
-  if (status_bounce_sol == StatusGW::Success)
-  {
-    Tperc = CalcTempAtFalseVacFraction(false_vac_frac);
+  if (status_bounce_sol != StatusGW::Success) return;
 
-    if (Tperc > 0 and percolation_temp_set == false)
-    {
-      // Try to calculate action at Tp
-      // CalculateActionAt(Tperc);
-      for (std::size_t i = 0; i < SolutionList.size() - 1; i++)
-      {
-        if (Tperc > SolutionList[i].T and Tperc < SolutionList[i + 1].T)
-          CalculateActionAt((SolutionList[i].T + SolutionList[i + 1].T) / 2.);
-      }
-      percolation_temp_set = true;
-      SetBounceSol();
-      Tperc       = CalcTempAtFalseVacFraction(false_vac_frac);
-      status_perc = BSMPT::StatusTemperature::Success;
-    }
-    else if (Tperc < 0)
-    {
-      Logger::Write(LoggingLevel::TransitionDetailed,
-                    "Calculation of the percolation temperature failed.");
-      status_perc = BSMPT::StatusTemperature::NotMet;
-    }
+  Tperc = CalcTempAtFalseVacFraction(false_vac_frac);
+
+  if (Tperc < 0)
+  {
+    Logger::Write(LoggingLevel::TransitionDetailed,
+                  "Calculation of the percolation temperature failed.");
+    status_perc = BSMPT::StatusTemperature::NotMet;
     return;
-  }
-  return;
+  };
+
+  if (status_perc == BSMPT::StatusTemperature::Success)
+    return; // We tried to improve already
+
+  // Success
+  status_perc = BSMPT::StatusTemperature::Success;
+
+  // Try to calculate action at Tp
+  // CalculateActionAt(~Tperc);
+  for (std::size_t i = 0; i < SolutionList.size() - 1; i++)
+    if (Tperc > SolutionList[i].T and Tperc < SolutionList[i + 1].T)
+      CalculateActionAt((SolutionList[i].T + SolutionList[i + 1].T) / 2.);
+  SetBounceSol();
+
+  const double Tperc_improved = CalcTempAtFalseVacFraction(false_vac_frac);
+  if (Tperc_improved > 0) Tperc = Tperc_improved; // Check if improvement worked
 }
 
 void BounceSolution::CalculateCompletionTemp(const double &false_vac_frac)
 {
-  if (status_bounce_sol == StatusGW::Success)
-  {
-    Tcompl = CalcTempAtFalseVacFraction(false_vac_frac);
+  if (status_bounce_sol != StatusGW::Success) return;
 
-    if (Tcompl > 0 and completion_temp_set == false)
-    {
-      for (std::size_t i = 0; i < SolutionList.size() - 1; i++)
-      {
-        if (Tcompl > SolutionList[i].T and Tcompl < SolutionList[i + 1].T)
-          CalculateActionAt((SolutionList[i].T + SolutionList[i + 1].T) / 2.);
-      }
-      completion_temp_set = true;
-      Tcompl              = CalcTempAtFalseVacFraction(false_vac_frac);
-      status_compl        = BSMPT::StatusTemperature::Success;
-    }
-    else if (Tcompl < 0)
-    {
-      Logger::Write(LoggingLevel::TransitionDetailed,
-                    "Calculation of the completion temperature failed.");
-      status_compl = BSMPT::StatusTemperature::NotMet;
-    }
+  Tcompl = CalcTempAtFalseVacFraction(false_vac_frac);
+
+  if (Tcompl < 0)
+  {
+    Logger::Write(LoggingLevel::TransitionDetailed,
+                  "Calculation of the completion temperature failed.");
+    status_compl = BSMPT::StatusTemperature::NotMet;
     return;
-  }
-  return;
+  };
+
+  if (status_compl == BSMPT::StatusTemperature::Success)
+    return; // We tried to improve already
+
+  // Success
+  status_compl = BSMPT::StatusTemperature::Success;
+
+  // Try to calculate action at Tcomp
+  // CalculateActionAt(~Tcomp);
+  for (std::size_t i = 0; i < SolutionList.size() - 1; i++)
+    if (Tcompl > SolutionList[i].T and Tcompl < SolutionList[i + 1].T)
+      CalculateActionAt((SolutionList[i].T + SolutionList[i + 1].T) / 2.);
+  SetBounceSol();
+
+  const double Tcompl_improved = CalcTempAtFalseVacFraction(false_vac_frac);
+  if (Tcompl_improved < 0) Tcompl = Tcompl_improved;
 }
 
 void BounceSolution::CalculateReheatingTemp()
