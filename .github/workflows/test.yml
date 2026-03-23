@@ -46,7 +46,7 @@ jobs:
     - name: Run detect
       run: conan profile detect
 
-    - uses: nick-fields/retry@v3
+    - uses: nick-fields/retry@v4
       with:
         timeout_minutes: 60
         max_attempts: 3
