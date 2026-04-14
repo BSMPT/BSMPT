@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.15</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.16</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -370,18 +370,6 @@ double&#160;</td><td class="memItemRight" valign="bottom"><b>Csound_true</b> = -
 size_t&#160;</td><td class="memItemRight" valign="bottom"><b>NumberOfInitialScanTemperatures</b></td></tr>
 <tr class="memdesc:a088fc30cb625626a293e0c47825b9ac2"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of temperature steps in the initial scan of the bounce solver <br /></td></tr>
 <tr class="separator:a088fc30cb625626a293e0c47825b9ac2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adcad21437e7fc9744175e16abd5d62c3" id="r_adcad21437e7fc9744175e16abd5d62c3"><td class="memItemLeft" align="right" valign="top"><a id="adcad21437e7fc9744175e16abd5d62c3" name="adcad21437e7fc9744175e16abd5d62c3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>nucleation_temp_set</b> = false</td></tr>
-<tr class="memdesc:adcad21437e7fc9744175e16abd5d62c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to true if nucleation temperature is set <br /></td></tr>
-<tr class="separator:adcad21437e7fc9744175e16abd5d62c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4902e27fc4040d28a01db03412c5b440" id="r_a4902e27fc4040d28a01db03412c5b440"><td class="memItemLeft" align="right" valign="top"><a id="a4902e27fc4040d28a01db03412c5b440" name="a4902e27fc4040d28a01db03412c5b440"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>percolation_temp_set</b> = false</td></tr>
-<tr class="memdesc:a4902e27fc4040d28a01db03412c5b440"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to true if percolation temperature is set <br /></td></tr>
-<tr class="separator:a4902e27fc4040d28a01db03412c5b440"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ccf7acab51a0dd480ae30b5ccbbfae2" id="r_a3ccf7acab51a0dd480ae30b5ccbbfae2"><td class="memItemLeft" align="right" valign="top"><a id="a3ccf7acab51a0dd480ae30b5ccbbfae2" name="a3ccf7acab51a0dd480ae30b5ccbbfae2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>completion_temp_set</b> = false</td></tr>
-<tr class="memdesc:a3ccf7acab51a0dd480ae30b5ccbbfae2"><td class="mdescLeft">&#160;</td><td class="mdescRight">set to true if completion temperature is set <br /></td></tr>
-<tr class="separator:a3ccf7acab51a0dd480ae30b5ccbbfae2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af0995167fbef49ce90698634f88af276" id="r_af0995167fbef49ce90698634f88af276"><td class="memItemLeft" align="right" valign="top"><a id="af0995167fbef49ce90698634f88af276" name="af0995167fbef49ce90698634f88af276"></a>
 <a class="el" href="namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0">TransitionTemperature</a>&#160;</td><td class="memItemRight" valign="bottom"><b>which_transition_temp</b> = TransitionTemperature::NotSet</td></tr>
 <tr class="memdesc:af0995167fbef49ce90698634f88af276"><td class="mdescLeft">&#160;</td><td class="mdescRight">Temperature at which to calculate parameters. <br /></td></tr>
@@ -492,10 +480,6 @@ const double&#160;</td><td class="memItemRight" valign="bottom"><b>RelativeTempe
 const double&#160;</td><td class="memItemRight" valign="bottom"><b>RelativeErrorInCalcTempAtFalseVacFraction</b> = 1e-3</td></tr>
 <tr class="memdesc:a2109f509b8a0f37cc3d33ae73552f4e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Maximum relative error on the fraction of vacuum tunneled to be accepted. <br /></td></tr>
 <tr class="separator:a2109f509b8a0f37cc3d33ae73552f4e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afda7119823dc424e147bdcaaa249f981" id="r_afda7119823dc424e147bdcaaa249f981"><td class="memItemLeft" align="right" valign="top"><a id="afda7119823dc424e147bdcaaa249f981" name="afda7119823dc424e147bdcaaa249f981"></a>
-const double&#160;</td><td class="memItemRight" valign="bottom"><b>MarginOfCalcTempAtFalseVacFractionBeforeFailure</b> = 1e-4</td></tr>
-<tr class="memdesc:afda7119823dc424e147bdcaaa249f981"><td class="mdescLeft">&#160;</td><td class="mdescRight">Additional margin of error in the while loop without admitting failure. <br /></td></tr>
-<tr class="separator:afda7119823dc424e147bdcaaa249f981"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ac9a3413c0c0a4679ab188c98e56937" id="r_a9ac9a3413c0c0a4679ab188c98e56937"><td class="memItemLeft" align="right" valign="top"><a id="a9ac9a3413c0c0a4679ab188c98e56937" name="a9ac9a3413c0c0a4679ab188c98e56937"></a>
 <a class="el" href="structBSMPT_1_1CoexPhases.html">CoexPhases</a>&#160;</td><td class="memItemRight" valign="bottom"><b>phase_pair</b></td></tr>
 <tr class="memdesc:a9ac9a3413c0c0a4679ab188c98e56937"><td class="mdescLeft">&#160;</td><td class="mdescRight">pair of coexisiting phases <br /></td></tr>

@@ -126,12 +126,12 @@ var NAVTREEINDEX =
 "BSMPT_8cpp.html",
 "NegativeBosonSpline_8cpp.html#ae7be2f10cd4525049e5abd8460b3eabb",
 "classBSMPT_1_1BounceActionInt.html#a182d04c01c45437c738b542836f9c61a",
-"classBSMPT_1_1BounceSolution.html#a8bd284707e4259c6cb89edc3a82ab131",
-"classBSMPT_1_1Class__Potential__Origin.html#a5551f2b0b413b28c26f0385414898006",
-"classBSMPT_1_1Logger.html",
-"classBSMPT_1_1parser.html#a99f5949ea5312661ff56f73afe3959cd",
-"namespaceBSMPT.html#a0259602958fa271cd91b7699b8628c80",
-"structBSMPT_1_1ISMConstants.html#abb52fa683971572741db44821b061356"
+"classBSMPT_1_1BounceSolution.html#a900d56d924b7c7ef9ccaf404ab2e6a6b",
+"classBSMPT_1_1Class__Potential__Origin.html#a6585f83a82f61626f6da599a3b00baa6",
+"classBSMPT_1_1MinimumTracer.html#a2d247747657e174ddffa09af1d5aa23d",
+"classBSMPT_1_1parser.html#abefef451ca87db9d128ae0af2c480fb1",
+"namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766eafaf396cbd83927b72a84d2616fac76ff",
+"structBSMPT_1_1ISMConstants.html#ad10bd3aaff654b8ee9a5115abf4e13d4"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
