@@ -44,6 +44,34 @@ TEST_CASE("Run CheckImplementation in c2hdm", "[c2hdm]")
   REQUIRE(output.find("fail") == std::string::npos);
 }
 
+TEST_CASE("Check 'CheckRotationMatrix()' c2hdm", "[c2hdm]")
+{
+  using namespace BSMPT;
+  const std::vector<double> problematic_point_C2HDM{
+      /* lambda_1 = */ 4.2449116270277205,
+      /* lambda_2 = */ 1.6012296919722049,
+      /* lambda_3 = */ 5.5019521141735925,
+      /* lambda_4 = */ -5.420480049856172,
+      /* Re(lambda_5) = */ -2.174405759032836,
+      /* Im(lambda_5) = */ 0.0002392204965281,
+      /* Re(m_{12}^2) = */ 92344.388000000006,
+      /* tan(beta) = */ 1.4760931000000002,
+      /* Yukawa Type = */ 1};
+
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::C2HDM, SMConstants);
+  modelPointer->initModel(problematic_point_C2HDM);
+  modelPointer->write();
+  std::stringstream ss;
+  Logger::SetOStream(ss);
+  REQUIRE_NOTHROW(ModelTests::CheckImplementation(
+      *modelPointer, Minimizer::WhichMinimizerDefault));
+  Logger::SetOStream(std::cout);
+  std::string output = ss.str();
+  REQUIRE(output.find("fail") == std::string::npos);
+}
+
 TEST_CASE("Checking NLOVEV for C2HDM", "[c2hdm]")
 {
   using namespace BSMPT;
