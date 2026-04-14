@@ -2857,7 +2857,7 @@ TEST_CASE("Test kappa_sw", "[gw]")
           Approx(expected).epsilon(1e-3));
 }
 
-TEST_CASE("Check percolation temperature for point of issue #173", "[gw1]")
+TEST_CASE("Check percolation temperature for point of issue #173", "[gw]")
 {
   const std::vector<double> example_point_R2HDM_machine_dep_temp_failure{
       /* lambda_1 = */ 1.939019085953685,
