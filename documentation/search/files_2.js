@@ -13,9 +13,10 @@ var searchData=
   ['classpotentialn2hdm_2ecpp_10',['ClassPotentialN2HDM.cpp',['../ClassPotentialN2HDM_8cpp.html',1,'']]],
   ['classpotentialn2hdm_2eh_11',['ClassPotentialN2HDM.h',['../ClassPotentialN2HDM_8h.html',1,'']]],
   ['classpotentialorigin_2eh_12',['ClassPotentialOrigin.h',['../ClassPotentialOrigin_8h.html',1,'']]],
-  ['classpotentialsm_2ecpp_13',['ClassPotentialSM.cpp',['../ClassPotentialSM_8cpp.html',1,'']]],
-  ['classpotentialsm_2eh_14',['ClassPotentialSM.h',['../ClassPotentialSM_8h.html',1,'']]],
-  ['classtemplate_2ecpp_15',['ClassTemplate.cpp',['../ClassTemplate_8cpp.html',1,'']]],
-  ['classtemplate_2eh_16',['ClassTemplate.h',['../ClassTemplate_8h.html',1,'']]],
-  ['createmugrid_2ecpp_17',['CreateMuGrid.cpp',['../CreateMuGrid_8cpp.html',1,'']]]
+  ['classpotentialrxsm_2eh_13',['ClassPotentialRxSM.h',['../ClassPotentialRxSM_8h.html',1,'']]],
+  ['classpotentialsm_2ecpp_14',['ClassPotentialSM.cpp',['../ClassPotentialSM_8cpp.html',1,'']]],
+  ['classpotentialsm_2eh_15',['ClassPotentialSM.h',['../ClassPotentialSM_8h.html',1,'']]],
+  ['classtemplate_2ecpp_16',['ClassTemplate.cpp',['../ClassTemplate_8cpp.html',1,'']]],
+  ['classtemplate_2eh_17',['ClassTemplate.h',['../ClassTemplate_8h.html',1,'']]],
+  ['createmugrid_2ecpp_18',['CreateMuGrid.cpp',['../CreateMuGrid_8cpp.html',1,'']]]
 ];

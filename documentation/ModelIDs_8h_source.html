@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.1.16</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.2.0</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -123,30 +123,32 @@ $(document).ready(function(){initNavTree('ModelIDs_8h_source.html',''); initResi
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>  N2HDM,</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>  CXSM,</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>  CPINTHEDARK,</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  SM,</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>  <span class="comment">// Here you start adding your models</span></div>
-<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  TEMPLATE,</div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>  <span class="comment">// DO NOT EDIT the part below</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  stop</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>};</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">const</span> std::unordered_map&lt;std::string, ModelIDs&gt; ModelNames{</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    {<span class="stringliteral">&quot;c2hdm&quot;</span>, ModelIDs::C2HDM},</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {<span class="stringliteral">&quot;r2hdm&quot;</span>, ModelIDs::R2HDM},</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    {<span class="stringliteral">&quot;n2hdm&quot;</span>, ModelIDs::N2HDM},</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {<span class="stringliteral">&quot;cxsm&quot;</span>, ModelIDs::CXSM},</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {<span class="stringliteral">&quot;sm&quot;</span>, ModelIDs::SM},</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {<span class="stringliteral">&quot;cpinthedark&quot;</span>, ModelIDs::CPINTHEDARK},</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {<span class="stringliteral">&quot;template&quot;</span>, ModelIDs::TEMPLATE},</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>};</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>} <span class="comment">// namespace ModelID</span></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>  RXSM,</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>  SM,</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>  <span class="comment">// Here you start adding your models</span></div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>  TEMPLATE,</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>  <span class="comment">// DO NOT EDIT the part below</span></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>  stop</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>};</div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span><span class="keyword">const</span> std::unordered_map&lt;std::string, ModelIDs&gt; ModelNames{</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {<span class="stringliteral">&quot;c2hdm&quot;</span>, ModelIDs::C2HDM},</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    {<span class="stringliteral">&quot;r2hdm&quot;</span>, ModelIDs::R2HDM},</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    {<span class="stringliteral">&quot;n2hdm&quot;</span>, ModelIDs::N2HDM},</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {<span class="stringliteral">&quot;cxsm&quot;</span>, ModelIDs::CXSM},</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {<span class="stringliteral">&quot;sm&quot;</span>, ModelIDs::SM},</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {<span class="stringliteral">&quot;cpinthedark&quot;</span>, ModelIDs::CPINTHEDARK},</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    {<span class="stringliteral">&quot;rxsm&quot;</span>, ModelIDs::RXSM},</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    {<span class="stringliteral">&quot;template&quot;</span>, ModelIDs::TEMPLATE},</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>};</div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>std::ostream &amp;<a class="code hl_function" href="namespaceBSMPT.html#abac7eb980739c364de5eb4ef26b1149c">operator&lt;&lt;</a>(std::ostream &amp;os, <span class="keyword">const</span> ModelID::ModelIDs &amp;Model);</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>} <span class="comment">// namespace BSMPT</span></div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>} <span class="comment">// namespace ModelID</span></div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>std::ostream &amp;<a class="code hl_function" href="namespaceBSMPT.html#abac7eb980739c364de5eb4ef26b1149c">operator&lt;&lt;</a>(std::ostream &amp;os, <span class="keyword">const</span> ModelID::ModelIDs &amp;Model);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>} <span class="comment">// namespace BSMPT</span></div>
 <div class="ttc" id="anamespaceBSMPT_html"><div class="ttname"><a href="namespaceBSMPT.html">BSMPT</a></div><div class="ttdoc">This classes calculates the Bounce action of the potential with a set temperature.</div><div class="ttdef"><b>Definition</b> CalculateEtaInterface.h:24</div></div>
 <div class="ttc" id="anamespaceBSMPT_html_abac7eb980739c364de5eb4ef26b1149c"><div class="ttname"><a href="namespaceBSMPT.html#abac7eb980739c364de5eb4ef26b1149c">BSMPT::operator&lt;&lt;</a></div><div class="ttdeci">std::ostream &amp; operator&lt;&lt;(std::ostream &amp;os, const StatusNLOStability &amp;status)</div><div class="ttdoc">Override &lt;&lt; operator to handle StatusNLOStability.</div><div class="ttdef"><b>Definition</b> minimum_tracer.cpp:30</div></div>
 </div><!-- fragment --></div><!-- contents -->

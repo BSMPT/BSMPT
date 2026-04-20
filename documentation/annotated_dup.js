@@ -41,6 +41,7 @@ var annotated_dup =
         [ "Class_Potential_CPintheDark", "classBSMPT_1_1Models_1_1Class__Potential__CPintheDark.html", "classBSMPT_1_1Models_1_1Class__Potential__CPintheDark" ],
         [ "Class_Potential_N2HDM", "classBSMPT_1_1Models_1_1Class__Potential__N2HDM.html", "classBSMPT_1_1Models_1_1Class__Potential__N2HDM" ],
         [ "Class_Potential_R2HDM", "classBSMPT_1_1Models_1_1Class__Potential__R2HDM.html", "classBSMPT_1_1Models_1_1Class__Potential__R2HDM" ],
+        [ "Class_Potential_RxSM", "classBSMPT_1_1Models_1_1Class__Potential__RxSM.html", "classBSMPT_1_1Models_1_1Class__Potential__RxSM" ],
         [ "Class_SM", "classBSMPT_1_1Models_1_1Class__SM.html", "classBSMPT_1_1Models_1_1Class__SM" ],
         [ "Class_Template", "classBSMPT_1_1Models_1_1Class__Template.html", "classBSMPT_1_1Models_1_1Class__Template" ]
       ] ],
@@ -88,6 +89,8 @@ var annotated_dup =
     [ "Compare_CXSM", "classCompare__CXSM.html", null ],
     [ "Compare_N2HDM", "classCompare__N2HDM.html", null ],
     [ "Compare_R2HDM", "classCompare__R2HDM.html", null ],
+    [ "Compare_RXSM", "classCompare__RXSM.html", null ],
+    [ "Compare_RXSM_noVS", "classCompare__RXSM__noVS.html", null ],
     [ "Compare_SM", "classCompare__SM.html", null ],
     [ "cvspline", "classcvspline.html", "classcvspline" ],
     [ "MyListener", "structMyListener.html", null ]

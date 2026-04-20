@@ -7,6 +7,7 @@ var dir_bb8717ff0746bf0bf107fee8a4e4f2a9 =
     [ "ClassPotentialN2HDM.h", "ClassPotentialN2HDM_8h.html", "ClassPotentialN2HDM_8h" ],
     [ "ClassPotentialOrigin.h", "ClassPotentialOrigin_8h.html", "ClassPotentialOrigin_8h" ],
     [ "ClassPotentialR2HDM.h", "ClassPotentialR2HDM_8h_source.html", null ],
+    [ "ClassPotentialRxSM.h", "ClassPotentialRxSM_8h.html", "ClassPotentialRxSM_8h" ],
     [ "ClassPotentialSM.h", "ClassPotentialSM_8h.html", "ClassPotentialSM_8h" ],
     [ "ClassTemplate.h", "ClassTemplate_8h.html", "ClassTemplate_8h" ],
     [ "IncludeAllModels.h", "IncludeAllModels_8h.html", "IncludeAllModels_8h" ],
