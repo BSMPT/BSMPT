@@ -36,7 +36,7 @@ jobs:
      - name: Install conan
        run: pip install conan>2
      - name: Get number of CPU cores
-       uses: SimenB/github-actions-cpu-cores@v2
+       uses: SimenB/github-actions-cpu-cores@v3
        id: cpu-cores
      - run: python3 Setup.py --build-missing
      - run: cmake --preset conan-linux-x86_64-release
