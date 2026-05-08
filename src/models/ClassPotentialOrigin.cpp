@@ -3280,7 +3280,7 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
         // if (GaugeMassesVec[k] > 0) VDebye += std::pow(GaugeMassesVec[k], 1.5);
         if (GaugeMassesVec[k] > 0) {
           VDebye += std::pow(GaugeMassesVec[k], 1.5);
-          VDebye += 1.5*Temp*GaugeMassesVec[k + NHiggs]*std::sqrt(std::abs(GaugeMassesVec[k])); 
+          VDebye += 1.5*Temp*GaugeMassesVec[k + NGauge]*std::sqrt(std::abs(GaugeMassesVec[k])); 
         }
         if (GaugeMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
