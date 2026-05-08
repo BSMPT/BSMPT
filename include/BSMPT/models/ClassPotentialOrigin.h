@@ -1088,7 +1088,8 @@ public:
    *
    *
    */
-  double boson(double MassSquared, double Temp, double cb, int diff = 0) const;
+   double bosonTderiv(double MassSquared, double DevMassSquared, double Temp, double cb, int diff = 0) const;
+   double boson(double MassSquared, double Temp, double cb, int diff = 0) const;
   /**
    * Deprecated version of boson() as present in the v1.X release. Still here
    * for legacy reasons
