@@ -3287,6 +3287,7 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
       }
 
       VDebye *= -1.0 / (12 * M_PI);
+      res += VDebye;
     }
   }
 
