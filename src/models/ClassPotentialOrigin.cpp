@@ -124,15 +124,15 @@ double Class_Potential_Origin::boson(double MassSquared,
   else if (diff > 0)
   {
     res += std::pow(Temp, 2) / (2 * std::pow(M_PI, 2)) *
-           ThermalFunctions::JbosonNumericalIntegration(Ratio, 1);
+           ThermalFunctions::JbosonInterpolated(Ratio, 1);
   }
   else if (diff == -1)
   {
     res += 1.0 / (2 * std::pow(M_PI, 2)) *
            (4 * std::pow(Temp, 3) *
-                ThermalFunctions::JbosonNumericalIntegration(Ratio, 0) -
+                ThermalFunctions::JbosonInterpolated(Ratio, 0) -
             2 * Temp * MassSquared *
-                ThermalFunctions::JbosonNumericalIntegration(Ratio, 1)); //Missing term!!
+                ThermalFunctions::JbosonInterpolated(Ratio, 1)); //Missing term!!
   }
   return res;
 }
@@ -152,8 +152,8 @@ double Class_Potential_Origin::bosonTderiv(double MassSquared, double DevMassSqu
    
   else if (diff == -1)
   { 
-    res += 1.0 / (2 * std::pow(M_PI, 2)) * (4 * std::pow(Temp, 3) * ThermalFunctions::JbosonNumericalIntegration(Ratio,0) -
-            (2 * Temp * MassSquared - Temp*Temp * DevMassSquared) * ThermalFunctions::JbosonNumericalIntegration(Ratio,1));
+    res += 1.0 / (2 * std::pow(M_PI, 2)) * (4 * std::pow(Temp, 3) * ThermalFunctions::JbosonInterpolated(Ratio,0) -
+            (2 * Temp * MassSquared - Temp*Temp * DevMassSquared) * ThermalFunctions::JbosonInterpolated(Ratio,1));
   }
   return res;
 }
@@ -170,18 +170,18 @@ Class_Potential_Origin::fermion(double MassSquared, double Temp, int diff) const
            ThermalFunctions::JfermionInterpolated(Ratio);
   }
           
-  else if (diff > 0) //Carlo correction
+  else if (diff > 0) 
   {
     res += std::pow(Temp, 2) / (2 * std::pow(M_PI, 2)) *
-           ThermalFunctions::JfermionNumericalIntegration(Ratio, 1);
+           ThermalFunctions::JfermionInterpolated(Ratio, 1);
   }
   else if (diff == -1)
   {
     res += 1.0 / (2 * std::pow(M_PI, 2)) *
            (4 * std::pow(Temp, 3) *
-                ThermalFunctions::JfermionNumericalIntegration(Ratio) -
+                ThermalFunctions::JfermionInterpolated(Ratio) -
             2 * Temp * MassSquared *
-                ThermalFunctions::JfermionNumericalIntegration(Ratio, 1));
+                ThermalFunctions::JfermionInterpolated(Ratio, 1));
   }
   return res;
 }
