@@ -96,7 +96,8 @@ def check_profile(profile):
             subprocess.check_output(cmd)
         if sys.platform != "win32":
             cmd = (
-                "cp " + conan_home + "/profiles/default profiles/BSMPT/" + str(profile)
+                "cp " + conan_home +
+                "/profiles/default profiles/BSMPT/" + str(profile)
             )
             subprocess.check_call(cmd, shell=True)
             set_setting(path, "compiler.cppstd", "gnu17")
@@ -137,15 +138,13 @@ def get_arch():
 
 
 def setup_profiles():
-    conan_home = subprocess.check_output("conan config home".split(), encoding="UTF-8")
+    conan_home = subprocess.check_output(
+        "conan config home".split(), encoding="UTF-8")
     profile_dir = os.path.join(str(conan_home.split()[0]), "profiles", "BSMPT")
     print(profile_dir)
     if os.path.exists(profile_dir):
         shutil.rmtree(profile_dir)
     shutil.copytree("profiles/BSMPT", profile_dir)
-
-    
-
 
 
 def conan_install(
@@ -155,7 +154,12 @@ def conan_install(
         "tools.cmake.cmake_layout:build_folder_vars=['settings.os','settings.arch','settings.build_type']"
     ]
 
-    build_profile = get_profile(sys.platform, get_arch(), BuildMode.release, compiler)
+    if (sys.platform == "win32"):
+        config_settings.append(
+            "tools.cmake.cmake_generator=Visual Studio 17 2022")
+
+    build_profile = get_profile(
+        sys.platform, get_arch(), BuildMode.release, compiler)
 
     cmd = f"conan install . -pr:h BSMPT/{profile} -pr:b BSMPT/{build_profile} ".split()
 
@@ -204,7 +208,8 @@ def create(build_missing=False, compiler: Compiler = None, additional_options=[]
         "tools.cmake.cmake_layout:build_folder_vars=['settings.os','settings.arch','settings.build_type']"
     ]
 
-    profile = get_profile(sys.platform, get_arch(), BuildMode.release, compiler)
+    profile = get_profile(sys.platform, get_arch(),
+                          BuildMode.release, compiler)
     cmd = f"conan create . -pr:h BSMPT/{profile} -pr:b BSMPT/{profile}".split()
 
     for conf in config_settings:
@@ -212,14 +217,13 @@ def create(build_missing=False, compiler: Compiler = None, additional_options=[]
 
     if build_missing:
         cmd += ["--build=missing"]
-    
 
     for option in additional_options:
         cmd += ["--options", option]
 
     if "EnableTests=True" not in additional_options:
         cmd += ["--options", "EnableTests=False"]
-        
+
     cmd += ["--options", "BuildExecutables=False"]
 
     subprocess.check_call(cmd)
@@ -231,13 +235,16 @@ class ArgTypeEnum(Enum):
         try:
             return cls[s]
         except KeyError:
-            raise argparse.ArgumentTypeError(f"{s!r} is not a valid {cls.__name__}")
+            raise argparse.ArgumentTypeError(
+                f"{s!r} is not a valid {cls.__name__}")
 
     def __str__(self):
         return self.name
 
+
 def prepare():
     setup_profiles()
+
 
 def parse_arguments():
     parser = ArgumentParser()

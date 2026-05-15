@@ -7,5 +7,3 @@ compiler.runtime=dynamic
 compiler.cppstd=17
 os=Windows
 
-[conf]
-tools.cmake.cmake_generator=Visual Studio 17 2022
