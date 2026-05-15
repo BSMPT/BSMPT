@@ -37,10 +37,6 @@ jobs:
           - name: Install conan
             run: pip install conan>2
 
-          - name: Setup MSVC environment
-            if: runner.os == 'Windows'
-            uses: ilammy/msvc-dev-cmd@v1
-
           - run: python3 Setup.py --build-missing
 
           - run: python3 Setup.py --create --build-missing --options EnableTests=True
