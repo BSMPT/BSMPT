@@ -5,4 +5,5 @@ compiler=msvc
 compiler.cppstd=17
 compiler.runtime=dynamic
 compiler.version=194
+compiler.toolset=v145
 os=Windows
