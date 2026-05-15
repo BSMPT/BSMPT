@@ -39,6 +39,9 @@ jobs:
 
           - name: Run detect
             run: conan profile detect --force
+          
+          - name: Run conan list
+            run: conan config list
 
           - run: python3 Setup.py --build-missing
 
