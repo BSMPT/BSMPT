@@ -2,7 +2,10 @@
 arch=x86_64
 build_type=Debug
 compiler=msvc
-compiler.cppstd=17
+compiler.version=193
 compiler.runtime=dynamic
-compiler.version=195
+compiler.cppstd=17
 os=Windows
+
+[conf]
+tools.cmake.cmake_generator=Visual Studio 17 2022
