@@ -4,5 +4,5 @@ build_type=Debug
 compiler=msvc
 compiler.cppstd=17
 compiler.runtime=dynamic
-compiler.version=195
+compiler.version=194
 os=Windows
