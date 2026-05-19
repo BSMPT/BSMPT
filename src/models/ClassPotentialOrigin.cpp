@@ -3250,47 +3250,24 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
     else
     {
       HiggsMassesZeroTempVec = HiggsMassesSquared(v, 0, diff);
-      for (std::size_t k = 0; k < NHiggs; k++)
-      {
-        res += boson(HiggsMassesZeroTempVec[k], Temp, C_CWcbHiggs, -1);
-      }
-      for (std::size_t k = 0; k < NGauge; k++)
-      {
-        res += 3 * boson(GaugeMassesZeroTempVec[k], Temp, C_CWcbGB, -1);
-      }
+      for (std::size_t k = 0; k < NHiggs; k++) res += bosonTderiv(HiggsMassesZeroTempVec[k], 0.0, Temp, C_CWcbHiggs, -1); //Carlo: bosonTderiv used
+      for (std::size_t k = 0; k < NGauge; k++) res += 3 * bosonTderiv(GaugeMassesZeroTempVec[k], 0.0, Temp, C_CWcbGB, -1); //Carlo: bosonTderiv used
       double AddContQuark = 0;
-      for (std::size_t k = 0; k < NQuarks; k++)
-        AddContQuark += -2 * fermion(QuarkMassesVec[k], Temp, -1);
-      for (std::size_t k = 0; k < NColour; k++)
-        res += AddContQuark;
-      for (std::size_t k = 0; k < NLepton; k++)
-        res += -2 * fermion(LeptonMassesVec[k], Temp, -1);
+      for (std::size_t k = 0; k < NQuarks; k++) AddContQuark += -2 * fermion(QuarkMassesVec[k], Temp, -1);
+      for (std::size_t k = 0; k < NColour; k++) res += AddContQuark;
+      for (std::size_t k = 0; k < NLepton; k++) res += -2 * fermion(LeptonMassesVec[k], Temp, -1);
 
       double VDebye = 0;
-      for (std::size_t k = 0; k < NHiggs; k++)
-      {
-        if (HiggsMassesVec[k] > 0)
-        {
-          VDebye += std::pow(HiggsMassesVec[k], 1.5);
-          VDebye += 1.5 * Temp * HiggsMassesVec.at(k + NHiggs) *
-                    std::pow(HiggsMassesVec.at(k), 0.5);
-        }
-        if (HiggsMassesZeroTempVec[k] > 0)
-          VDebye += -std::pow(HiggsMassesZeroTempVec[k], 1.5);
+      for (std::size_t k = 0; k < NHiggs; k++){
+        if (HiggsMassesVec[k] > 0) VDebye += std::pow(HiggsMassesVec[k], 1.5) + 3./2. * Temp * std::pow(HiggsMassesVec[k], 1./2.) * HiggsMassesVec[k + NHiggs]; 
+        if (HiggsMassesZeroTempVec[k] > 0) VDebye += - std::pow(HiggsMassesZeroTempVec[k], 1.5);
       }
-      for (std::size_t k = 0; k < NGauge; k++)
-      {
-        if (GaugeMassesVec[k] > 0)
-        {
-          VDebye += std::pow(GaugeMassesVec[k], 1.5);
-          VDebye += 1.5 * Temp * GaugeMassesVec.at(k + NGauge) *
-                    std::pow(GaugeMassesVec[k], 0.5);
-        }
-        if (GaugeMassesZeroTempVec[k] > 0)
-          VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
+      for (std::size_t k = 0; k < NGauge; k++){
+        if (GaugeMassesVec[k] > 0) VDebye += std::pow(GaugeMassesVec[k], 1.5) + 3./2. * Temp * std::pow(GaugeMassesVec[k], 1./2.) * GaugeMassesVec[k+NGauge]; 
+        if (GaugeMassesZeroTempVec[k] > 0) VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
       }
-
       VDebye *= -1.0 / (12 * M_PI);
+
       res += VDebye;
     }
   }
