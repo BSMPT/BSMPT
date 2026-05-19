@@ -152,8 +152,8 @@ def conan_install(
         "tools.cmake.cmake_layout:build_folder_vars=['settings.os','settings.arch','settings.build_type']"
     ]
     
-    if (sys.platform == "win32"):
-        config_settings.append("tools.cmake.cmaketoolchain:generator=Visual Studio 17 2022")   
+    #if (sys.platform == "win32"):
+    #    config_settings.append("tools.cmake.cmaketoolchain:generator=Visual Studio 17 2022")   
 
     build_profile = get_profile(sys.platform, get_arch(), BuildMode.release, compiler)
 
