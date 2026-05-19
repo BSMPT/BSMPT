@@ -8,6 +8,7 @@
  */
 
 #include <BSMPT/bounce_solution/bounce_solution.h>
+#include <BSMPT/utility/NumericalDerivatives.h>
 #include <BSMPT/utility/asciiplotter/asciiplotter.h>
 namespace BSMPT
 {
@@ -1163,28 +1164,34 @@ void BounceSolution::CalculateWallVelocity(const Minimum &false_min,
 
 double BounceSolution::CalculateSoundSpeed(Phase &phase)
 {
-  const double eps                         = 0.01;
-  std::function<double(Minimum minimum)> V = [&](Minimum minimum)
+  const double eps = 0.01;
+  std::function<double(std::vector<double>, double)> dT2V_num =
+      [=](auto const &vev, auto const &T)
   {
-    // Potential wrapper
-    std::vector<double> res = modelPointer->MinimizeOrderVEV(minimum.point);
-    return modelPointer->VEff(res, minimum.temp);
+    return NablaNumerical(
+               {T},
+               [&](std::vector<double> Tv)
+               {
+                 // Potential T-derivative wrapper
+                 return this->modelPointer->VEff(
+                     this->modelPointer->MinimizeOrderVEV(vev), Tv.at(0), -1);
+               },
+               eps)
+        .at(0);
   };
-  const double V_before = V(phase.Get(Tstar + eps));
-  const double V_tstar  = V(phase.Get(Tstar));
-  const double V_after  = V(phase.Get(Tstar - eps));
-  const double dVdT     = (V_before - V_after) / (2. * eps);
-  const double d2VdT2   = (V_before - 2. * V_tstar + V_after) / (eps * eps);
-  const double cs       = sqrt(dVdT / (d2VdT2 * Tstar));
+
+  Minimum phase_min = phase.Get(Tstar);
+  const double dVdT = this->modelPointer->VEff(
+      this->modelPointer->MinimizeOrderVEV(phase_min.point), Tstar, -1);
+  const double d2VdT2 = dT2V_num(phase_min.point, Tstar);
+  const double cs     = sqrt(dVdT / (d2VdT2 * Tstar));
   if (isnan(cs))
   {
     stringstream ss;
     ss << "Sound speed calculation failed!" << "\n";
-    ss << "V(T-eps) V(T) V(T + eps) " << V_after << " " << V_tstar << " "
-       << V_before << "\n";
-    ss << "dVdT = \t" << dVdT << "\n";
-    ss << "d2VdT2 = \t" << d2VdT2 << "\n";
-    ss << "Using cs = 1/sqrt(3) instead.";
+    ss << "dVdT(T)   = \t" << dVdT << "\n";
+    ss << "d2VdT2(T) = \t" << d2VdT2 << "\n";
+    ss << "Using cs  = 1/sqrt(3) instead.";
     Logger::Write(LoggingLevel::GWDetailed, ss.str());
     return 1. / sqrt(3.);
   }

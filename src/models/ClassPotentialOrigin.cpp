@@ -179,7 +179,7 @@ Class_Potential_Origin::fermion(double MassSquared, double Temp, int diff) const
   {
     res += 1.0 / (2 * std::pow(M_PI, 2)) *
            (4 * std::pow(Temp, 3) *
-                ThermalFunctions::JfermionInterpolated(Ratio) -
+                ThermalFunctions::JfermionInterpolated(Ratio, 0) -
             2 * Temp * MassSquared *
                 ThermalFunctions::JfermionInterpolated(Ratio, 1));
   }
@@ -2484,7 +2484,8 @@ Class_Potential_Origin::HiggsMassesSquared(const std::vector<double> &v,
 {
   std::vector<double> res;
 
-  auto MassMatrix = HiggsMassMatrix(v, Temp, 0); 
+  auto MassMatrix = HiggsMassMatrix(v, Temp);
+
   double ZeroMass = std::pow(10, -5);
 
   if (diff == 0 and res.empty())
@@ -3268,19 +3269,22 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
       double VDebye = 0;
       for (std::size_t k = 0; k < NHiggs; k++)
       {
-        if (HiggsMassesVec[k] > 0) {
+        if (HiggsMassesVec[k] > 0)
+        {
           VDebye += std::pow(HiggsMassesVec[k], 1.5);
-          VDebye += 1.5*Temp*HiggsMassesVec[k + NHiggs]*std::sqrt(std::abs(HiggsMassesVec[k])); 
+          VDebye += 1.5 * Temp * HiggsMassesVec.at(k + NHiggs) *
+                    std::pow(HiggsMassesVec.at(k), 0.5);
         }
         if (HiggsMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(HiggsMassesZeroTempVec[k], 1.5);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        // if (GaugeMassesVec[k] > 0) VDebye += std::pow(GaugeMassesVec[k], 1.5);
-        if (GaugeMassesVec[k] > 0) {
+        if (GaugeMassesVec[k] > 0)
+        {
           VDebye += std::pow(GaugeMassesVec[k], 1.5);
-          VDebye += 1.5*Temp*GaugeMassesVec[k + NGauge]*std::sqrt(std::abs(GaugeMassesVec[k])); 
+          VDebye += 1.5 * Temp * GaugeMassesVec.at(k + NGauge) *
+                    std::pow(GaugeMassesVec[k], 0.5);
         }
         if (GaugeMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
