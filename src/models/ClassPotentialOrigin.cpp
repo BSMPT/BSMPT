@@ -3224,7 +3224,6 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
       for (std::size_t k = 0; k < NHiggs; k++)
       { 
         res += HiggsMassesVec.at(k + NHiggs) * bosonTderiv(HiggsMassesVec[k], HiggsMassesVec.at(k + NHiggs), Temp, C_CWcbHiggs, 1);
-        //std::cout << " --- debug " << HiggsMassesVec[k] << " " << HiggsMassesVec.at(k + NHiggs) << " " << HiggsMassesVec.at(k + NHiggs) * bosonTderiv(HiggsMassesVec[k], HiggsMassesVec.at(k + NHiggs), Temp, C_CWcbHiggs, 1) << " " << bosonTderiv(HiggsMassesVec[k], HiggsMassesVec.at(k + NHiggs), Temp, C_CWcbHiggs, -1) << std::endl; //debug Carlo
         res += bosonTderiv(HiggsMassesVec[k], HiggsMassesVec.at(k + NHiggs), Temp, C_CWcbHiggs, -1);
 
       }
@@ -3250,8 +3249,8 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
     else
     {
       HiggsMassesZeroTempVec = HiggsMassesSquared(v, 0, diff);
-      for (std::size_t k = 0; k < NHiggs; k++) res += bosonTderiv(HiggsMassesZeroTempVec[k], 0.0, Temp, C_CWcbHiggs, -1); //Carlo: bosonTderiv used
-      for (std::size_t k = 0; k < NGauge; k++) res += 3 * bosonTderiv(GaugeMassesZeroTempVec[k], 0.0, Temp, C_CWcbGB, -1); //Carlo: bosonTderiv used
+      for (std::size_t k = 0; k < NHiggs; k++) res += bosonTderiv(HiggsMassesZeroTempVec[k], 0.0, Temp, C_CWcbHiggs, -1); 
+      for (std::size_t k = 0; k < NGauge; k++) res += 3 * bosonTderiv(GaugeMassesZeroTempVec[k], 0.0, Temp, C_CWcbGB, -1); 
       double AddContQuark = 0;
       for (std::size_t k = 0; k < NQuarks; k++) AddContQuark += -2 * fermion(QuarkMassesVec[k], Temp, -1);
       for (std::size_t k = 0; k < NColour; k++) res += AddContQuark;
