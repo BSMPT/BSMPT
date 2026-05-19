@@ -40,6 +40,9 @@ jobs:
           - name: Run detect
             run: conan profile detect --force
           
+          - name: Conan profile show
+            run: conan profile show
+          
           - name: Run conan list
             run: conan config list
 
