@@ -3279,8 +3279,8 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
         if (GaugeMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
       }
-      VDebye *= -1.0 / (12 * M_PI);
 
+      VDebye *= -1.0 / (12 * M_PI);
       res += VDebye;
     }
   }
