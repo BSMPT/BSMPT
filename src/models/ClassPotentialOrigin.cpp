@@ -3269,8 +3269,8 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
         if (HiggsMassesVec[k] > 0)
         {
           VDebye += std::pow(HiggsMassesVec[k], 1.5);
-          VDebye += 3. / 2. * Temp * std::pow(HiggsMassesVec[k], 1. / 2.) *
-                    HiggsMassesVec[k + NHiggs];
+          VDebye += 1.5 * Temp * HiggsMassesVec[k + NHiggs] *
+                    std::sqrt(HiggsMassesVec[k]);
         }
         if (HiggsMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(HiggsMassesZeroTempVec[k], 1.5);
@@ -3280,8 +3280,8 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
         if (GaugeMassesVec[k] > 0)
         {
           VDebye += std::pow(GaugeMassesVec[k], 1.5);
-          VDebye += 3. / 2. * Temp * std::pow(GaugeMassesVec[k], 1. / 2.) *
-                    GaugeMassesVec[k + NGauge];
+          VDebye += 1.5 * Temp * GaugeMassesVec[k + NGauge] *
+                    std::sqrt(GaugeMassesVec[k]);
         }
         if (GaugeMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
