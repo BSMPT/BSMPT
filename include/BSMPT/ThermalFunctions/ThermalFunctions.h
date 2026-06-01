@@ -45,25 +45,6 @@ const double C_BosonShift = 0.0063108787;
 const double C_euler_gamma = 0.5772156649015328606065;
 
 /**
- * Integrand of the thermic integral for the bosons \f$ J_-(x) =
- * \int\limits_{0}^{\infty} \,\mathrm{d}k \, k^2 \log\left[ 1 - \exp\left(
- * -\sqrt{k^2+x} \right) \right] \f$
- * @param x The ratio m^2/T^2
- * @param k The integration variable
- * @param diff Returns the integrand of J_- for diff = 0 and for the dJ_-/dx for
- * diff = 1
- */
-double JbosonIntegrand(const double &x, const double &k, int diff = 0);
-/**
- * Numerical integration of the thermical integral for the bosons \f$ J_-(x) =
- * \int\limits_{0}^{\infty} \,\mathrm{d}k \, k^2 \log\left[ 1 - \exp\left(
- * -\sqrt{k^2+x} \right) \right] \f$
- * @param x The ratio m^2/T^2
- * @param diff Returns the numerical integration of J_- for diff = 0 and J_-/dx
- * for diff = 1
- */
-double JbosonNumericalIntegration(const double &x, int diff = 0);
-/**
  * Taylor expansion of J_- for small x=m^2/T^2, \f$ J_{_,s}(x,n) =
  * -\frac{\pi^4}{45} + \frac{\pi}{12} x - \frac{\pi}{6} x^{3/2} -
  * \frac{x^2}{32}(\log x - c_-) + \pi^2 x \sum\limits_{l=2}^{n} \left( -
@@ -92,25 +73,6 @@ double JbosonInterpolatedNegative(const double &x, int diff = 0);
  */
 double JbosonInterpolated(const double &x, int diff = 0);
 
-/**
- * Integrand of the thermic integral for the fermions \f$ J_+(x) =
- * \int\limits_{0}^{\infty} \,\mathrm{d}k \, k^2 \log\left[ 1 + \exp\left(
- * -\sqrt{k^2+x} \right) \right] \f$
- * @param x The ratio m^2/T^2
- * @param k The integration variable
- * @param diff Returns the integrand of J_+ for diff = 0 and for the dJ_+/dx for
- * diff = 1
- */
-double JfermionIntegrand(const double &x, const double &k, int diff = 0);
-/**
- * Numerical integration of the thermical integral for the fermions \f$ J_+(x) =
- * \int\limits_{0}^{\infty} \,\mathrm{d}k \, k^2 \log\left[ 1 + \exp\left(
- * -\sqrt{k^2+x} \right) \right] \f$
- * @param x The ratio m^2/T^2
- * @param diff Returns the integrand of J_+ for diff = 0 and for the dJ_+/dx for
- * diff = 1
- */
-double JfermionNumericalIntegration(const double &x, int diff = 0);
 /**
  * Taylor expansion of J_+ for small x=m^2/T^2, \f$ J_{+,s}(x,n) =
  * -\frac{7\pi^4}{360} + \frac{\pi^2}{24} x + \frac{x^2}{32}\left( \log x - c_+
