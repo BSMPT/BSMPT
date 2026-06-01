@@ -3056,16 +3056,17 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
   LeptonMassesVec        = LeptonMassesSquared(v, diff);
 
   // Length = N if diff = 0 else Length = 2N (mass_i, deriv_mass_i)
-  const size_t NMultiplier = (diff == 0) ? 1 : 2;
+  const size_t NMultiplier         = (diff == 0) ? 1 : 2;
+  const size_t NMultiplierFermions = (diff <= 0) ? 1 : 2;
   if (HiggsMassesVec.size() != NHiggs * NMultiplier)
     throw("Missmatch NHiggs [V1Loop]");
   if (GaugeMassesVec.size() != NGauge * NMultiplier)
     throw("Missmatch NGauge [V1Loop]");
   if (GaugeMassesZeroTempVec.size() != NGauge * NMultiplier)
     throw("Missmatch NGauge T = 0 [V1Loop]");
-  if (QuarkMassesVec.size() != NQuarks * NMultiplier)
+  if (QuarkMassesVec.size() != NQuarks * NMultiplierFermions)
     throw("Missmatch NQuarks [V1Loop]");
-  if (LeptonMassesVec.size() != NLepton * NMultiplier)
+  if (LeptonMassesVec.size() != NLepton * NMultiplierFermions)
     throw("Missmatch NLepton [V1Loop]");
 
   if (diff == 0)
