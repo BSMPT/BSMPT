@@ -3056,7 +3056,7 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
   LeptonMassesVec        = LeptonMassesSquared(v, diff);
 
   // Length = N if diff = 0 else Length = 2N (mass_i, deriv_mass_i)
-  const double NMultiplier = (1 + (diff != 0));
+  const size_t NMultiplier = (diff == 0) ? 1 : 2;
   if (HiggsMassesVec.size() != NHiggs * NMultiplier)
     throw("Missmatch NHiggs [V1Loop]");
   if (GaugeMassesVec.size() != NGauge * NMultiplier)
