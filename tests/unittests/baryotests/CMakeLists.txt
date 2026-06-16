@@ -3,7 +3,7 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-file(GLOB SOURCE_FILES "Test-*.cpp" CONFIURE_DEPENDS)
+file(GLOB SOURCE_FILES CONFIGURE_DEPENDS "Test-*.cpp")
 add_executable(BaryoTests ${SOURCE_FILES})
 target_link_libraries(
   BaryoTests

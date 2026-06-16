@@ -2885,20 +2885,63 @@ TEST_CASE("Check percolation temperature for point of issue #173", "[gw]")
       ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
   modelPointer->initModel(example_point_R2HDM_machine_dep_temp_failure);
 
-  std::shared_ptr<MinimumTracer> MinTracer(
-      new MinimumTracer(modelPointer, Minimizer::WhichMinimizerDefault, false));
-
   user_input input;
   input.modelPointer        = modelPointer;
   input.gw_calculation      = true;
   input.T_high              = 1000;
   input.maxpathintegrations = 2;
 
-  TransitionTracer trans(input);
-  trans.ListBounceSolution.at(0).CalculatePercolationTemp();
+  std::shared_ptr<MinimumTracer> mintracer(new MinimumTracer(
+      input.modelPointer, input.which_minimizer, input.use_multithreading));
 
-  auto output = trans.output_store;
+  Vacuum vac(input.T_low,
+             input.T_high,
+             mintracer,
+             input.modelPointer,
+             input.multistepmode,
+             input.num_points);
 
-  REQUIRE(314.566 ==
-          Approx(output.vec_trans_data.at(1).perc_temp.value()).epsilon(1e-2));
+  std::vector<std::vector<double>> bounce_data = {
+      {286.1572195, 10547.00634, 36.85738336},
+      {290.727222, 12461.72633, 42.86398173},
+      {295.2972246, 14854.48174, 50.30349256},
+      {299.8672271, 17919.26815, 59.75734101},
+      {304.4372297, 21957.20037, 72.12390019},
+      {309.0072323, 27464.88637, 88.88104713},
+      {311.2922335, 31016.16242, 99.6368013},
+      {313.5772348, 35303.587, 112.5833864},
+      {314.1484851, 36515.30442, 116.2358125},
+      {314.4341103, 37144.78597, 118.132177},
+      {314.7197355, 37790.94374, 120.0780869},
+      {315.8622361, 40554.3312, 128.3924653},
+      {318.1472374, 47091.77425, 148.0188061},
+      {319.6705716, 52390.61439, 163.8893882},
+      {321.1939058, 58663.86319, 182.643139},
+      {321.9555728, 62243.9951, 193.331007},
+      {322.7172399, 66170.66273, 205.0422306},
+      {327.2872425, 100435.2359, 306.8718326},
+      {331.8572451, 172624.5267, 520.177062},
+      {336.4272476, 373686.8218, 1110.750763},
+      {340.9972502, 1429580.799, 4192.352867}};
+
+  BounceSolution bouncesolution(modelPointer);
+  bouncesolution.MinTracer  = mintracer;
+  bouncesolution.phase_pair = vac.CoexPhasesList.at(1);
+  bouncesolution.Tc         = bouncesolution.phase_pair.crit_temp;
+  bouncesolution.Tm         = bouncesolution.phase_pair.T_low;
+  bouncesolution.InitializeGstarProfile();
+
+  for (const auto &bounce : bounce_data)
+  {
+    BounceActionInt bounceactionint;
+    bounceactionint.T      = bounce.at(0);
+    bounceactionint.Action = bounce.at(1);
+    bouncesolution.SolutionList.push_back(bounceactionint);
+  }
+
+  bouncesolution.status_perc = StatusTemperature::Success;
+  bouncesolution.SetBounceSol();
+  bouncesolution.CalculatePercolationTemp();
+
+  REQUIRE(314.566 == Approx(bouncesolution.Tperc).epsilon(1e-2));
 }

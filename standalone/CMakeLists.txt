@@ -6,7 +6,7 @@
 if(BSMPTBuildExecutables)
 
   set(STANDALONE_DIR ${CMAKE_CURRENT_SOURCE_DIR})
-  file(GLOB SOURCE_FILES "*.cpp" CONFIURE_DEPENDS)
+  file(GLOB SOURCE_FILES CONFIGURE_DEPENDS "*.cpp")
 
   foreach(file_path ${SOURCE_FILES})
     get_filename_component(filename "${file_path}" NAME)
