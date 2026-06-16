@@ -1085,10 +1085,13 @@ public:
    * potential
    * @param diff: 0 returns the value of the std::size_tegral and diff >0 the
    * derivative w.r.t. m^2 and diff = -1 w.r.t. Temp
-   *
-   *
+   * @param DevMassSquared mass squared field derivative
    */
-  double boson(double MassSquared, double Temp, double cb, int diff = 0) const;
+  double boson(double MassSquared,
+               double Temp,
+               double cb,
+               int diff              = 0,
+               double DevMassSquared = 0) const;
   /**
    * Deprecated version of boson() as present in the v1.X release. Still here
    * for legacy reasons
