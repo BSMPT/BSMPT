@@ -9,7 +9,7 @@ var searchData=
   ['besselj_6',['BesselJ',['../classBSMPT_1_1BounceActionInt.html#a3556731a2b2d65ce8f380d568ffe7c35',1,'BSMPT::BounceActionInt']]],
   ['beta_7',['beta',['../classBSMPT_1_1Baryo_1_1Calc__Gam__M.html#ac44f00409f7046adac3769d2629de536',1,'BSMPT::Baryo::Calc_Gam_M']]],
   ['betah_8',['betaH',['../classBSMPT_1_1BounceSolution.html#a088a20a7f184e883c0351a9b6aa3e120',1,'BSMPT::BounceSolution']]],
-  ['boson_9',['boson',['../classBSMPT_1_1Class__Potential__Origin.html#ab9bd1684036e1dc81d1d1321b5da7f06',1,'BSMPT::Class_Potential_Origin']]],
+  ['boson_9',['boson',['../classBSMPT_1_1Class__Potential__Origin.html#a49290943a70e566f97c358808a4a9094',1,'BSMPT::Class_Potential_Origin']]],
   ['boson_5flegacy_10',['boson_legacy',['../classBSMPT_1_1Class__Potential__Origin.html#a6585f83a82f61626f6da599a3b00baa6',1,'BSMPT::Class_Potential_Origin']]],
   ['bot_5fbroken_5fcp_5fviolating_5fphase_11',['bot_broken_cp_violating_phase',['../structBSMPT_1_1Baryo_1_1GSL__integration__mubl.html#ace879af09e547e4373a12140f6814687',1,'BSMPT::Baryo::GSL_integration_mubl::BOT_broken_CP_violating_phase'],['../classBSMPT_1_1Baryo_1_1gen__fluid.html#aa945e1f94c066d2649fd231cb89b4129',1,'BSMPT::Baryo::gen_fluid::BOT_broken_CP_violating_phase']]],
   ['bot_5fmass_5fflag_12',['bot_mass_flag',['../classBSMPT_1_1Baryo_1_1CalculateEtaInterface.html#a03f053bbe9ac06f1fbe746d5552689b4',1,'BSMPT::Baryo::CalculateEtaInterface']]],

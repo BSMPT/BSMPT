@@ -5,7 +5,7 @@ var classBSMPT_1_1Class__Potential__Origin =
     [ "addLegendTripleCouplings", "classBSMPT_1_1Class__Potential__Origin.html#ab2a71ba9fc5447d3c7eefd50f2f02803", null ],
     [ "addLegendVEV", "classBSMPT_1_1Class__Potential__Origin.html#abb159af5709fc2244cb3c68129a42d30", null ],
     [ "AdjustRotationMatrix", "classBSMPT_1_1Class__Potential__Origin.html#a33ea464154a5021cd36ec157a3f6793e", null ],
-    [ "boson", "classBSMPT_1_1Class__Potential__Origin.html#ab9bd1684036e1dc81d1d1321b5da7f06", null ],
+    [ "boson", "classBSMPT_1_1Class__Potential__Origin.html#a49290943a70e566f97c358808a4a9094", null ],
     [ "boson_legacy", "classBSMPT_1_1Class__Potential__Origin.html#a6585f83a82f61626f6da599a3b00baa6", null ],
     [ "calc_CT", "classBSMPT_1_1Class__Potential__Origin.html#a407ca0e233d13679792506b97d37a671", null ],
     [ "CalculateDebye", "classBSMPT_1_1Class__Potential__Origin.html#a486d212719bb64309efd0035923ddd3b", null ],

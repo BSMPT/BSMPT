@@ -32,7 +32,7 @@ MathJax.Hub.Config({
  <tbody>
  <tr id="projectrow">
   <td id="projectalign">
-   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.2.1</span>
+   <div id="projectname">BSMPT<span id="projectnumber">&#160;3.3.0</span>
    </div>
    <div id="projectbrief">BSMPT - Beyond the Standard Model Phase Transitions : A C++ package for the computation of the EWPT in BSM models</div>
   </td>
@@ -343,9 +343,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a234541b83ffa51dae80a6690e8a1b562"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f12d5e2fed16af0e536edf170ac5f1e" id="r_a8f12d5e2fed16af0e536edf170ac5f1e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a8f12d5e2fed16af0e536edf170ac5f1e">FCW</a> (double MassSquared) const</td></tr>
 <tr class="separator:a8f12d5e2fed16af0e536edf170ac5f1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9bd1684036e1dc81d1d1321b5da7f06" id="r_ab9bd1684036e1dc81d1d1321b5da7f06"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#ab9bd1684036e1dc81d1d1321b5da7f06">boson</a> (double MassSquared, double Temp, double cb, int diff=0) const</td></tr>
-<tr class="memdesc:ab9bd1684036e1dc81d1d1321b5da7f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculation of the bosonic std::size_tegral + Coleman-Weinberg potential <b>without</b> taking d.o.f. std::size_to account.  <br /></td></tr>
-<tr class="separator:ab9bd1684036e1dc81d1d1321b5da7f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49290943a70e566f97c358808a4a9094" id="r_a49290943a70e566f97c358808a4a9094"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a49290943a70e566f97c358808a4a9094">boson</a> (double MassSquared, double Temp, double cb, int diff=0, double DevMassSquared=0) const</td></tr>
+<tr class="memdesc:a49290943a70e566f97c358808a4a9094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculation of the bosonic std::size_tegral + Coleman-Weinberg potential <b>without</b> taking d.o.f. std::size_to account.  <br /></td></tr>
+<tr class="separator:a49290943a70e566f97c358808a4a9094"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6585f83a82f61626f6da599a3b00baa6" id="r_a6585f83a82f61626f6da599a3b00baa6"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a6585f83a82f61626f6da599a3b00baa6">boson_legacy</a> (double MassSquared, double Temp, double cb, int diff=0) const</td></tr>
 <tr class="separator:a6585f83a82f61626f6da599a3b00baa6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1861f270a9805dbec5bbaad3901c924" id="r_aa1861f270a9805dbec5bbaad3901c924"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#aa1861f270a9805dbec5bbaad3901c924">fermion</a> (double MassSquared, double Temp, int diff=0) const</td></tr>
@@ -747,8 +747,8 @@ std::vector&lt; std::size_t &gt;&#160;</td><td class="memItemRight" valign="bott
 
 </div>
 </div>
-<a id="ab9bd1684036e1dc81d1d1321b5da7f06" name="ab9bd1684036e1dc81d1d1321b5da7f06"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab9bd1684036e1dc81d1d1321b5da7f06">&#9670;&#160;</a></span>boson()</h2>
+<a id="a49290943a70e566f97c358808a4a9094" name="a49290943a70e566f97c358808a4a9094"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49290943a70e566f97c358808a4a9094">&#9670;&#160;</a></span>boson()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -775,7 +775,13 @@ std::vector&lt; std::size_t &gt;&#160;</td><td class="memItemRight" valign="bott
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>diff</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>diff</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>DevMassSquared</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -792,6 +798,7 @@ std::vector&lt; std::size_t &gt;&#160;</td><td class="memItemRight" valign="bott
     <tr><td class="paramname">Temp</td><td>= Temperature at which the Debye masses and std::size_tegrals should be calculated </td></tr>
     <tr><td class="paramname">cb</td><td>= Parameter of the renormalisation-Scheme in the Coleman-Weinberg potential </td></tr>
     <tr><td class="paramname">diff</td><td>0 returns the value of the std::size_tegral and diff &gt;0 the derivative w.r.t. m^2 and diff = -1 w.r.t. Temp </td></tr>
+    <tr><td class="paramname">DevMassSquared</td><td>mass squared field derivative </td></tr>
   </table>
   </dd>
 </dl>
@@ -835,7 +842,7 @@ std::vector&lt; std::size_t &gt;&#160;</td><td class="memItemRight" valign="bott
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Deprecated version of <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#ab9bd1684036e1dc81d1d1321b5da7f06" title="Calculation of the bosonic std::size_tegral + Coleman-Weinberg potential without taking d....">boson()</a> as present in the v1.X release. Still here for legacy reasons </p>
+<p>Deprecated version of <a class="el" href="classBSMPT_1_1Class__Potential__Origin.html#a49290943a70e566f97c358808a4a9094" title="Calculation of the bosonic std::size_tegral + Coleman-Weinberg potential without taking d....">boson()</a> as present in the v1.X release. Still here for legacy reasons </p>
 
 </div>
 </div>
