@@ -24,7 +24,7 @@ jobs:
   CreateDocumentation:
      runs-on: ubuntu-latest
      steps:
-     - uses: actions/checkout@v6
+     - uses: actions/checkout@v7
        with:
           persist-credentials: false
      - name: installPackages
@@ -51,7 +51,7 @@ jobs:
     needs: CreateDocumentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: actions/download-artifact@v8
         with:
           name: documentation
