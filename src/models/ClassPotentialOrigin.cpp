@@ -110,10 +110,11 @@ Class_Potential_Origin::CWTerm(double MassSquared, double cb, int diff) const
 double Class_Potential_Origin::boson(double MassSquared,
                                      double Temp,
                                      double cb,
-                                     int diff) const
+                                     int diff,
+                                     double DevMassSquared) const
 {
   double res = 0;
-  if (diff >= 0) res = CWTerm(std::abs(MassSquared), cb, diff);
+  if (diff >= 0) res = CWTerm(MassSquared, cb, diff);
   if (Temp == 0) return res;
   double Ratio = MassSquared / std::pow(Temp, 2);
   if (diff == 0)
@@ -121,17 +122,17 @@ double Class_Potential_Origin::boson(double MassSquared,
     res += std::pow(Temp, 4) / (2 * std::pow(M_PI, 2)) *
            ThermalFunctions::JbosonInterpolated(Ratio);
   }
-  else if (diff == 1)
+  else if (diff > 0)
   {
     res += std::pow(Temp, 2) / (2 * std::pow(M_PI, 2)) *
-           ThermalFunctions::JbosonNumericalIntegration(Ratio, 1);
+           ThermalFunctions::JbosonInterpolated(Ratio, 1);
   }
   else if (diff == -1)
   {
     res += 1.0 / (2 * std::pow(M_PI, 2)) *
            (4 * std::pow(Temp, 3) *
                 ThermalFunctions::JbosonInterpolated(Ratio, 0) -
-            2 * Temp * MassSquared *
+            (2 * Temp * MassSquared - Temp * Temp * DevMassSquared) *
                 ThermalFunctions::JbosonInterpolated(Ratio, 1));
   }
   return res;
@@ -149,10 +150,11 @@ Class_Potential_Origin::fermion(double MassSquared, double Temp, int diff) const
     res += std::pow(Temp, 4) / (2 * std::pow(M_PI, 2)) *
            ThermalFunctions::JfermionInterpolated(Ratio);
   }
-  else if (diff == 1)
+
+  else if (diff > 0)
   {
     res += std::pow(Temp, 2) / (2 * std::pow(M_PI, 2)) *
-           ThermalFunctions::JfermionNumericalIntegration(Ratio, 1);
+           ThermalFunctions::JfermionInterpolated(Ratio, 1);
   }
   else if (diff == -1)
   {
@@ -3053,10 +3055,25 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
   QuarkMassesVec         = QuarkMassesSquared(v, diff);
   LeptonMassesVec        = LeptonMassesSquared(v, diff);
 
+  // Length = N if diff = 0 else Length = 2N (mass_i, deriv_mass_i)
+  const size_t NMultiplier         = (diff == 0) ? 1 : 2;
+  const size_t NMultiplierFermions = (diff <= 0) ? 1 : 2;
+  if (HiggsMassesVec.size() != NHiggs * NMultiplier)
+    throw("Missmatch NHiggs [V1Loop]");
+  if (GaugeMassesVec.size() != NGauge * NMultiplier)
+    throw("Missmatch NGauge [V1Loop]");
+  if (GaugeMassesZeroTempVec.size() != NGauge * NMultiplier)
+    throw("Missmatch NGauge T = 0 [V1Loop]");
+  if (QuarkMassesVec.size() != NQuarks * NMultiplierFermions)
+    throw("Missmatch NQuarks [V1Loop]");
+  if (LeptonMassesVec.size() != NLepton * NMultiplierFermions)
+    throw("Missmatch NLepton [V1Loop]");
+
   if (diff == 0)
   {
     if (C_UseParwani)
     {
+      // CW + Jbf with (field dependent + thermal) masses
       for (std::size_t k = 0; k < NHiggs; k++)
         res += boson(HiggsMassesVec[k], Temp, C_CWcbHiggs, 0);
       for (std::size_t k = 0; k < NGauge; k++)
@@ -3070,7 +3087,10 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
     }
     else
     {
+      // CW + Jbf with field dependent masses
       HiggsMassesZeroTempVec = HiggsMassesSquared(v, 0);
+      if (HiggsMassesVec.size() != NHiggs * NMultiplier)
+        throw("Missmatch NHiggs T = 0 [V1Loop]");
       for (std::size_t k = 0; k < NHiggs; k++)
       {
         res += boson(HiggsMassesZeroTempVec[k], Temp, C_CWcbHiggs, 0);
@@ -3089,7 +3109,7 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
       {
         res += -2 * fermion(LeptonMassesVec[k], Temp, 0);
       }
-
+      // Vdaisy
       double VDebye = 0;
       for (std::size_t k = 0; k < NHiggs; k++)
       {
@@ -3112,70 +3132,74 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
   {
     if (C_UseParwani)
     {
+      // dm^2/dphi * d(CW + Jbf)/dm^2
       for (std::size_t k = 0; k < NHiggs; k++)
       {
-        res += HiggsMassesVec.at(k + NHiggs) *
-               boson(HiggsMassesVec.at(k), Temp, C_CWcbHiggs, diff);
+        res += HiggsMassesVec[k + NHiggs] *
+               boson(HiggsMassesVec[k], Temp, C_CWcbHiggs, diff);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        res += GaugeMassesVec.at(k + NGauge) *
-               boson(GaugeMassesVec.at(k), Temp, C_CWcbHiggs, diff);
+        res += GaugeMassesVec[k + NGauge] *
+               boson(GaugeMassesVec[k], Temp, C_CWcbGB, diff);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        res += 2 * GaugeMassesZeroTempVec.at(k + NGauge) *
-               boson(GaugeMassesZeroTempVec.at(k), Temp, C_CWcbHiggs, diff);
+        res += 2 * GaugeMassesZeroTempVec[k + NGauge] *
+               boson(GaugeMassesZeroTempVec[k], Temp, C_CWcbGB, diff);
       }
       for (std::size_t k = 0; k < NQuarks; k++)
       {
-        res += -6 * QuarkMassesVec.at(k + NQuarks) *
+        res += -6 * QuarkMassesVec[k + NQuarks] *
                fermion(QuarkMassesVec[k], Temp, diff);
       }
       for (std::size_t k = 0; k < NLepton; k++)
       {
-        res += -2 * LeptonMassesVec.at(k + NLepton) *
+        res += -2 * LeptonMassesVec[k + NLepton] *
                fermion(LeptonMassesVec[k], Temp, diff);
       }
     }
     else
     {
+      // dm^2/dphi * d(CW and Jbf)/dm^2
       HiggsMassesZeroTempVec = HiggsMassesSquared(v, 0, diff);
+      if (HiggsMassesVec.size() != NHiggs * NMultiplier)
+        throw("Missmatch NHiggs T = 0 [V1Loop]");
       for (std::size_t k = 0; k < NHiggs; k++)
       {
-        res += HiggsMassesZeroTempVec.at(k + NHiggs) *
+        res += HiggsMassesZeroTempVec[k + NHiggs] *
                boson(HiggsMassesZeroTempVec[k], Temp, C_CWcbHiggs, diff);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        res += 3 * GaugeMassesZeroTempVec.at(k + NGauge) *
+        res += 3 * GaugeMassesZeroTempVec[k + NGauge] *
                boson(GaugeMassesZeroTempVec[k], Temp, C_CWcbGB, diff);
       }
       double AddContQuark = 0;
       for (std::size_t k = 0; k < NQuarks; k++)
       {
-        AddContQuark += -2 * QuarkMassesVec.at(k + NQuarks) *
+        AddContQuark += -2 * QuarkMassesVec[k + NQuarks] *
                         fermion(QuarkMassesVec[k], Temp, diff);
       }
       for (std::size_t k = 0; k < NColour; k++)
         res += AddContQuark;
       for (std::size_t k = 0; k < NLepton; k++)
       {
-        res += -2 * LeptonMassesVec.at(k + NLepton) *
+        res += -2 * LeptonMassesVec[k + NLepton] *
                fermion(LeptonMassesVec[k], Temp, diff);
       }
-
+      // dm^2/dphi * d(Vdaisy)/dm^2
       double VDebye = 0;
       for (std::size_t k = 0; k < NHiggs; k++)
       {
         if (HiggsMassesVec[k] > 0)
         {
-          VDebye += 1.5 * HiggsMassesVec.at(k + NHiggs) *
-                    std::pow(HiggsMassesVec.at(k), 0.5);
+          VDebye += 1.5 * HiggsMassesVec[k + NHiggs] *
+                    std::pow(HiggsMassesVec[k], 0.5);
         }
         if (HiggsMassesZeroTempVec[k] > 0)
         {
-          VDebye += -1.5 * HiggsMassesZeroTempVec.at(k + NHiggs) *
+          VDebye += -1.5 * HiggsMassesZeroTempVec[k + NHiggs] *
                     std::pow(HiggsMassesZeroTempVec[k], 0.5);
         }
       }
@@ -3183,12 +3207,12 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
       {
         if (GaugeMassesVec[k] > 0)
         {
-          VDebye += 1.5 * GaugeMassesVec.at(k + NGauge) *
+          VDebye += 1.5 * GaugeMassesVec[k + NGauge] *
                     std::pow(GaugeMassesVec[k], 0.5);
         }
         if (GaugeMassesZeroTempVec[k] > 0)
         {
-          VDebye += -1.5 * GaugeMassesZeroTempVec.at(k + NGauge) *
+          VDebye += -1.5 * GaugeMassesZeroTempVec[k + NGauge] *
                     std::pow(GaugeMassesZeroTempVec[k], 0.5);
         }
       }
@@ -3203,19 +3227,32 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
     {
       for (std::size_t k = 0; k < NHiggs; k++)
       {
-        res += HiggsMassesVec.at(k + NHiggs) *
-               boson(HiggsMassesVec[k], Temp, C_CWcbHiggs, 0);
-        res += boson(HiggsMassesVec[k], Temp, C_CWcbHiggs, -1);
+        // dm^2/dT * d(CW)/dm^2
+        res += HiggsMassesVec[k + NHiggs] * boson(HiggsMassesVec[k],
+                                                  Temp,
+                                                  C_CWcbHiggs,
+                                                  1,
+                                                  HiggsMassesVec[k + NHiggs]);
+        // d(Jbf)/dT
+        res += boson(HiggsMassesVec[k],
+                     Temp,
+                     C_CWcbHiggs,
+                     -1,
+                     HiggsMassesVec[k + NHiggs]);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        res += GaugeMassesVec.at(k + NGauge) *
-               boson(GaugeMassesVec[k], Temp, C_CWcbGB, 0);
-        res += boson(GaugeMassesVec.at(k), Temp, C_CWcbGB, -1);
+        res += GaugeMassesVec[k + NGauge] * boson(GaugeMassesVec[k],
+                                                  Temp,
+                                                  C_CWcbGB,
+                                                  1,
+                                                  GaugeMassesVec[k + NGauge]);
+        res += boson(
+            GaugeMassesVec[k], Temp, C_CWcbGB, -1, GaugeMassesVec[k + NGauge]);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        res += 2 * boson(GaugeMassesZeroTempVec[k], Temp, C_CWcbGB, -1);
+        res += 2 * boson(GaugeMassesZeroTempVec[k], Temp, C_CWcbGB, -1, 0.0);
       }
       for (std::size_t k = 0; k < NQuarks; k++)
       {
@@ -3228,14 +3265,25 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
     }
     else
     {
+      // d(Jbf)/dT
       HiggsMassesZeroTempVec = HiggsMassesSquared(v, 0, diff);
+      if (HiggsMassesVec.size() != NHiggs * NMultiplier)
+        throw("Missmatch NHiggs T = 0 [V1Loop]");
       for (std::size_t k = 0; k < NHiggs; k++)
       {
-        res += boson(HiggsMassesZeroTempVec[k], Temp, C_CWcbHiggs, -1);
+        res += boson(HiggsMassesZeroTempVec[k],
+                     Temp,
+                     C_CWcbHiggs,
+                     -1,
+                     0.0 /* 0 added for clarity */);
       }
       for (std::size_t k = 0; k < NGauge; k++)
       {
-        res += 3 * boson(GaugeMassesZeroTempVec[k], Temp, C_CWcbGB, -1);
+        res += 3 * boson(GaugeMassesZeroTempVec[k],
+                         Temp,
+                         C_CWcbGB,
+                         -1,
+                         0.0 /* 0 added for clarity */);
       }
       double AddContQuark = 0;
       for (std::size_t k = 0; k < NQuarks; k++)
@@ -3245,15 +3293,19 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
       for (std::size_t k = 0; k < NLepton; k++)
         res += -2 * fermion(LeptonMassesVec[k], Temp, -1);
 
+      // d(Vdaisy)/dT
       double VDebye = 0;
       for (std::size_t k = 0; k < NHiggs; k++)
       {
         if (HiggsMassesVec[k] > 0)
         {
+          // Explicit T part
           VDebye += std::pow(HiggsMassesVec[k], 1.5);
-          VDebye += 1.5 * Temp * HiggsMassesVec.at(k + NHiggs) *
-                    std::pow(HiggsMassesVec.at(k), 0.5);
+          // Thermal mass contribution
+          VDebye += 1.5 * Temp * HiggsMassesVec[k + NHiggs] *
+                    std::sqrt(HiggsMassesVec[k]);
         }
+        // Explicit T part
         if (HiggsMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(HiggsMassesZeroTempVec[k], 1.5);
       }
@@ -3262,8 +3314,8 @@ double Class_Potential_Origin::V1Loop(const std::vector<double> &v,
         if (GaugeMassesVec[k] > 0)
         {
           VDebye += std::pow(GaugeMassesVec[k], 1.5);
-          VDebye += 1.5 * Temp * GaugeMassesVec.at(k + NGauge) *
-                    std::pow(GaugeMassesVec[k], 0.5);
+          VDebye += 1.5 * Temp * GaugeMassesVec[k + NGauge] *
+                    std::sqrt(GaugeMassesVec[k]);
         }
         if (GaugeMassesZeroTempVec[k] > 0)
           VDebye += -std::pow(GaugeMassesZeroTempVec[k], 1.5);
