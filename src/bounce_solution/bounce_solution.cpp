@@ -206,7 +206,8 @@ void BounceSolution::CalculateActionAt(double T, bool smart)
 {
   // Action outside allowed range
   if (T < Tm or T > Tc) return;
-  Logger::Write(LoggingLevel::BounceDetailed, " T = " + std::to_string(T));
+  Logger::Write(LoggingLevel::BounceDetailed,
+                "Calculating action at T = " + std::to_string(T));
   // Find the closest solution to our goal temperature
   if (SolutionList.size() > 0)
   {
@@ -217,7 +218,7 @@ void BounceSolution::CalculateActionAt(double T, bool smart)
                          { return std::abs(T - a.T) < std::abs(T - b.T); });
     BounceActionInt Nearest_bc = *it;
 
-    if (abs(Nearest_bc.T - T) < 0.001) return;
+    if (abs(Nearest_bc.T - T) < 1e-4) return;
 
     // Check if transition is energetically viable
     if (phase_pair.true_phase.Get(T).potential >=
