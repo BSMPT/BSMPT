@@ -313,22 +313,23 @@ TransitionTracer::TransitionTracer(user_input &input)
 
                 if (new_gw_data.status_gw != StatusGW::Failure)
                 {
+                  const double h = gw.h;
                   gw.CalcPeakCollision();
                   new_gw_data.fb_col = gw.data.CollisionParameter.f_b.value();
-                  new_gw_data.omegab_col =
-                      gw.data.CollisionParameter.Omega_b.value();
+                  new_gw_data.h2omegab_col =
+                      h * h * gw.data.CollisionParameter.Omega_b.value();
 
                   gw.CalcPeakSoundWave();
                   new_gw_data.f1_sw = gw.data.SoundWaveParameter.f_1.value();
                   new_gw_data.f2_sw = gw.data.SoundWaveParameter.f_2.value();
-                  new_gw_data.omega_2_sw =
-                      gw.data.SoundWaveParameter.Omega_2.value();
+                  new_gw_data.h2omega_2_sw =
+                      h * h * gw.data.SoundWaveParameter.Omega_2.value();
 
                   gw.CalcPeakTurbulence();
                   new_gw_data.f1_turb = gw.data.TurbulanceParameter.f_1.value();
                   new_gw_data.f2_turb = gw.data.TurbulanceParameter.f_2.value();
-                  new_gw_data.omega_2_turb =
-                      gw.data.TurbulanceParameter.Omega_2.value();
+                  new_gw_data.h2omega_2_turb =
+                      h * h * gw.data.TurbulanceParameter.Omega_2.value();
 
                   std::stringstream ss;
 
