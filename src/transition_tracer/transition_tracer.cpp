@@ -330,11 +330,18 @@ TransitionTracer::TransitionTracer(user_input &input)
                   new_gw_data.omega_2_turb =
                       gw.data.TurbulanceParameter.Omega_2.value();
 
+                  std::stringstream ss;
+
+                  ss << "\n--------------- SNR ---------------\n\n";
+
                   // SNR of Collision
                   gw.data.collisionON = true;
                   gw.data.swON        = false;
                   gw.data.turbON      = false;
                   new_gw_data.SNR_col = gw.GetSNR(1e-6, 10);
+
+                  ss << "SNR(collision) = " << new_gw_data.SNR_col.value_or(NAN)
+                     << "\n";
 
                   // SNR of Sound Waves
                   gw.data.collisionON = false;
@@ -342,17 +349,29 @@ TransitionTracer::TransitionTracer(user_input &input)
                   gw.data.turbON      = false;
                   new_gw_data.SNR_sw  = gw.GetSNR(1e-6, 10);
 
+                  ss << "SNR(sound waves) = "
+                     << new_gw_data.SNR_sw.value_or(NAN) << "\n";
+
                   // SNR of Turbulence
                   gw.data.collisionON  = false;
                   gw.data.swON         = false;
                   gw.data.turbON       = true;
                   new_gw_data.SNR_turb = gw.GetSNR(1e-6, 10);
 
+                  ss << "SNR(turbulence) = "
+                     << new_gw_data.SNR_turb.value_or(NAN) << "\n";
+
                   // SNR of all contributions
                   gw.data.collisionON = true;
                   gw.data.swON        = true;
                   gw.data.turbON      = true;
                   new_gw_data.SNR     = gw.GetSNR(1e-6, 10);
+
+                  ss << "\nSNR(collison + sound waves + turbulence) "
+                        "= "
+                     << new_gw_data.SNR.value_or(NAN) << "\n";
+
+                  Logger::Write(LoggingLevel::GWDetailed, ss.str());
 
                   new_gw_data.kappa_col    = gw.data.kappa_col;
                   new_gw_data.kappa_sw     = gw.data.kappa_sw;
