@@ -149,7 +149,9 @@ void BounceSolution::GWInitialScan()
 
   for (double T = Tc - dT; T >= phase_pair.T_low + dT; T -= dT)
   {
-    Logger::Write(LoggingLevel::BounceDetailed, "T = " + std::to_string(T));
+    Logger::Write(LoggingLevel::BounceDetailed,
+                  "[InitialScan] Calculating action at T = " +
+                      std::to_string(T));
 
     // Check if transition is energetically viable
     if (phase_pair.true_phase.Get(T).potential >=

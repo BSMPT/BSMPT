@@ -176,13 +176,13 @@ void GravitationalWave::CalcPeakCollision()
                         1. / 2. * pow(-n1 / n2, -n2 / (n1 - n2)),
                     (n1 - n2) / a1);
 
-  Logger::Write(LoggingLevel::GWDetailed,
-                "\n--------------- Collision ---------------\n");
-  Logger::Write(LoggingLevel::GWDetailed,
-                "f_b = " + std::to_string(data.CollisionParameter.f_b.value()));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Omega_b = " +
-                    std::to_string(data.CollisionParameter.Omega_b.value()));
+  std::stringstream ss;
+
+  ss << "\n--------------- Collision ---------------\n\n";
+  ss << "f_b = " << data.CollisionParameter.f_b.value() << "\n";
+  ss << "h^2 Omega_b  = " << h * h * data.CollisionParameter.Omega_b.value();
+
+  Logger::Write(LoggingLevel::GWDetailed, ss.str());
 }
 
 double GravitationalWave::CalculateXiShell()
@@ -230,15 +230,15 @@ void GravitationalWave::CalcPeakSoundWave()
   data.SoundWaveParameter.f_2 = f_2;
   data.SoundWaveParameter.Omega_2 =
       Omega_int * (sqrt(2) + (2 * f_2 / f_1) / (1 + pow(f_2 / f_1, 2))) / M_PI;
-  Logger::Write(LoggingLevel::GWDetailed,
-                "\n--------------- Sound Wave ---------------\n");
-  Logger::Write(LoggingLevel::GWDetailed,
-                "f_1 = " + std::to_string(data.SoundWaveParameter.f_1.value()));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "f_2 = " + std::to_string(data.SoundWaveParameter.f_2.value()));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Omega_2 = " +
-                    std::to_string(data.SoundWaveParameter.Omega_2.value()));
+
+  std::stringstream ss;
+
+  ss << "\n--------------- Sound Wave ---------------\n\n";
+  ss << "f_1 = " << data.SoundWaveParameter.f_1.value() << "\n";
+  ss << "f_2 = " << data.SoundWaveParameter.f_2.value() << "\n";
+  ss << "h^2 Omega_2 = " << h * h * data.SoundWaveParameter.Omega_2.value();
+
+  Logger::Write(LoggingLevel::GWDetailed, ss.str());
 }
 
 void GravitationalWave::CalcPeakTurbulence()
@@ -266,17 +266,14 @@ void GravitationalWave::CalcPeakTurbulence()
   data.TurbulanceParameter.Omega_2 =
       data.FGW0 * A_MHD * pow(Omega_s, 2) * pow(data.HR, 2);
 
-  Logger::Write(LoggingLevel::GWDetailed,
-                "\n--------------- Turbulence ---------------\n");
-  Logger::Write(LoggingLevel::GWDetailed,
-                "f_1 = " +
-                    std::to_string(data.TurbulanceParameter.f_1.value()));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "f_2 = " +
-                    std::to_string(data.TurbulanceParameter.f_2.value()));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Omega_2 = " +
-                    std::to_string(data.TurbulanceParameter.Omega_2.value()));
+  std::stringstream ss;
+
+  ss << "\n--------------- Turbulence ---------------\n\n";
+  ss << "f_1 = " << data.TurbulanceParameter.f_1.value() << "\n";
+  ss << "f_2 = " << data.TurbulanceParameter.f_2.value() << "\n";
+  ss << "h^2 Omega_2 = " << h * h * data.TurbulanceParameter.Omega_2.value();
+
+  Logger::Write(LoggingLevel::GWDetailed, ss.str());
 }
 
 double GravitationalWave::BPL(const double &f, const BPLParameters &par) const
