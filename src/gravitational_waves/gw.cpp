@@ -26,27 +26,21 @@ GravitationalWave::GravitationalWave(
   data.PTStrength     = BACalc.GetPTStrength();
   data.betaH          = BACalc.GetInvTimeScale();
   data.vw             = BACalc.GetWallVelocity();
-  Logger::Write(LoggingLevel::GWDetailed,
-                "\n--------------- Transition parameters ---------------\n");
-  Logger::Write(LoggingLevel::GWDetailed,
-                "T* = " + std::to_string(data.transitionTemp));
+  std::stringstream ss;
+  ss << "\n--------------- Transition parameters ---------------\n\n";
+  ss << "T* = " << data.transitionTemp << "\n";
+  ss << "Th = " << data.reheatingTemp << "\n";
+  ss << "alpha = " << data.PTStrength << "\n";
+  ss << "beta/H = " << data.betaH << "\n";
+  ss << "vw = " << data.vw << "\n\n";
 
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Th = " + std::to_string(data.reheatingTemp));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "alpha = " + std::to_string(data.PTStrength));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "beta/H = " + std::to_string(data.betaH));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "vw = " + std::to_string(data.vw) + "\n");
   // Sound speeds
   data.Csound_false = BACalc.GetSoundSpeedFalse();
   data.Csound_true  = BACalc.GetSoundSpeedTrue();
 
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Csound_false = " + std::to_string(data.Csound_false));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Csound_true = " + std::to_string(data.Csound_true));
+  ss << "Csound_false = " << data.Csound_false << "\n";
+  ss << "Csound_true = " << data.Csound_true << "\n";
+
   // General purpose GW parameters
   data.HR    = BACalc.GetRstar() * BACalc.HubbleRate(data.transitionTemp);
   data.gstar = BACalc.GetGstar(data.transitionTemp);
@@ -72,22 +66,16 @@ GravitationalWave::GravitationalWave(
                                         alpha_eff,
                                         BACalc.vwall,
                                         vprofile);
-  Logger::Write(LoggingLevel::GWDetailed, "HR = " + std::to_string(data.HR));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "gstar = " + std::to_string(data.gstar));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "FGW0 = " + std::to_string(data.FGW0));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Hstar0 = " + std::to_string(data.Hstar0));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "kappa_col = " + std::to_string(data.kappa_col));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "Epsilon_Turb = " + std::to_string(data.Epsilon_Turb));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "alpha_eff = " + std::to_string(alpha_eff));
-  Logger::Write(LoggingLevel::GWDetailed, "vCJ = " + std::to_string(data.vCJ));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "kappa_sw = " + std::to_string(data.kappa_sw));
+  ss << "HR = " << data.HR << "\n";
+  ss << "gstar = " << data.gstar << "\n";
+  ss << "FGW0 = " << data.FGW0 << "\n";
+  ss << "Hstar0 = " << data.Hstar0 << "\n";
+
+  ss << "Epsilon_Turb = " << data.Epsilon_Turb << "\n";
+  ss << "alpha_eff = " << alpha_eff << "\n";
+  ss << "vCJ = " << data.vCJ << "\n";
+  ss << "kappa_sw = " << data.kappa_sw << "\n";
+  ss << "kappa_col = " << data.kappa_col << "\n";
   // XiShock = fastest fluid shell
   if (data.kappa_sw > 0)
   {
@@ -99,10 +87,11 @@ GravitationalWave::GravitationalWave(
   }
 
   data.K_sw = GetK_sw(data.PTStrength, data.kappa_sw);
-  Logger::Write(LoggingLevel::GWDetailed,
-                "XiShock= " + std::to_string(data.XiShock));
-  Logger::Write(LoggingLevel::GWDetailed,
-                "K_sw = " + std::to_string(data.K_sw));
+  ss << "XiShock= " << data.XiShock << "\n";
+  ss << "K_sw = " << data.K_sw;
+
+  Logger::Write(LoggingLevel::GWDetailed, ss.str());
+
   if (data.betaH < 1)
   {
     data.status = StatusGW::Failure;
