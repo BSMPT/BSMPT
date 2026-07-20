@@ -40,7 +40,7 @@ jobs:
             run: |
               choco install visualstudio2022buildtools -y --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --quiet --norestart"
 
-          - uses: actions/setup-python@v6
+          - uses: actions/setup-python@v7
             with:
               python-version: '3.x'
               architecture: 'x64'
