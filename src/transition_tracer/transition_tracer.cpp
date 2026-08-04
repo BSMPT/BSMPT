@@ -313,22 +313,27 @@ TransitionTracer::TransitionTracer(user_input &input)
 
                 if (new_gw_data.status_gw != StatusGW::Failure)
                 {
+                  const double h = gw.h;
                   gw.CalcPeakCollision();
                   new_gw_data.fb_col = gw.data.CollisionParameter.f_b.value();
-                  new_gw_data.omegab_col =
-                      gw.data.CollisionParameter.Omega_b.value();
+                  new_gw_data.h2omegab_col =
+                      h * h * gw.data.CollisionParameter.Omega_b.value();
 
                   gw.CalcPeakSoundWave();
                   new_gw_data.f1_sw = gw.data.SoundWaveParameter.f_1.value();
                   new_gw_data.f2_sw = gw.data.SoundWaveParameter.f_2.value();
-                  new_gw_data.omega_2_sw =
-                      gw.data.SoundWaveParameter.Omega_2.value();
+                  new_gw_data.h2omega_2_sw =
+                      h * h * gw.data.SoundWaveParameter.Omega_2.value();
 
                   gw.CalcPeakTurbulence();
                   new_gw_data.f1_turb = gw.data.TurbulanceParameter.f_1.value();
                   new_gw_data.f2_turb = gw.data.TurbulanceParameter.f_2.value();
-                  new_gw_data.omega_2_turb =
-                      gw.data.TurbulanceParameter.Omega_2.value();
+                  new_gw_data.h2omega_2_turb =
+                      h * h * gw.data.TurbulanceParameter.Omega_2.value();
+
+                  std::stringstream ss;
+
+                  ss << "\n--------------- SNR ---------------\n\n";
 
                   // SNR of Collision
                   gw.data.collisionON = true;
@@ -336,11 +341,17 @@ TransitionTracer::TransitionTracer(user_input &input)
                   gw.data.turbON      = false;
                   new_gw_data.SNR_col = gw.GetSNR(1e-6, 10);
 
+                  ss << "SNR(collision) = " << new_gw_data.SNR_col.value_or(NAN)
+                     << "\n";
+
                   // SNR of Sound Waves
                   gw.data.collisionON = false;
                   gw.data.swON        = true;
                   gw.data.turbON      = false;
                   new_gw_data.SNR_sw  = gw.GetSNR(1e-6, 10);
+
+                  ss << "SNR(sound waves) = "
+                     << new_gw_data.SNR_sw.value_or(NAN) << "\n";
 
                   // SNR of Turbulence
                   gw.data.collisionON  = false;
@@ -348,11 +359,20 @@ TransitionTracer::TransitionTracer(user_input &input)
                   gw.data.turbON       = true;
                   new_gw_data.SNR_turb = gw.GetSNR(1e-6, 10);
 
+                  ss << "SNR(turbulence) = "
+                     << new_gw_data.SNR_turb.value_or(NAN) << "\n";
+
                   // SNR of all contributions
                   gw.data.collisionON = true;
                   gw.data.swON        = true;
                   gw.data.turbON      = true;
                   new_gw_data.SNR     = gw.GetSNR(1e-6, 10);
+
+                  ss << "\nSNR(collison + sound waves + turbulence) "
+                        "= "
+                     << new_gw_data.SNR.value_or(NAN) << "\n";
+
+                  Logger::Write(LoggingLevel::GWDetailed, ss.str());
 
                   new_gw_data.kappa_col    = gw.data.kappa_col;
                   new_gw_data.kappa_sw     = gw.data.kappa_sw;

@@ -959,21 +959,22 @@ TEST_CASE("Checking phase tracking and GW for BP3", "[gw]")
   REQUIRE(0.0170023112894 ==
           Approx(output.vec_gw_data.at(0).fb_col.value()).epsilon(1e-2));
   REQUIRE(0. ==
-          Approx(output.vec_gw_data.at(0).omegab_col.value()).epsilon(1e-2));
+          Approx(output.vec_gw_data.at(0).h2omegab_col.value()).epsilon(1e-2));
 
   REQUIRE(0.00744305239818 ==
           Approx(output.vec_gw_data.at(0).f1_sw.value()).epsilon(1e-2));
   REQUIRE(0.0470969569436 ==
           Approx(output.vec_gw_data.at(0).f2_sw.value()).epsilon(1e-2));
-  REQUIRE(9.05885430918e-20 ==
-          Approx(output.vec_gw_data.at(0).omega_2_sw.value()).epsilon(1e-2));
+  REQUIRE(4.1152201001570546e-20 ==
+          Approx(output.vec_gw_data.at(0).h2omega_2_sw.value()).epsilon(1e-2));
 
   REQUIRE(2.69271850203e-05 ==
           Approx(output.vec_gw_data.at(0).f1_turb.value()).epsilon(1e-2));
   REQUIRE(0.08187357638 ==
           Approx(output.vec_gw_data.at(0).f2_turb.value()).epsilon(1e-2));
-  REQUIRE(3.51603674416e-25 ==
-          Approx(output.vec_gw_data.at(0).omega_2_turb.value()).epsilon(1e-2));
+  REQUIRE(
+      1.5972511079900284e-25 ==
+      Approx(output.vec_gw_data.at(0).h2omega_2_turb.value()).epsilon(1e-2));
 
   REQUIRE(0 == Approx(output.vec_gw_data.at(0).SNR_col.value()).epsilon(5e-2));
   REQUIRE(9.15003140408e-08 ==
@@ -1057,21 +1058,22 @@ TEST_CASE("Checking phase tracking and GW for BP3 (low sample) and not "
   REQUIRE(0.0170282844073 ==
           Approx(output.vec_gw_data.at(0).fb_col.value()).epsilon(1e-2));
   REQUIRE(0. ==
-          Approx(output.vec_gw_data.at(0).omegab_col.value()).epsilon(1e-2));
+          Approx(output.vec_gw_data.at(0).h2omegab_col.value()).epsilon(1e-2));
 
   REQUIRE(0.00745408785087 ==
           Approx(output.vec_gw_data.at(0).f1_sw.value()).epsilon(1e-2));
   REQUIRE(0.0471667878942 ==
           Approx(output.vec_gw_data.at(0).f2_sw.value()).epsilon(1e-2));
-  REQUIRE(9.03362471629e-20 ==
-          Approx(output.vec_gw_data.at(0).omega_2_sw.value()).epsilon(1e-2));
+  REQUIRE(4.1037589016173564e-20 ==
+          Approx(output.vec_gw_data.at(0).h2omega_2_sw.value()).epsilon(1e-2));
 
   REQUIRE(2.69667207673e-05 ==
           Approx(output.vec_gw_data.at(0).f1_turb.value()).epsilon(1e-2));
   REQUIRE(0.0819949663596 ==
           Approx(output.vec_gw_data.at(0).f2_turb.value()).epsilon(1e-2));
-  REQUIRE(3.50544513664e-25 ==
-          Approx(output.vec_gw_data.at(0).omega_2_turb.value()).epsilon(1e-2));
+  REQUIRE(
+      1.5924395948922728e-25 ==
+      Approx(output.vec_gw_data.at(0).h2omega_2_turb.value()).epsilon(1e-2));
 
   REQUIRE(0 == Approx(output.vec_gw_data.at(0).SNR_col.value()).epsilon(5e-2));
   REQUIRE(9.09581393167e-08 ==
@@ -1146,13 +1148,13 @@ TEST_CASE(
   REQUIRE(not output.vec_gw_data.at(0).kappa_col.has_value());
   REQUIRE(not output.vec_gw_data.at(0).kappa_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).fb_col.has_value());
-  REQUIRE(not output.vec_gw_data.at(0).omegab_col.has_value());
+  REQUIRE(not output.vec_gw_data.at(0).h2omegab_col.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f1_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f2_sw.has_value());
-  REQUIRE(not output.vec_gw_data.at(0).omega_2_sw.has_value());
+  REQUIRE(not output.vec_gw_data.at(0).h2omega_2_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f1_turb.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f2_turb.has_value());
-  REQUIRE(not output.vec_gw_data.at(0).omega_2_turb.has_value());
+  REQUIRE(not output.vec_gw_data.at(0).h2omega_2_turb.has_value());
   REQUIRE(not output.vec_gw_data.at(0).SNR_col.has_value());
   REQUIRE(not output.vec_gw_data.at(0).SNR_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).SNR_turb.has_value());
