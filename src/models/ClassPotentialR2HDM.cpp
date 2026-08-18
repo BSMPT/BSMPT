@@ -30,7 +30,7 @@ Class_Potential_R2HDM::Class_Potential_R2HDM(const ISMConstants &smConstants)
   NQuarks = 12;
 
   nPar   = 8;
-  nParCT = 11;
+  nParCT = 12;
 
   nVEV = 4;
 
