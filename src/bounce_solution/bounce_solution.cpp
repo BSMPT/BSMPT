@@ -1117,7 +1117,7 @@ void BounceSolution::CalculatePTStrength()
 void BounceSolution::CalcChapmanJougetVelocity()
 {
   const double vminusterm = Csound_false / 2 + 1 / (6 * Csound_false);
-  vCJ = 1 / (1 + std::max(0., alpha)) * (vminusterm) +
+  vCJ                     = 1 / (1 + std::max(0., alpha)) * (vminusterm) +
         sqrt(pow(vminusterm, 2) + pow(alpha, 2) + 2. / 3. * alpha - 1. / 3.);
 }
 
@@ -1268,11 +1268,33 @@ void BounceSolution::CalculateRstar()
   };
   F.params = this; // Pass `this` pointer as parameters
 
-  double result, error;
-  gsl_integration_qags(
-      &F, Tstar, Tc, RelErr, AbsErr, 1000, workspace, &result, &error);
+  double result_qags, error_qags;
+  gsl_integration_qags(&F,
+                       Tstar,
+                       Tc,
+                       AbsErr,
+                       RelErr,
+                       1000,
+                       workspace,
+                       &result_qags,
+                       &error_qags);
+
+  double result_qag, error_qag;
+  int key = 6; // GSL_INTEG_GAUSS61; default for qags is GSL_INTEG_GAUSS21
+  gsl_integration_qag(&F,
+                      Tstar,
+                      Tc,
+                      AbsErr,
+                      RelErr,
+                      1000,
+                      key,
+                      workspace,
+                      &result_qag,
+                      &error_qag);
 
   gsl_integration_workspace_free(workspace);
+
+  const double result = (error_qags < error_qag ? result_qags : result_qag);
 
   this->Rstar = pow(pow(Tstar, 3) * result, -1 / 3.);
 }
