@@ -1116,10 +1116,9 @@ void BounceSolution::CalculatePTStrength()
 
 void BounceSolution::CalcChapmanJougetVelocity()
 {
-  vCJ = (1 + std::sqrt(3 * alpha *
-                       (1 - Csound_false * Csound_false +
-                        3 * Csound_false * Csound_false * alpha))) /
-        (1. / Csound_false + 3 * Csound_false * alpha);
+  const double vminusterm = Csound_false / 2 + 1 / (6 * Csound_false);
+  vCJ = 1 / (1 + std::max(0., alpha)) * (vminusterm) +
+        sqrt(pow(vminusterm, 2) + pow(alpha, 2) + 2. / 3. * alpha - 1. / 3.);
 }
 
 void BounceSolution::CalculateWallVelocity(const Minimum &false_min,
