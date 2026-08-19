@@ -10,6 +10,7 @@
 #include <BSMPT/bounce_solution/bounce_solution.h>
 #include <BSMPT/utility/NumericalDerivatives.h>
 #include <BSMPT/utility/asciiplotter/asciiplotter.h>
+#include <gsl/gsl_errno.h>
 namespace BSMPT
 {
 
@@ -1269,6 +1270,8 @@ void BounceSolution::CalculateRstar()
   };
   F.params = this; // Pass `this` pointer as parameters
 
+  gsl_error_handler_t *old_handler = gsl_set_error_handler_off();
+
   double result_qags, error_qags;
   gsl_integration_qags(&F,
                        Tstar,
@@ -1298,5 +1301,7 @@ void BounceSolution::CalculateRstar()
   const double result = (error_qags < error_qag ? result_qags : result_qag);
 
   this->Rstar = pow(pow(Tstar, 3) * result, -1 / 3.);
+
+  gsl_set_error_handler(old_handler);
 }
 } // namespace BSMPT
