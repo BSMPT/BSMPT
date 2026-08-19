@@ -174,6 +174,26 @@ const std::unordered_map<StatusGW, std::string> StatusGWToString{
     {StatusGW::Failure, "failure"}};
 
 /**
+ * @brief Possible status for the check of the last phase
+ * ending up in the EW minimum at T = 0
+ *
+ */
+enum class StatusLastPhaseEW
+{
+  NotSet,
+  Success,
+  Failure
+};
+/**
+ * @brief Map to convert StatusLastPhaseEW to strings
+ *
+ */
+const std::unordered_map<StatusLastPhaseEW, std::string>
+    StatusLastPhaseEWToString{{StatusLastPhaseEW::NotSet, "not_set"},
+                              {StatusLastPhaseEW::Success, "success"},
+                              {StatusLastPhaseEW::Failure, "failure"}};
+
+/**
  * @brief Possible transitions temperatures
  *
  */
@@ -264,6 +284,14 @@ std::ostream &operator<<(std::ostream &os, const StatusGW &status);
  * @return std::ostream& buffer
  */
 std::ostream &operator<<(std::ostream &os, const StatusTemperature &status);
+/**
+ * @brief Override << operator to handle StatusLastPhaseEW
+ *
+ * @param os ostream buffer
+ * @param status status to be printed
+ * @return std::ostream& buffer
+ */
+std::ostream &operator<<(std::ostream &os, const StatusLastPhaseEW &status);
 
 /**
  * @brief struct to store minimum and temperature
