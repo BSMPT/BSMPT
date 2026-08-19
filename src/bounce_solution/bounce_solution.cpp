@@ -10,6 +10,7 @@
 #include <BSMPT/bounce_solution/bounce_solution.h>
 #include <BSMPT/utility/NumericalDerivatives.h>
 #include <BSMPT/utility/asciiplotter/asciiplotter.h>
+#include <gsl/gsl_errno.h>
 namespace BSMPT
 {
 
@@ -1116,10 +1117,10 @@ void BounceSolution::CalculatePTStrength()
 
 void BounceSolution::CalcChapmanJougetVelocity()
 {
-  vCJ = (1 + std::sqrt(3 * alpha *
-                       (1 - Csound_false * Csound_false +
-                        3 * Csound_false * Csound_false * alpha))) /
-        (1. / Csound_false + 3 * Csound_false * alpha);
+  const double vminusterm = Csound_false / 2 + 1 / (6 * Csound_false);
+  vCJ                     = 1 / (1 + std::max(0., alpha)) *
+        ((vminusterm) +
+         sqrt(pow(vminusterm, 2) + pow(alpha, 2) + 2. / 3. * alpha - 1. / 3.));
 }
 
 void BounceSolution::CalculateWallVelocity(const Minimum &false_min,
@@ -1269,12 +1270,38 @@ void BounceSolution::CalculateRstar()
   };
   F.params = this; // Pass `this` pointer as parameters
 
-  double result, error;
-  gsl_integration_qags(
-      &F, Tstar, Tc, RelErr, AbsErr, 1000, workspace, &result, &error);
+  gsl_error_handler_t *old_handler = gsl_set_error_handler_off();
+
+  double result_qags, error_qags;
+  gsl_integration_qags(&F,
+                       Tstar,
+                       Tc,
+                       AbsErr,
+                       RelErr,
+                       1000,
+                       workspace,
+                       &result_qags,
+                       &error_qags);
+
+  double result_qag, error_qag;
+  int key = 6; // GSL_INTEG_GAUSS61; default for qags is GSL_INTEG_GAUSS21
+  gsl_integration_qag(&F,
+                      Tstar,
+                      Tc,
+                      AbsErr,
+                      RelErr,
+                      1000,
+                      key,
+                      workspace,
+                      &result_qag,
+                      &error_qag);
 
   gsl_integration_workspace_free(workspace);
 
+  const double result = (error_qags < error_qag ? result_qags : result_qag);
+
   this->Rstar = pow(pow(Tstar, 3) * result, -1 / 3.);
+
+  gsl_set_error_handler(old_handler);
 }
 } // namespace BSMPT

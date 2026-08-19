@@ -30,7 +30,7 @@ Class_Potential_R2HDM::Class_Potential_R2HDM(const ISMConstants &smConstants)
   NQuarks = 12;
 
   nPar   = 8;
-  nParCT = 11;
+  nParCT = 12;
 
   nVEV = 4;
 
@@ -72,6 +72,7 @@ std::vector<std::string> Class_Potential_R2HDM::addLegendCT() const
   labels.push_back("DT1");
   labels.push_back("DT2");
   labels.push_back("DT3");
+  labels.push_back("DTCharged");
   return labels;
 }
 
@@ -314,6 +315,7 @@ void Class_Potential_R2HDM::set_CT_Pot_Par(const std::vector<double> &p)
   DT1 = p[8];
   DT2 = p[9];
   DT3 = p[10];
+  DTCharged = p[11];
 
   double DIL5CT = 0;
   double DIu3CT = 0;
@@ -558,7 +560,8 @@ void Class_Potential_R2HDM::write() const
 
   ss << "DT1 := " << DT1 << ";\n";
   ss << "DT2 := " << DT2 << ";\n";
-  ss << "DT3:= " << DT3 << ";" << std::endl;
+  ss << "DT3 := " << DT3 << ";\n";
+  ss << "DTCharged:= " << DTCharged << ";" << std::endl;
 
   MatrixXd HiggsRot(NHiggs, NHiggs);
   for (std::size_t i = 0; i < NHiggs; i++)
@@ -699,6 +702,9 @@ std::vector<double> Class_Potential_R2HDM::calc_CT() const
   tmp = -(-v1 * v1 * HesseWeinberg(4, 5) - HesseWeinberg(4, 7) * v1 * v2 +
           NablaWeinberg(7) * v2) /
         v2;
+  // DTCharged
+  parCT.push_back(-NablaWeinberg(2));
+  
   if (std::abs(tmp) < 1e-9) tmp = 0;
   parCT.push_back(tmp);
 
