@@ -144,9 +144,6 @@ def setup_profiles():
         shutil.rmtree(profile_dir)
     shutil.copytree("profiles/BSMPT", profile_dir)
 
-    
-
-
 
 def conan_install(
     profile, additional_options=[], build_missing=False, compiler: Compiler = None

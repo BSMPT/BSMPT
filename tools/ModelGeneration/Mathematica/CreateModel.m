@@ -169,6 +169,7 @@ public:
   void set_CT_Pot_Par(const std::vector<double> &par) override;
   void write() const override;
 
+  void AdjustRotationMatrix() override;
   void TripleHiggsCouplings() override;
   std::vector<double> calc_CT() const override;
 
@@ -374,6 +375,10 @@ void Class_Potential_"<>name<>"::set_CT_Pot_Par(const std::vector<double> &par)
   ,"
 }
 
+void Class_Potential_"<>name<>"::AdjustRotationMatrix()
+{
+}
+
 /**
  * console output of all parameters
  */
@@ -409,7 +414,7 @@ std::vector<double> Class_Potential_"<>name<>"::calc_CT() const
     retmes += \" was called before SetCurvatureArrays()!\\n\";
     throw std::runtime_error(retmes);
   }
-  if (!CalcCouplingsdone)
+  if (!CalcCouplingsDone)
   {
     std::string retmes = __func__;
     retmes += \" was called before CalculatePhysicalCouplings()!\\n\";
@@ -437,7 +442,7 @@ std::vector<double> Class_Potential_"<>name<>"::calc_CT() const
 void Class_Potential_"<>name<>"::TripleHiggsCouplings()
 {
   if (!SetCurvatureDone) SetCurvatureArrays();
-  if (!CalcCouplingsdone) CalculatePhysicalCouplings();
+  if (!CalcCouplingsDone) CalculatePhysicalCouplings();
 
   // new rotation matrix with
   MatrixXd HiggsRotSort(NHiggs, NHiggs);

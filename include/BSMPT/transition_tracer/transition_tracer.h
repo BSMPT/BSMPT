@@ -130,15 +130,15 @@ struct gw_data
   std::optional<double> cs_t;
 
   std::optional<double> fb_col;
-  std::optional<double> omegab_col;
+  std::optional<double> h2omegab_col;
 
   std::optional<double> f1_sw;
   std::optional<double> f2_sw;
-  std::optional<double> omega_2_sw;
+  std::optional<double> h2omega_2_sw;
 
   std::optional<double> f1_turb;
   std::optional<double> f2_turb;
-  std::optional<double> omega_2_turb;
+  std::optional<double> h2omega_2_turb;
 
   std::optional<double> SNR_col;
   std::optional<double> SNR_sw;

@@ -27,10 +27,20 @@ jobs:
         if: "!contains(github.event.head_commit.message, 'skip-ci')"
     
         steps:
-          - uses: actions/checkout@v6
+          - uses: actions/checkout@v7
             with:
               persist-credentials: false
-          - uses: actions/setup-python@v6
+
+          - name: Setup MSVC (Windows only)
+            if: runner.os == 'Windows'
+            uses: ilammy/msvc-dev-cmd@v1
+
+          - name: Install VS Build Tools
+            if: runner.os == 'Windows'
+            run: |
+              choco install visualstudio2022buildtools -y --package-parameters "--add Microsoft.VisualStudio.Workload.VCTools --includeRecommended --quiet --norestart"
+
+          - uses: actions/setup-python@v7
             with:
               python-version: '3.x'
               architecture: 'x64'

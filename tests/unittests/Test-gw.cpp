@@ -580,13 +580,15 @@ TEST_CASE("Checking negative alpha case R2HDM", "[gw]")
   input.T_high         = 1000;
   TransitionTracer trans(input);
 
+  // Swap false and true phase to ensure that alpha < 0 to simulate an invalid
+  // point
+  std::swap(trans.ListBounceSolution.at(0).phase_pair.true_phase,
+            trans.ListBounceSolution.at(0).phase_pair.false_phase);
+
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
 
-  auto output = trans.output_store;
-
-  REQUIRE(output.vec_gw_data.at(0).alpha.value() < 0);
-
+  REQUIRE(trans.ListBounceSolution.at(0).alpha < 0);
   REQUIRE(trans.ListBounceSolution.at(0).status_bounce_sol ==
           StatusGW::Failure);
 }
@@ -730,7 +732,7 @@ TEST_CASE("Check calculation of Chapman-Jouget velocity", "[gw]")
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
 
-  REQUIRE(0.583037 ==
+  REQUIRE(0.583117330888 ==
           Approx(trans.ListBounceSolution.at(0).GetChapmanJougetVelocity())
               .epsilon(1e-2));
 }
@@ -935,63 +937,68 @@ TEST_CASE("Checking phase tracking and GW for BP3", "[gw]")
 
   auto output = trans.output_store;
 
-  REQUIRE(126.0223716 ==
+  REQUIRE(126.022371971 ==
           Approx(output.vec_trans_data.at(0).crit_temp.value()).epsilon(1e-2));
-  REQUIRE(121.0869527 ==
+  REQUIRE(121.087102987 ==
           Approx(output.vec_trans_data.at(0).nucl_approx_temp.value())
               .epsilon(1e-2));
-  REQUIRE(121.212833 ==
+  REQUIRE(121.214146278 ==
           Approx(output.vec_trans_data.at(0).nucl_temp.value()).epsilon(1e-2));
-  REQUIRE(120.7670659 ==
+  REQUIRE(120.768600948 ==
           Approx(output.vec_trans_data.at(0).perc_temp.value()).epsilon(1e-2));
-  REQUIRE(120.7267244 ==
+  REQUIRE(120.728166654 ==
           Approx(output.vec_trans_data.at(0).compl_temp.value()).epsilon(1e-2));
 
-  REQUIRE(0.0056735067 ==
+  REQUIRE(0.00550822653225 ==
           Approx(output.vec_gw_data.at(0).alpha.value()).epsilon(1e-2));
-  REQUIRE(7658.8931 ==
+  REQUIRE(7683.9523086 ==
           Approx(output.vec_gw_data.at(0).beta_over_H.value()).epsilon(1e-2));
-  REQUIRE(0.0084807773 ==
+  REQUIRE(0.00849495456316 ==
           Approx(output.vec_gw_data.at(0).kappa_sw.value()).epsilon(1e-2));
 
-  REQUIRE(0.01699469177 ==
+  REQUIRE(0.0170023112894 ==
           Approx(output.vec_gw_data.at(0).fb_col.value()).epsilon(1e-2));
   REQUIRE(0. ==
-          Approx(output.vec_gw_data.at(0).omegab_col.value()).epsilon(1e-2));
+          Approx(output.vec_gw_data.at(0).h2omegab_col.value()).epsilon(1e-2));
 
-  REQUIRE(0.007441950626 ==
+  REQUIRE(0.00744305239818 ==
           Approx(output.vec_gw_data.at(0).f1_sw.value()).epsilon(1e-2));
-  REQUIRE(0.04661408636 ==
+  REQUIRE(0.0470969569436 ==
           Approx(output.vec_gw_data.at(0).f2_sw.value()).epsilon(1e-2));
-  REQUIRE(9.481654892e-20 ==
-          Approx(output.vec_gw_data.at(0).omega_2_sw.value()).epsilon(1e-2));
+  REQUIRE(4.1152201001570546e-20 ==
+          Approx(output.vec_gw_data.at(0).h2omega_2_sw.value()).epsilon(1e-2));
 
-  REQUIRE(2.729908945e-05 ==
+  REQUIRE(2.69271850203e-05 ==
           Approx(output.vec_gw_data.at(0).f1_turb.value()).epsilon(1e-2));
-  REQUIRE(0.08186145689 ==
+  REQUIRE(0.08187357638 ==
           Approx(output.vec_gw_data.at(0).f2_turb.value()).epsilon(1e-2));
-  REQUIRE(3.71764571e-25 ==
-          Approx(output.vec_gw_data.at(0).omega_2_turb.value()).epsilon(1e-2));
+  REQUIRE(
+      1.5972511079900284e-25 ==
+      Approx(output.vec_gw_data.at(0).h2omega_2_turb.value()).epsilon(1e-2));
 
   REQUIRE(0 == Approx(output.vec_gw_data.at(0).SNR_col.value()).epsilon(5e-2));
-  REQUIRE(9.681903249e-08 ==
+  REQUIRE(9.15003140408e-08 ==
           Approx(output.vec_gw_data.at(0).SNR_sw.value()).epsilon(5e-2));
-  REQUIRE(1.210536738e-12 ==
+  REQUIRE(1.14472092378e-12 ==
           Approx(output.vec_gw_data.at(0).SNR_turb.value()).epsilon(5e-2));
-  REQUIRE(9.682005317e-08 ==
+  REQUIRE(9.15012791548e-08 ==
           Approx(output.vec_gw_data.at(0).SNR.value()).epsilon(5e-2));
 
   // Check different vwalls
+  // Set alpha to -1 to force proper recalculation of it inside
+  // SetAndCalculateGWParameters
+  trans.ListBounceSolution.at(0).alpha             = -1;
   trans.ListBounceSolution.at(0).UserDefined_vwall = -1;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.374931042806113 ==
+  REQUIRE(0.380424139188 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 
+  trans.ListBounceSolution.at(0).alpha             = -1;
   trans.ListBounceSolution.at(0).UserDefined_vwall = -2;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.5597359442 ==
+  REQUIRE(0.580617831706 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 }
 
@@ -1029,63 +1036,68 @@ TEST_CASE("Checking phase tracking and GW for BP3 (low sample) and not "
 
   auto output = trans.output_store;
 
-  REQUIRE(126.0223716 ==
+  REQUIRE(126.022371971 ==
           Approx(output.vec_trans_data.at(0).crit_temp.value()).epsilon(1e-2));
-  REQUIRE(121.0869527 ==
+  REQUIRE(121.087043695 ==
           Approx(output.vec_trans_data.at(0).nucl_approx_temp.value())
               .epsilon(1e-2));
-  REQUIRE(121.212833 ==
+  REQUIRE(121.214324326 ==
           Approx(output.vec_trans_data.at(0).nucl_temp.value()).epsilon(1e-2));
-  REQUIRE(120.7670659 ==
+  REQUIRE(120.768821105 ==
           Approx(output.vec_trans_data.at(0).perc_temp.value()).epsilon(1e-2));
-  REQUIRE(120.7267244 ==
+  REQUIRE(120.728450915 ==
           Approx(output.vec_trans_data.at(0).compl_temp.value()).epsilon(1e-2));
 
-  REQUIRE(0.0056735067 ==
+  REQUIRE(0.00550814624504 ==
           Approx(output.vec_gw_data.at(0).alpha.value()).epsilon(1e-2));
-  REQUIRE(7658.8931 ==
+  REQUIRE(7695.67606994 ==
           Approx(output.vec_gw_data.at(0).beta_over_H.value()).epsilon(1e-2));
-  REQUIRE(0.0084807773 ==
+  REQUIRE(0.00849483333036 ==
           Approx(output.vec_gw_data.at(0).kappa_sw.value()).epsilon(1e-2));
 
-  REQUIRE(0.01699469177 ==
+  REQUIRE(0.0170282844073 ==
           Approx(output.vec_gw_data.at(0).fb_col.value()).epsilon(1e-2));
   REQUIRE(0. ==
-          Approx(output.vec_gw_data.at(0).omegab_col.value()).epsilon(1e-2));
+          Approx(output.vec_gw_data.at(0).h2omegab_col.value()).epsilon(1e-2));
 
-  REQUIRE(0.007441950626 ==
+  REQUIRE(0.00745408785087 ==
           Approx(output.vec_gw_data.at(0).f1_sw.value()).epsilon(1e-2));
-  REQUIRE(0.04661408636 ==
+  REQUIRE(0.0471667878942 ==
           Approx(output.vec_gw_data.at(0).f2_sw.value()).epsilon(1e-2));
-  REQUIRE(9.481654892e-20 ==
-          Approx(output.vec_gw_data.at(0).omega_2_sw.value()).epsilon(1e-2));
+  REQUIRE(4.1037589016173564e-20 ==
+          Approx(output.vec_gw_data.at(0).h2omega_2_sw.value()).epsilon(1e-2));
 
-  REQUIRE(2.729908945e-05 ==
+  REQUIRE(2.69667207673e-05 ==
           Approx(output.vec_gw_data.at(0).f1_turb.value()).epsilon(1e-2));
-  REQUIRE(0.08186145689 ==
+  REQUIRE(0.0819949663596 ==
           Approx(output.vec_gw_data.at(0).f2_turb.value()).epsilon(1e-2));
-  REQUIRE(3.71764571e-25 ==
-          Approx(output.vec_gw_data.at(0).omega_2_turb.value()).epsilon(1e-2));
+  REQUIRE(
+      1.5924395948922728e-25 ==
+      Approx(output.vec_gw_data.at(0).h2omega_2_turb.value()).epsilon(1e-2));
 
   REQUIRE(0 == Approx(output.vec_gw_data.at(0).SNR_col.value()).epsilon(5e-2));
-  REQUIRE(9.681903249e-08 ==
+  REQUIRE(9.09581393167e-08 ==
           Approx(output.vec_gw_data.at(0).SNR_sw.value()).epsilon(5e-2));
-  REQUIRE(1.210536738e-12 ==
+  REQUIRE(1.13959697383e-12 ==
           Approx(output.vec_gw_data.at(0).SNR_turb.value()).epsilon(5e-2));
-  REQUIRE(9.682005317e-08 ==
+  REQUIRE(9.09590998347e-08 ==
           Approx(output.vec_gw_data.at(0).SNR.value()).epsilon(5e-2));
 
   // Check different vwalls
+  // Set alpha to -1 to force proper recalculation of it inside
+  // SetAndCalculateGWParameters
+  trans.ListBounceSolution.at(0).alpha             = -1;
   trans.ListBounceSolution.at(0).UserDefined_vwall = -1;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.374931042806113 ==
+  REQUIRE(0.380415115098 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 
+  trans.ListBounceSolution.at(0).alpha             = -1;
   trans.ListBounceSolution.at(0).UserDefined_vwall = -2;
   trans.ListBounceSolution.at(0).SetAndCalculateGWParameters(
       TransitionTemperature::Percolation);
-  REQUIRE(0.5597359442 ==
+  REQUIRE(0.580664700495 ==
           Approx(trans.ListBounceSolution.at(0).vwall).epsilon(1e-2));
 }
 
@@ -1136,13 +1148,13 @@ TEST_CASE(
   REQUIRE(not output.vec_gw_data.at(0).kappa_col.has_value());
   REQUIRE(not output.vec_gw_data.at(0).kappa_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).fb_col.has_value());
-  REQUIRE(not output.vec_gw_data.at(0).omegab_col.has_value());
+  REQUIRE(not output.vec_gw_data.at(0).h2omegab_col.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f1_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f2_sw.has_value());
-  REQUIRE(not output.vec_gw_data.at(0).omega_2_sw.has_value());
+  REQUIRE(not output.vec_gw_data.at(0).h2omega_2_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f1_turb.has_value());
   REQUIRE(not output.vec_gw_data.at(0).f2_turb.has_value());
-  REQUIRE(not output.vec_gw_data.at(0).omega_2_turb.has_value());
+  REQUIRE(not output.vec_gw_data.at(0).h2omega_2_turb.has_value());
   REQUIRE(not output.vec_gw_data.at(0).SNR_col.has_value());
   REQUIRE(not output.vec_gw_data.at(0).SNR_sw.has_value());
   REQUIRE(not output.vec_gw_data.at(0).SNR_turb.has_value());
@@ -2855,4 +2867,83 @@ TEST_CASE("Test kappa_sw", "[gw]")
                  -0.000096061} /* negative kappa is unphysical */);
   REQUIRE(BSMPT::kappa::kappaNuMuModel(cs2b, cs2s, al, vw) ==
           Approx(expected).epsilon(1e-3));
+}
+
+TEST_CASE("Check percolation temperature for point of issue #173", "[gw]")
+{
+  const std::vector<double> example_point_R2HDM_machine_dep_temp_failure{
+      /* lambda_1 = */ 1.939019085953685,
+      /* lambda_2 = */ 2.368448996569993,
+      /* lambda_3 = */ 7.6135777364421875,
+      /* lambda_4 = */ -5.450539233086667,
+      /* lambda_5 = */ -3.9705820766209374,
+      /* m_{12}^2 = */ 162500.89873320065,
+      /* tan(beta) = */ 1.2197198842183743,
+      /* Yukawa Type = */ 1};
+
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
+  modelPointer->initModel(example_point_R2HDM_machine_dep_temp_failure);
+
+  user_input input;
+  input.modelPointer        = modelPointer;
+  input.gw_calculation      = true;
+  input.T_high              = 1000;
+  input.maxpathintegrations = 2;
+
+  std::shared_ptr<MinimumTracer> mintracer(new MinimumTracer(
+      input.modelPointer, input.which_minimizer, input.use_multithreading));
+
+  Vacuum vac(input.T_low,
+             input.T_high,
+             mintracer,
+             input.modelPointer,
+             input.multistepmode,
+             input.num_points);
+
+  std::vector<std::vector<double>> bounce_data = {
+      {286.1572195, 10547.00634, 36.85738336},
+      {290.727222, 12461.72633, 42.86398173},
+      {295.2972246, 14854.48174, 50.30349256},
+      {299.8672271, 17919.26815, 59.75734101},
+      {304.4372297, 21957.20037, 72.12390019},
+      {309.0072323, 27464.88637, 88.88104713},
+      {311.2922335, 31016.16242, 99.6368013},
+      {313.5772348, 35303.587, 112.5833864},
+      {314.1484851, 36515.30442, 116.2358125},
+      {314.4341103, 37144.78597, 118.132177},
+      {314.7197355, 37790.94374, 120.0780869},
+      {315.8622361, 40554.3312, 128.3924653},
+      {318.1472374, 47091.77425, 148.0188061},
+      {319.6705716, 52390.61439, 163.8893882},
+      {321.1939058, 58663.86319, 182.643139},
+      {321.9555728, 62243.9951, 193.331007},
+      {322.7172399, 66170.66273, 205.0422306},
+      {327.2872425, 100435.2359, 306.8718326},
+      {331.8572451, 172624.5267, 520.177062},
+      {336.4272476, 373686.8218, 1110.750763},
+      {340.9972502, 1429580.799, 4192.352867}};
+
+  BounceSolution bouncesolution(modelPointer);
+  bouncesolution.MinTracer  = mintracer;
+  bouncesolution.phase_pair = vac.CoexPhasesList.at(1);
+  bouncesolution.Tc         = bouncesolution.phase_pair.crit_temp;
+  bouncesolution.Tm         = bouncesolution.phase_pair.T_low;
+  bouncesolution.InitializeGstarProfile();
+
+  for (const auto &bounce : bounce_data)
+  {
+    BounceActionInt bounceactionint;
+    bounceactionint.T      = bounce.at(0);
+    bounceactionint.Action = bounce.at(1);
+    bouncesolution.SolutionList.push_back(bounceactionint);
+  }
+
+  bouncesolution.status_perc = StatusTemperature::Success;
+  bouncesolution.SetBounceSol();
+  bouncesolution.CalculatePercolationTemp();
+
+  REQUIRE(314.566 == Approx(bouncesolution.Tperc).epsilon(1e-2));
 }

@@ -1,0 +1,121 @@
+// SPDX-FileCopyrightText: 2026 Lisa Biermann, Margarete Mühlleitner, Rui
+// Santos, João Viana
+//
+// SPDX-License-Identifier: GPL-3.0-or-later
+#include "RXSM.h"
+Compare_RXSM::Compare_RXSM()
+{
+  std::size_t NHiggs = 5;
+  CheckTripleTree =
+      Matrix3D{NHiggs, Matrix2D{NHiggs, std::vector<double>(NHiggs, 0)}};
+  CheckTripleCW =
+      Matrix3D{NHiggs, Matrix2D{NHiggs, std::vector<double>(NHiggs, 0)}};
+  CheckTripleCT =
+      Matrix3D{NHiggs, Matrix2D{NHiggs, std::vector<double>(NHiggs, 0)}};
+  EWPTPerSetting[4].Tc = 159.485;
+  EWPTPerSetting[4].vc = 21.9152;
+  EWPTPerSetting[4].EWMinimum.push_back(-21.9152);
+  EWPTPerSetting[4].EWMinimum.push_back(740.715);
+  EWPTPerSetting[1].Tc = 159.485;
+  EWPTPerSetting[1].vc = 21.9154;
+  EWPTPerSetting[1].EWMinimum.push_back(-21.9154);
+  EWPTPerSetting[1].EWMinimum.push_back(-740.715);
+  EWPTPerSetting[5].Tc = 159.485;
+  EWPTPerSetting[5].vc = 21.9152;
+  EWPTPerSetting[5].EWMinimum.push_back(-21.9152);
+  EWPTPerSetting[5].EWMinimum.push_back(740.715);
+  EWPTPerSetting[2].Tc = 159.485;
+  EWPTPerSetting[2].vc = 21.9154;
+  EWPTPerSetting[2].EWMinimum.push_back(-21.9154);
+  EWPTPerSetting[2].EWMinimum.push_back(-740.715);
+  EWPTPerSetting[6].Tc = 159.485;
+  EWPTPerSetting[6].vc = 21.9152;
+  EWPTPerSetting[6].EWMinimum.push_back(-21.9152);
+  EWPTPerSetting[6].EWMinimum.push_back(740.715);
+  EWPTPerSetting[3].Tc = 159.485;
+  EWPTPerSetting[3].vc = 21.9154;
+  EWPTPerSetting[3].EWMinimum.push_back(-21.9154);
+  EWPTPerSetting[3].EWMinimum.push_back(-740.715);
+  EWPTPerSetting[7].Tc = 159.485;
+  EWPTPerSetting[7].vc = 21.9152;
+  EWPTPerSetting[7].EWMinimum.push_back(-21.9152);
+  EWPTPerSetting[7].EWMinimum.push_back(740.715);
+  CheckTripleTree.at(0).at(0).at(3) = 63.165;
+  CheckTripleCT.at(0).at(0).at(3)   = -5.17546;
+  CheckTripleCW.at(0).at(0).at(3)   = 5.17546;
+  CheckTripleTree.at(0).at(0).at(4) = -29.6095;
+  CheckTripleCT.at(0).at(0).at(4)   = 0.493229;
+  CheckTripleCW.at(0).at(0).at(4)   = -0.493229;
+  CheckTripleTree.at(0).at(3).at(0) = 63.165;
+  CheckTripleCT.at(0).at(3).at(0)   = -5.17546;
+  CheckTripleCW.at(0).at(3).at(0)   = 5.17546;
+  CheckTripleTree.at(0).at(4).at(0) = -29.6095;
+  CheckTripleCT.at(0).at(4).at(0)   = 0.493229;
+  CheckTripleCW.at(0).at(4).at(0)   = -0.493229;
+  CheckTripleTree.at(1).at(1).at(3) = 63.165;
+  CheckTripleCT.at(1).at(1).at(3)   = -5.17546;
+  CheckTripleCW.at(1).at(1).at(3)   = 5.17546;
+  CheckTripleTree.at(1).at(1).at(4) = -29.6095;
+  CheckTripleCT.at(1).at(1).at(4)   = 0.493229;
+  CheckTripleCW.at(1).at(1).at(4)   = -0.493229;
+  CheckTripleTree.at(1).at(3).at(1) = 63.165;
+  CheckTripleCT.at(1).at(3).at(1)   = -5.17546;
+  CheckTripleCW.at(1).at(3).at(1)   = 5.17546;
+  CheckTripleTree.at(1).at(4).at(1) = -29.6095;
+  CheckTripleCT.at(1).at(4).at(1)   = 0.493229;
+  CheckTripleCW.at(1).at(4).at(1)   = -0.493229;
+  CheckTripleTree.at(2).at(2).at(3) = 63.165;
+  CheckTripleCT.at(2).at(2).at(3)   = -5.17546;
+  CheckTripleCW.at(2).at(2).at(3)   = 5.17546;
+  CheckTripleTree.at(2).at(2).at(4) = -29.6095;
+  CheckTripleCT.at(2).at(2).at(4)   = 0.493229;
+  CheckTripleCW.at(2).at(2).at(4)   = -0.493229;
+  CheckTripleTree.at(2).at(3).at(2) = 63.165;
+  CheckTripleCT.at(2).at(3).at(2)   = -5.17546;
+  CheckTripleCW.at(2).at(3).at(2)   = 5.17546;
+  CheckTripleTree.at(2).at(4).at(2) = -29.6095;
+  CheckTripleCT.at(2).at(4).at(2)   = 0.493229;
+  CheckTripleCW.at(2).at(4).at(2)   = -0.493229;
+  CheckTripleTree.at(3).at(0).at(0) = 63.165;
+  CheckTripleCT.at(3).at(0).at(0)   = -5.17546;
+  CheckTripleCW.at(3).at(0).at(0)   = 5.17546;
+  CheckTripleTree.at(3).at(1).at(1) = 63.165;
+  CheckTripleCT.at(3).at(1).at(1)   = -5.17546;
+  CheckTripleCW.at(3).at(1).at(1)   = 5.17546;
+  CheckTripleTree.at(3).at(2).at(2) = 63.165;
+  CheckTripleCT.at(3).at(2).at(2)   = -5.17546;
+  CheckTripleCW.at(3).at(2).at(2)   = 5.17546;
+  CheckTripleTree.at(3).at(3).at(3) = 187.283;
+  CheckTripleCT.at(3).at(3).at(3)   = -15.3394;
+  CheckTripleCW.at(3).at(3).at(3)   = -0.18502;
+  CheckTripleTree.at(3).at(3).at(4) = -41.5059;
+  CheckTripleCT.at(3).at(3).at(4)   = 1.61306;
+  CheckTripleCW.at(3).at(3).at(4)   = -0.0497354;
+  CheckTripleTree.at(3).at(4).at(3) = -41.5059;
+  CheckTripleCT.at(3).at(4).at(3)   = 1.61306;
+  CheckTripleCW.at(3).at(4).at(3)   = -0.0497354;
+  CheckTripleTree.at(3).at(4).at(4) = 28.6816;
+  CheckTripleCT.at(3).at(4).at(4)   = -0.202281;
+  CheckTripleCW.at(3).at(4).at(4)   = 0.142148;
+  CheckTripleTree.at(4).at(0).at(0) = -29.6095;
+  CheckTripleCT.at(4).at(0).at(0)   = 0.493229;
+  CheckTripleCW.at(4).at(0).at(0)   = -0.493229;
+  CheckTripleTree.at(4).at(1).at(1) = -29.6095;
+  CheckTripleCT.at(4).at(1).at(1)   = 0.493229;
+  CheckTripleCW.at(4).at(1).at(1)   = -0.493229;
+  CheckTripleTree.at(4).at(2).at(2) = -29.6095;
+  CheckTripleCT.at(4).at(2).at(2)   = 0.493229;
+  CheckTripleCW.at(4).at(2).at(2)   = -0.493229;
+  CheckTripleTree.at(4).at(3).at(3) = -41.5059;
+  CheckTripleCT.at(4).at(3).at(3)   = 1.61306;
+  CheckTripleCW.at(4).at(3).at(3)   = -0.0497354;
+  CheckTripleTree.at(4).at(3).at(4) = 28.6816;
+  CheckTripleCT.at(4).at(3).at(4)   = -0.202281;
+  CheckTripleCW.at(4).at(3).at(4)   = 0.142148;
+  CheckTripleTree.at(4).at(4).at(3) = 28.6816;
+  CheckTripleCT.at(4).at(4).at(3)   = -0.202281;
+  CheckTripleCW.at(4).at(4).at(3)   = 0.142148;
+  CheckTripleTree.at(4).at(4).at(4) = 258.696;
+  CheckTripleCT.at(4).at(4).at(4)   = -0.0350589;
+  CheckTripleCW.at(4).at(4).at(4)   = 0.900057;
+}

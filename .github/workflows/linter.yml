@@ -16,7 +16,7 @@ jobs:
   
     steps:          
       - name: Checkout remote branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
@@ -25,7 +25,7 @@ jobs:
         if: env.LocalCommit == 'true'
 
       - name: Checkout remote branch
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.head_ref }}
@@ -39,7 +39,7 @@ jobs:
 
       - name: Format CMake files
         id: cmake-format
-        uses: PuneetMatharu/cmake-format-lint-action@v1.0.6
+        uses: PuneetMatharu/cmake-format-lint-action@v1.0.8
         with:
           args: --config-files .cmake-format.py --in-place
 

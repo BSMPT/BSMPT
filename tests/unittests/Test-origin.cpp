@@ -18,6 +18,9 @@ using Approx = Catch::Approx;
 #include <BSMPT/models/IncludeAllModels.h>
 #include <BSMPT/models/modeltests/ModelTestfunctions.h>
 #include <BSMPT/utility/Logger.h>
+#include <BSMPT/utility/NumericalDerivatives.h>
+#include <BSMPT/utility/utility.h>
+
 namespace
 {
 
@@ -149,4 +152,183 @@ TEST_CASE("Check potential int -> Order cast", "[origin]")
               Approx(modelPointer->VEff(vev, T, diff, Order::OneLoop))
                   .margin(1e-8));
     }
+}
+
+TEST_CASE("Check of analytical T-derivative of Veff (CxSM example point)",
+          "[origin]")
+{
+  const std::vector<double> example_point_CXSM{/* v = */ 245.34120667410863,
+                                               /* vs = */ 0,
+                                               /* va = */ 0,
+                                               /* msq = */ -15650,
+                                               /* lambda = */ 0.52,
+                                               /* delta2 = */ 0.55,
+                                               /* b2 = */ -8859,
+                                               /* d2 = */ 0.5,
+                                               /* Reb1 = */ 0,
+                                               /* Imb1 = */ 0,
+                                               /* Rea1 = */ 0,
+                                               /* Ima1 = */ 0};
+
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::CXSM, SMConstants);
+  modelPointer->initModel(example_point_CXSM);
+
+  std::vector<double> T_values{20., 50., 100., 200., 500., 1000.};
+  std::vector<std::vector<double>> phi_values{{0., 0., 0.},
+                                              {100., 0., 0.},
+                                              {0., 100., 0.},
+                                              {0., 0., 100.},
+                                              {100., 200., 0.},
+                                              {50., 100., 200.}};
+
+  const double eps = 1e-3;
+  std::function<double(std::vector<double>, double)> dTV_num =
+      [=](auto const &vev, auto const &T)
+  {
+    return NablaNumerical(
+               {T},
+               [&](std::vector<double> Tv)
+               {
+                 // Potential wrapper
+                 return modelPointer->VEff(modelPointer->MinimizeOrderVEV(vev),
+                                           Tv.at(0));
+               },
+               eps)
+        .at(0);
+  };
+
+  for (double T_val : T_values)
+  {
+    for (auto &phi_val : phi_values)
+    {
+      double x_num = dTV_num(phi_val, T_val);
+      double x_an  = modelPointer->VEff(
+          modelPointer->MinimizeOrderVEV(phi_val), T_val, -1);
+      REQUIRE(x_num == Approx(x_an).epsilon(5e-3));
+    }
+  }
+}
+
+TEST_CASE("Check of analytical T-derivative of Veff (R2HDM example point)",
+          "[origin]")
+{
+  const std::vector<double> example_point_R2HDM{
+      /* lambda_1 = */ 6.9309437685026,
+      /* lambda_2 = */ 0.26305141403285998,
+      /* lambda_3 = */ 1.2865950045595,
+      /* lambda_4 = */ 4.7721306931875001,
+      /* lambda_5 = */ 4.7275722046239004,
+      /* m_{12}^2 = */ 18933.440789693999,
+      /* tan(beta) = */ 16.577896825227999,
+      /* Yukawa Type = */ 1};
+
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
+  modelPointer->initModel(example_point_R2HDM);
+
+  std::vector<double> T_values{20., 50., 100., 200., 500., 1000.};
+  std::vector<std::vector<double>> phi_values{{0., 0., 0., 0.},
+                                              {100., 0., 0., 0.},
+                                              {0., 100., 0., 0.},
+                                              {0., 0., 100., 0.},
+                                              {0., 50., 200., 0.},
+                                              {50., 100., 200., 10.}};
+
+  const double eps = 1e-3;
+  std::function<double(std::vector<double>, double)> dTV_num =
+      [=](auto const &vev, auto const &T)
+  {
+    return NablaNumerical(
+               {T},
+               [&](std::vector<double> Tv)
+               {
+                 // Potential wrapper
+                 return modelPointer->VEff(modelPointer->MinimizeOrderVEV(vev),
+                                           Tv.at(0));
+               },
+               eps)
+        .at(0);
+  };
+
+  for (double T_val : T_values)
+  {
+    for (auto &phi_val : phi_values)
+    {
+      double x_num = dTV_num(phi_val, T_val);
+      double x_an  = modelPointer->VEff(
+          modelPointer->MinimizeOrderVEV(phi_val), T_val, -1);
+      REQUIRE(x_num == Approx(x_an).epsilon(5e-3));
+    }
+  }
+}
+
+TEST_CASE("Check of analytical field-derivative of Veff (R2HDM example point)",
+          "[origin]")
+{
+  const std::vector<double> example_point_R2HDM{
+      /* lambda_1 = */ 6.9309437685026,
+      /* lambda_2 = */ 0.26305141403285998,
+      /* lambda_3 = */ 1.2865950045595,
+      /* lambda_4 = */ 4.7721306931875001,
+      /* lambda_5 = */ 4.7275722046239004,
+      /* m_{12}^2 = */ 18933.440789693999,
+      /* tan(beta) = */ 16.577896825227999,
+      /* Yukawa Type = */ 1};
+
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::R2HDM, SMConstants);
+  modelPointer->initModel(example_point_R2HDM);
+
+  std::vector<double> T_values{20., 50., 100., 200., 500., 1000.};
+  std::vector<std::vector<double>> phi_values{{0., 0., 0., 0.},
+                                              {100., 0., 0., 0.},
+                                              {0., 100., 0., 0.},
+                                              {0., 0., 100., 0.},
+                                              {0., 50., 200., 0.},
+                                              {50., 100., 200., 10.}};
+
+  const double eps = 1e-2;
+
+  std::function<double(std::vector<double>)> V;
+  std::function<std::vector<double>(std::vector<double>)> dV, dVanalytical;
+
+  for (double T_val : T_values)
+  {
+    for (auto &phi_val : phi_values)
+    {
+      V = [&](std::vector<double> vev)
+      {
+        std::vector<double> res = modelPointer->MinimizeOrderVEV(vev);
+        return modelPointer->VEff(res, T_val);
+      };
+      dV = [=](auto const &arg) { return NablaNumerical(arg, V, eps); };
+      dVanalytical = [&](std::vector<double> vev)
+      {
+        std::vector<double> res = modelPointer->MinimizeOrderVEV(vev);
+        std::vector<double> r;
+        for (const auto &i : modelPointer->Get_VevOrder())
+          r.push_back(modelPointer->VEff(res, T_val, i + 1));
+
+        return r;
+      };
+
+      double err                        = 0;
+      std::vector<double> dV_num        = dV(phi_val);
+      std::vector<double> dV_analytical = dVanalytical(phi_val);
+      for (size_t i = 0; i < dV_num.size(); i++)
+        err += std::abs(0.5 * (dV_num.at(i) - dV_analytical.at(i)) /
+                        (1 + dV_num.at(i) + dV_analytical.at(i)));
+
+      err /= dV_num.size();
+
+      REQUIRE(err == Approx(0).margin(5e-2));
+    }
+  }
 }

@@ -4,7 +4,7 @@ SPDX-FileCopyrightText: 2021 Philipp Basler, Margarete Mühlleitner and Jonas M�
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-Program: BSMPT version 3.1.14
+Program: BSMPT version 3.3.1
 
 Released by: Philipp Basler, Lisa Biermann, Margarete Mühlleitner, Jonas Müller, Rui Santos and João Viana
 
@@ -30,7 +30,7 @@ The code also allows to derive the loop-corrected trilinear Higgs self-couplings
 We apply an 'on-shell' renormalization scheme in the sense
 that the loop-corrected masses and mixing angles are required to be
 equal to their tree-level input values. This allows for efficient
-scans in the parameter space of the models. 
+scans in the parameter space of the models.
 
 The models implemented so far are
 
@@ -40,6 +40,7 @@ The models implemented so far are
   - Next-to-Minimal 2HDM (N2HDM)
   - CP in the Dark ([arXiv 1807.10322](https://arxiv.org/abs/1807.10322), [arXiv 2204.13425](https://arxiv.org/abs/2204.13425))
   - Complex Singlet Extension (CxSM)
+  - Real Singlet Extension (RxSM) ([arXiv 1512.05355](https://arxiv.org/abs/1512.05355))
 
 The code is structured such that users can add their own models.
 

@@ -13,6 +13,7 @@
 #include <BSMPT/models/ClassPotentialN2HDM.h>       // for Class_Potential_N2HDM
 #include <BSMPT/models/ClassPotentialOrigin.h> // for Class_Potential_Origin
 #include <BSMPT/models/ClassPotentialR2HDM.h>  // for Class_Potential_R2HDM
+#include <BSMPT/models/ClassPotentialRxSM.h>   // for Class_Potential_RxSM
 #include <BSMPT/models/IncludeAllModels.h>
 #include <BSMPT/models/modeltests/ModelTestfunctions.h>
 #include <BSMPT/utility/Logger.h>
@@ -911,5 +912,141 @@ TEST_CASE("Checking sign convention of rotation matrix for R2HDM",
     Check(HiggsRotFixed[0][1], SinBeta);
     Check(HiggsRotFixed[1][0], -SinBeta);
     Check(HiggsRotFixed[1][1], CosBeta);
+  }
+}
+
+TEST_CASE("Checking sign convention of rotation matrix for RxSM",
+          "[signrotationmatrix]")
+{
+  using namespace BSMPT;
+  const auto SMConstants = GetSMConstants();
+  std::shared_ptr<BSMPT::Class_Potential_Origin> modelPointer =
+      ModelID::FChoose(ModelID::ModelIDs::RXSM, SMConstants);
+  auto nPar = modelPointer->get_nPar();
+
+  std::ifstream testData(
+      TEST_DATA_PATH
+      "/signrotationmatrix_data/rxsm_unittest_signrotationmatrix.tsv");
+
+  auto Check = [](auto result, auto expected)
+  {
+    if (std::abs(expected) > 1e-4)
+    {
+      REQUIRE(result == Approx(expected).epsilon(1e-4));
+    }
+    else
+    {
+      REQUIRE(std::abs(result) < 1e-4);
+    }
+  };
+
+  std::string line;
+  std::getline(testData, line); // header, ignore
+
+  while (std::getline(testData, line))
+  {
+    // Read in test data and parse properly: first the input parameters, then
+    // the rotation matrix elements
+    std::stringstream ss(line);
+    std::vector<double> parameter_point;
+    while (!ss.eof() && parameter_point.size() < nPar - 1)
+    {
+      double x;
+      ss >> x;
+      parameter_point.push_back(x);
+    }
+
+    double mH1, mH2;
+    ss >> mH1 >> mH2;
+    if (std::abs(mH1 - SMConstants.C_MassSMHiggs) <
+        std::abs(mH2 - SMConstants.C_MassSMHiggs))
+      parameter_point.push_back(mH2);
+    else
+      parameter_point.push_back(mH1);
+
+    double RH11, RH21, angle;
+    ss >> RH11 >> RH21 >> angle;
+
+    std::vector<double> rotation_matrix_angles;
+    rotation_matrix_angles.push_back(RH11);
+    rotation_matrix_angles.push_back(-RH21);
+    rotation_matrix_angles.push_back(RH21);
+    rotation_matrix_angles.push_back(RH11);
+    rotation_matrix_angles.push_back(angle);
+
+    modelPointer->initModel(parameter_point);
+
+    // Since we need to access model-specific variables, cast modelPointer to
+    // the actual child class
+    auto modelSpecificPointer =
+        std::static_pointer_cast<BSMPT::Models::Class_Potential_RxSM>(
+            modelPointer);
+
+    std::vector<double> alphas;
+    alphas.push_back(modelSpecificPointer->alpha);
+
+    // Define some abbreviations
+    auto pos_h = modelSpecificPointer->pos_h;
+    auto pos_H = modelSpecificPointer->pos_H;
+
+    auto pos_zeta1 = modelSpecificPointer->pos_zeta1;
+    auto pos_zetaS = modelSpecificPointer->pos_zetaS;
+
+    const std::size_t n         = 2;
+    const std::size_t numAngles = n * (n - 1) / 2;
+    // Ensure that the test data is in the correct format, i.e. first all
+    // rotation matrix elements, then n*(n - 1)/2 angles
+    REQUIRE(rotation_matrix_angles.size() == n * n + numAngles);
+
+    // Construct the neutral 3x3 mixing matrix
+    std::vector<std::vector<double>> HiggsRotNeutralFixed(
+        n, std::vector<double>(n));
+    HiggsRotNeutralFixed[0][0] =
+        modelPointer->get_HiggsRotationMatrixEnsuredConvention(pos_h,
+                                                               pos_zeta1);
+    HiggsRotNeutralFixed[0][1] =
+        modelPointer->get_HiggsRotationMatrixEnsuredConvention(pos_h,
+                                                               pos_zetaS);
+
+    HiggsRotNeutralFixed[1][0] =
+        modelPointer->get_HiggsRotationMatrixEnsuredConvention(pos_H,
+                                                               pos_zeta1);
+    HiggsRotNeutralFixed[1][1] =
+        modelPointer->get_HiggsRotationMatrixEnsuredConvention(pos_H,
+                                                               pos_zetaS);
+
+    for (std::size_t i = 0; i < n; ++i)
+    {
+      for (std::size_t j = 0; j < n; ++j)
+      {
+        auto Rij_EnsuredConvention = HiggsRotNeutralFixed[i][j];
+        auto expected              = rotation_matrix_angles[i * n + j];
+        Check(Rij_EnsuredConvention, expected);
+      }
+    }
+
+    // Do not test the angles for RxSM, as a1, a2, a3 from the data input is
+    // potentially for a
+    //   different mass ordering, as they are input values for ScannerS
+
+    // Do the checks also for the remaining elements (Goldstones)
+    auto pos_Gp = modelSpecificPointer->pos_Gp;
+    auto pos_Gm = modelSpecificPointer->pos_Gm;
+    auto pos_G0 = modelSpecificPointer->pos_G0;
+
+    auto pos_rho1 = modelSpecificPointer->pos_rho1;
+    auto pos_eta1 = modelSpecificPointer->pos_eta1;
+    auto pos_psi1 = modelSpecificPointer->pos_psi1;
+
+    auto GpFixed = modelPointer->get_HiggsRotationMatrixEnsuredConvention(
+        pos_Gp, pos_rho1);
+    auto GmFixed = modelPointer->get_HiggsRotationMatrixEnsuredConvention(
+        pos_Gm, pos_eta1);
+    auto G0Fixed = modelPointer->get_HiggsRotationMatrixEnsuredConvention(
+        pos_G0, pos_psi1);
+
+    Check(GpFixed, 1.);
+    Check(GmFixed, 1.);
+    Check(G0Fixed, 1.);
   }
 }

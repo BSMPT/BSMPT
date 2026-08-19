@@ -3,9 +3,25 @@
 #
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-set(header C2HDM.h R2HDM.h N2HDM.h CPINTHEDARK.h CXSM.h SM.h)
+set(header
+    C2HDM.h
+    R2HDM.h
+    N2HDM.h
+    CPINTHEDARK.h
+    CXSM.h
+    RXSM.h
+    RXSM_noVS.h
+    SM.h)
 
-set(src C2HDM.cpp R2HDM.cpp N2HDM.cpp CPINTHEDARK.cpp CXSM.cpp SM.cpp)
+set(src
+    C2HDM.cpp
+    R2HDM.cpp
+    N2HDM.cpp
+    CPINTHEDARK.cpp
+    CXSM.cpp
+    RXSM.cpp
+    RXSM_noVS.cpp
+    SM.cpp)
 
 add_library(TestCompares ${header} ${src})
 target_compile_features(TestCompares PUBLIC cxx_std_17)
