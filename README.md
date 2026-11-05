@@ -174,6 +174,8 @@ Calculate the baryon asymmetry for a generic model, assuming a fermionic structu
 ### CalcBAUBench
 Calculate the baryon asymmetry for the benchmark model that assumes a kink-like VEV profile.
 
+The following executables were released with BSMPTv1, BSMPTv2 and BSMPTv3:
+
 ### Test
 Test checks the model implementation for a provided parameter point. Some of the performed tests are e.g.: matching fermion masses and tree-level electroweak minimum with SM, tadpole relations, matching scalar masses between tree-level and NLO and symmetries of the coupling-tensors. The number of passed/failed tests is reported.
 
