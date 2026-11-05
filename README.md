@@ -4,9 +4,9 @@ SPDX-FileCopyrightText: 2021 Philipp Basler, Margarete M체hlleitner and Jonas M�
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-Program: BSMPT version 3.3.1
+Program: BSMPT version 4.0.0
 
-Released by: Philipp Basler, Lisa Biermann, Margarete M체hlleitner, Jonas M체ller, Rui Santos and Jo찾o Viana
+Released by: Philipp Basler, Lisa Biermann, Margarete M체hlleitner, Jonas M체ller, Johann Plotnikov, Rui Santos and Jo찾o Viana
 
 [![GitHub Discussions](https://img.shields.io/badge/%20GitHub-%20Discussions-gray.svg?longCache=true&logo=github&colorB=purple)](https://github.com/BSMPT/BSMPT/discussions)
 [![Unit tests](https://github.com/BSMPT/BSMPT/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/BSMPT/BSMPT/actions/workflows/test.yml)
@@ -18,14 +18,14 @@ Released by: Philipp Basler, Lisa Biermann, Margarete M체hlleitner, Jonas M체lle
 [![Latest release](https://badgen.net/github/release/BSMPT/bsmpt)](https://github.com/BSMPT/bsmpt/releases)
 
 
-Manual: version 3.0
+Manual: version 4.0
 
 BSMPT - Beyond the Standard Model Phase Transitions:
 
 The C++ program package BSMPT allows for the detailed study of (multi-step) phase transitions between temperature-dependent minima in the one-loop daisy-resummed finite-temperature effective potential.
 
 The program tracks temperature-dependent minima, calculates the bounce solution, the characteristic temperatures and gravitational wave signals of first-order phase transitions.
-The code also allows to derive the loop-corrected trilinear Higgs self-couplings and provides the computation of the baryon asymmetry for the CP-violating 2-Higgs Doublet Model (C2HDM).
+The code also allows to derive the loop-corrected trilinear Higgs self-couplings and provides the computation of the baryon asymmetry.
 
 We apply an 'on-shell' renormalization scheme in the sense
 that the loop-corrected masses and mixing angles are required to be
@@ -87,7 +87,6 @@ BSMPT uses cmake and [conan 2](https://conan.io/) for dependencies. The used dep
 2. [Eigen3](https://eigen.tuxfamily.org/index.php?title=Main_Page)  
 3. [libcmaes](https://github.com/CMA-ES/libcmaes): Additionally to GSL you should either use libcmaes or NLopt. For more details on the libcmaes installation, e.g. possible dependencies, visit their [wiki](https://github.com/CMA-ES/libcmaes/wiki). If you don't want to install or use it, you can set `--options UseLibCMAES=False` when using the detailed build, as described below.
 4. [NLopt](https://nlopt.readthedocs.io/en/latest/): If you do not want to use NLopt, you can set `--options UseNLopt=False` when using the detailed build, as described below.
-5. [Boost](https://www.boost.org/) : This is optional and only required for the Baryogenesis calculations. In order to compile the Baryogenesis calculation, set `--options CompileBaryo=True` when using the detailed build, as described below.
 
 
 ### build - detailed
@@ -161,29 +160,21 @@ Also contact us if you have a custom model for BSMPT v1.x and you have trouble c
 ## Executables
 BSMPT provides multiple executables. Here we give a quick overview of them. 
 Every executable can be called with the `--help` option to see how it can be run and to get an overview of all its required and optional arguments.
-Also, consult the manuals ([BSMPTv1](https://arxiv.org/abs/1803.02846), [BSMPTv2](https://arxiv.org/abs/2007.01725), [BSMPTv3](https://arxiv.org/abs/24XX.XXXXX])) for more details on the executables and their input parameters.
+Also, consult the manuals ([BSMPTv1](https://arxiv.org/abs/1803.02846), [BSMPTv2](https://arxiv.org/abs/2007.01725), [BSMPTv3](https://arxiv.org/abs/24XX.XXXXX])), [BSMPVv3](https://arxiv.org/abs/2404.19037) for more details on the executables and their input parameters.
 
 Note, that every executable has the option to set the `--json=/path/to/your/file.json` which contains a json string with the parameters you can set through the CLI. This can be useful if you want to store the parameters you used for a given call. Please beware that all paths in the json file are considered relative to the current working directory and not to the location of the json file. Examples can be found in `example/JSON`. If you want to be sure to have the correct output file we recommend using absolute paths.
 
 
-In BSMPTv3, the following four executables are added:
+In BSMPTv4, the following two executables are added:
 
 
-### MinimaTracer
-MinimaTracer tracks temperature-dependent local minima in a user-defined temperature interval.
+### CalcBAU
+Calculate the baryon asymmetry for a generic model, assuming a fermionic structure similar to that of the SM.
 
-### CalcTemps
-CalcTemps identifies regions of coexisting minima, calculates the bounce solutions and characteristic temperature scales (critical, nucleation, percolation and completion temperature) of first-order phase transitions. Based on that, we report a transition history for the point.
+### CalcBAUBench
+Calculate the baryon asymmetry for the benchmark model that assumes a kink-like VEV profile.
 
-### CalcGW
-CalcGW expands CalcTemps by the additional calculation of the gravitational waves spectra sourced by first-order phase transitions.
-
-### PotPlotter
-PotPlotter calculates user-defined data grids that can be used for the visualization of multi-dimensional potential contours.
-
-
-The following executables were released with BSMPTv1 and BSMPTv2:
-
+The following executables were released with BSMPTv1, BSMPTv2 and BSMPTv3:
 
 ### Test
 Test checks the model implementation for a provided parameter point. Some of the performed tests are e.g.: matching fermion masses and tree-level electroweak minimum with SM, tadpole relations, matching scalar masses between tree-level and NLO and symmetries of the coupling-tensors. The number of passed/failed tests is reported.
@@ -203,19 +194,18 @@ VEVEVO calculates the evolution of the global minimum of a given point in a user
 ### TripleHiggsCouplingNLO
 TripleHiggsCouplingNLO calculates the trilinear Higgs self-couplings at NLO at zero temperature.
 
-### CalculateEWBG
-CalculateEWBG calculates the difference between baryons and anti-baryons
-normalized to the photon density generated through the EWPT.
-Please beware that this is only tested for the C2HDM so far and the general
-implementation is future work.
+### MinimaTracer
+MinimaTracer tracks temperature-dependent local minima in a user-defined temperature interval.
 
-### PlotEWBG_vw
-PlotEWBG_vw varies the wall velocity of a given parameter point and
-calculates the baryon asymmetry for each velocity.
+### CalcTemps
+CalcTemps identifies regions of coexisting minima, calculates the bounce solutions and characteristic temperature scales (critical, nucleation, percolation and completion temperature) of first-order phase transitions. Based on that, we report a transition history for the point.
 
-### PlotEWBG_nL
-PlotEWBG_nL calculates the left-handed fermion density in front of the
-wall as a function of the distance to the bubble wall.
+### CalcGW
+CalcGW expands CalcTemps by the additional calculation of the gravitational waves spectra sourced by first-order phase transitions.
+
+### PotPlotter
+PotPlotter calculates user-defined data grids that can be used for the visualization of multi-dimensional potential contours.
+
 
 
 
