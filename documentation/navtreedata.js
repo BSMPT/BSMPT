@@ -124,15 +124,15 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "BSMPT_8cpp.html",
-"NegativeBosonSpline_8cpp.html#a062ab089c6d9fefd5a4799a23a446b9a",
-"classBSMPT_1_1BounceActionInt.html#a1d402c0928fdea994ead22d1bffd1c87",
-"classBSMPT_1_1BounceSolution.html#a9ac9a3413c0c0a4679ab188c98e56937",
-"classBSMPT_1_1Class__Potential__Origin.html#a6832879413039f6fb0d89b0ee912abf2",
-"classBSMPT_1_1MinimumTracer.html#a377bcf8f8e330845f725eae4b601072f",
-"classBSMPT_1_1parser.html#a7d79d3ebf7ab035e0fa9635213856f58",
-"md_Changelog.html#autotoc_md53",
-"structBSMPT_1_1ISMConstants.html#a8ac415c1401199721b2741a55e82dc9c"
+"classBSMPT_1_1Baryo_1_1transport__equations.html#a32af98f9968dd5c3c2c0dcead5ede1bf",
+"classBSMPT_1_1BounceSolution.html#a83e68c3b25765a61940129937d8960f3",
+"classBSMPT_1_1Class__Potential__Origin.html#a5551f2b0b413b28c26f0385414898006",
+"classBSMPT_1_1MinimumTracer.html",
+"classBSMPT_1_1parser.html#a1e2d2aeefdba5a7c49021aac1761dd86",
+"md_Changelog.html#autotoc_md57",
+"structBSMPT_1_1Minimizer_1_1MinimizersToUse.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

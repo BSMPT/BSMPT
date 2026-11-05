@@ -24,7 +24,7 @@ var searchData=
   ['c_5fmassup_21',['C_MassUp',['../structBSMPT_1_1ISMConstants.html#a91d4a37ccce72480c2e0e71381b360e5',1,'BSMPT::ISMConstants']]],
   ['c_5fmassw_22',['C_MassW',['../structBSMPT_1_1ISMConstants.html#a40b3925d04d1281a9cd870995ddd6770',1,'BSMPT::ISMConstants']]],
   ['c_5fmassz_23',['C_MassZ',['../structBSMPT_1_1ISMConstants.html#a71db3b51d26e829a50e41ffc17d05199',1,'BSMPT::ISMConstants']]],
-  ['c_5fnegline_24',['c_negline',['../NegativeBosonSpline_8cpp.html#ae7be2f10cd4525049e5abd8460b3eabb',1,'C_NegLine:&#160;NegativeBosonSpline.cpp'],['../NegativeBosonSpline_8h.html#ae7be2f10cd4525049e5abd8460b3eabb',1,'C_NegLine:&#160;NegativeBosonSpline.cpp']]],
+  ['c_5fnegline_24',['C_NegLine',['../NegativeBosonSpline_8h.html#ae7be2f10cd4525049e5abd8460b3eabb',1,'C_NegLine:&#160;NegativeBosonSpline.cpp'],['../NegativeBosonSpline_8cpp.html#ae7be2f10cd4525049e5abd8460b3eabb',1,'C_NegLine:&#160;NegativeBosonSpline.cpp']]],
   ['c_5fpt_25',['C_PT',['../namespaceBSMPT.html#a1b3a829fa1c864f44450da9df8771d64',1,'BSMPT']]],
   ['c_5frelerr_26',['C_RelErr',['../gen__func__fluid_8h.html#a239930c6fa5c9b0a7c96a4d2789f82a2',1,'BSMPT::Baryo']]],
   ['c_5fsinsquaredweinberg_27',['C_sinsquaredWeinberg',['../structBSMPT_1_1ISMConstants.html#ae119637c0ba35b99acabcbcb433aa1fb',1,'BSMPT::ISMConstants']]],

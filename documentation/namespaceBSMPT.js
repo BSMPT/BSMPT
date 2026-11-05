@@ -1,94 +1,39 @@
 var namespaceBSMPT =
 [
     [ "BounceActionInt", "classBSMPT_1_1BounceActionInt.html", "classBSMPT_1_1BounceActionInt" ],
+    [ "resultErrorPair", "structBSMPT_1_1resultErrorPair.html", null ],
     [ "BounceSolution", "classBSMPT_1_1BounceSolution.html", "classBSMPT_1_1BounceSolution" ],
     [ "BPLParameters", "structBSMPT_1_1BPLParameters.html", null ],
-    [ "BSMPTLogger", "classBSMPT_1_1BSMPTLogger.html", "classBSMPT_1_1BSMPTLogger" ],
-    [ "Class_Potential_Origin", "classBSMPT_1_1Class__Potential__Origin.html", "classBSMPT_1_1Class__Potential__Origin" ],
-    [ "CoexPhases", "structBSMPT_1_1CoexPhases.html", "structBSMPT_1_1CoexPhases" ],
     [ "DBPLParameters", "structBSMPT_1_1DBPLParameters.html", null ],
-    [ "GravitationalWave", "classBSMPT_1_1GravitationalWave.html", "classBSMPT_1_1GravitationalWave" ],
     [ "GravitationalWaveData", "structBSMPT_1_1GravitationalWaveData.html", null ],
-    [ "gw_data", "structBSMPT_1_1gw__data.html", null ],
-    [ "ISMConstants", "structBSMPT_1_1ISMConstants.html", "structBSMPT_1_1ISMConstants" ],
-    [ "Logger", "classBSMPT_1_1Logger.html", null ],
+    [ "GravitationalWave", "classBSMPT_1_1GravitationalWave.html", "classBSMPT_1_1GravitationalWave" ],
     [ "Minimum", "structBSMPT_1_1Minimum.html", null ],
     [ "MinimumTracer", "classBSMPT_1_1MinimumTracer.html", "classBSMPT_1_1MinimumTracer" ],
-    [ "output", "structBSMPT_1_1output.html", null ],
-    [ "parser", "classBSMPT_1_1parser.html", "classBSMPT_1_1parser" ],
-    [ "parserException", "classBSMPT_1_1parserException.html", null ],
     [ "Phase", "structBSMPT_1_1Phase.html", "structBSMPT_1_1Phase" ],
-    [ "resultErrorPair", "structBSMPT_1_1resultErrorPair.html", null ],
+    [ "CoexPhases", "structBSMPT_1_1CoexPhases.html", "structBSMPT_1_1CoexPhases" ],
+    [ "Vacuum", "structBSMPT_1_1Vacuum.html", "structBSMPT_1_1Vacuum" ],
+    [ "Class_Potential_Origin", "classBSMPT_1_1Class__Potential__Origin.html", "classBSMPT_1_1Class__Potential__Origin" ],
+    [ "ISMConstants", "structBSMPT_1_1ISMConstants.html", "structBSMPT_1_1ISMConstants" ],
+    [ "user_input", "structBSMPT_1_1user__input.html", null ],
     [ "status_codes", "structBSMPT_1_1status__codes.html", null ],
     [ "transition_data", "structBSMPT_1_1transition__data.html", null ],
+    [ "gw_data", "structBSMPT_1_1gw__data.html", null ],
+    [ "output", "structBSMPT_1_1output.html", null ],
     [ "TransitionTracer", "classBSMPT_1_1TransitionTracer.html", "classBSMPT_1_1TransitionTracer" ],
-    [ "user_input", "structBSMPT_1_1user__input.html", null ],
-    [ "Vacuum", "structBSMPT_1_1Vacuum.html", "structBSMPT_1_1Vacuum" ],
-    [ "MultiStepPTMode", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c", [
-      [ "Default", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca7a1920d61156abc05a60135aefe8bc67", null ],
-      [ "OneStep", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca93a3d0301727134912a98c91b33b0e2f", null ],
-      [ "EdgeCoverage", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055caa86b6d038501f4cffae8a2f9a540ffa8", null ],
-      [ "CompleteCoverage", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca7f3031f0965369258d68c3af0fdcc7ec", null ],
-      [ "Auto", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055ca06b9281e396db002010bde1de57262eb", null ]
-    ] ],
-    [ "Order", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8", [
-      [ "TreeLevel", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8a200497bff08d55054f8a2f5a86f1b829", null ],
-      [ "OneLoop", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8a38c9bb0ef12593546d234ff18b294c4b", null ]
-    ] ],
-    [ "StatusCoexPair", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4f", [
-      [ "NotSet", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4fafaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Success", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4fa505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "NoCoexPairs", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4fa931f356d08ee07a453fd4ab58a30f52a", null ]
-    ] ],
-    [ "StatusCrit", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5ac", [
-      [ "NotSet", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acafaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Success", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5aca505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "FalseLower", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acaeb2e62b5d57cafc7166fcb4e336b7409", null ],
-      [ "TrueLower", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acaba2d541070f4c98762c4098ebb3f953d", null ],
-      [ "Failure", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acae139a585510a502bbf1841cf589f5086", null ],
-      [ "CoincideSinglePoint", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5acaad2e434d3bffd6508dadfa783bc214d6", null ]
-    ] ],
-    [ "StatusEWSR", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766e", [
-      [ "NotSet", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766eafaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Off", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766ead15305d7a4e34e02489c74a5ef542f36", null ],
-      [ "Failure", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766eae139a585510a502bbf1841cf589f5086", null ],
-      [ "NotBFB", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766ea5d6b0db4686aa9a18fc6fbab8361feab", null ],
-      [ "FlatRegion", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766eaf7fae366c5a53ffaf6676f312d75b7ff", null ],
-      [ "EWSymNonRes", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766ea5a3bba9e30b7d774c6fd89101c816031", null ],
-      [ "EWSymRes", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766ea7166c46abd800dadf5fe823d57510a34", null ]
-    ] ],
-    [ "StatusGW", "namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80d", [
-      [ "NotSet", "namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80dafaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Success", "namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80da505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "Failure", "namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80dae139a585510a502bbf1841cf589f5086", null ]
-    ] ],
-    [ "StatusNLOStability", "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5", [
-      [ "NotSet", "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5afaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Off", "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5ad15305d7a4e34e02489c74a5ef542f36", null ],
-      [ "Success", "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5a505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "NoNLOStability", "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5a9f04ba686cd5b9c5ac500f0c11b8ac98", null ]
-    ] ],
-    [ "StatusTemperature", "namespaceBSMPT.html#a7b277da28fbdd0f751d0e06826fe9201", [
-      [ "NotSet", "namespaceBSMPT.html#a7b277da28fbdd0f751d0e06826fe9201afaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Success", "namespaceBSMPT.html#a7b277da28fbdd0f751d0e06826fe9201a505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "NotMet", "namespaceBSMPT.html#a7b277da28fbdd0f751d0e06826fe9201abe6b6c78427176294e94bde7ebd6d8f4", null ],
-      [ "NaN", "namespaceBSMPT.html#a7b277da28fbdd0f751d0e06826fe9201a7ecfb3bf076a6a9635f975fe96ac97fd", null ]
-    ] ],
-    [ "StatusTracing", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314", [
-      [ "NotSet", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314afaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "Success", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314a505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "NoCoverage", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314abf276a16e8024d6a3e45f22e0a881034", null ],
-      [ "NoMinsAtBoundaries", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314ad2962dcad6ff4f976b44ce1de47bac0a", null ],
-      [ "NoGlobMinCoverage", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314a62a55fa2eaeac4ffdff3c9d1efcf61d0", null ],
-      [ "Failure", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314ae139a585510a502bbf1841cf589f5086", null ]
-    ] ],
-    [ "TransitionTemperature", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0", [
-      [ "NotSet", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0afaf396cbd83927b72a84d2616fac76ff", null ],
-      [ "ApproxNucleation", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0af9517cb78f15c1ad1583ac055513c531", null ],
-      [ "Nucleation", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0a1a4b443a95bd8b6ca9d6b82e72976225", null ],
-      [ "Percolation", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0ae234ab7b9afbd014f22b8790d87861a1", null ],
-      [ "Completion", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0a2fea59b7e470acac5ec1589d504da14e", null ]
-    ] ],
+    [ "BSMPTLogger", "classBSMPT_1_1BSMPTLogger.html", "classBSMPT_1_1BSMPTLogger" ],
+    [ "Logger", "classBSMPT_1_1Logger.html", null ],
+    [ "parserException", "classBSMPT_1_1parserException.html", null ],
+    [ "parser", "classBSMPT_1_1parser.html", "classBSMPT_1_1parser" ],
+    [ "MultiStepPTMode", "namespaceBSMPT.html#a4bab35d80a520bd282a39792d20d055c", null ],
+    [ "Order", "namespaceBSMPT.html#a3d04e386a6938871d34ad1ae95d80cf8", null ],
+    [ "StatusCoexPair", "namespaceBSMPT.html#a572a958ee192b7b00500562c3f1c8b4f", null ],
+    [ "StatusCrit", "namespaceBSMPT.html#a6103b25f2b801f1256cf73a2547bc5ac", null ],
+    [ "StatusEWSR", "namespaceBSMPT.html#a027d918f62e839a8cfed4fd16341766e", null ],
+    [ "StatusGW", "namespaceBSMPT.html#a548174fac1d1e5e7bf7f17893d37e80d", null ],
+    [ "StatusNLOStability", "namespaceBSMPT.html#a3c0b51265ad016cb2ffeb47da838b3f5", null ],
+    [ "StatusTemperature", "namespaceBSMPT.html#a7b277da28fbdd0f751d0e06826fe9201", null ],
+    [ "StatusTracing", "namespaceBSMPT.html#a55fd1ad353563eab5383fe07eefe7314", null ],
+    [ "TransitionTemperature", "namespaceBSMPT.html#a5f2a6b7efc9d6695e40543d323613ee0", null ],
     [ "almost_the_same", "namespaceBSMPT.html#a3c3b59dc7c02a46fe99213740fbabaac", null ],
     [ "almost_the_same", "namespaceBSMPT.html#a3064ebf1c186332a80b4523704699dce", null ],
     [ "almost_the_same", "namespaceBSMPT.html#a48a65cfaa309225724885338185f355c", null ],

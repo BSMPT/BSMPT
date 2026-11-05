@@ -11,6 +11,6 @@ var searchData=
   ['usetanbetasuppression_8',['UseTanBetaSuppression',['../classBSMPT_1_1Baryo_1_1transport__equations.html#a41e44a49c9496545b60479c65c179caf',1,'BSMPT::Baryo::transport_equations']]],
   ['usetreelevel_9',['UseTreeLevel',['../classBSMPT_1_1Class__Potential__Origin.html#aa13c4b8675b13c153774ad9cf475c2ca',1,'BSMPT::Class_Potential_Origin']]],
   ['usevcountersimplified_10',['UseVCounterSimplified',['../classBSMPT_1_1Class__Potential__Origin.html#a9f5b1fc4312b08807683d0bd4fde6cba',1,'BSMPT::Class_Potential_Origin']]],
-  ['usevelocitytransportequations_11',['usevelocitytransportequations',['../classBSMPT_1_1Baryo_1_1transport__equations.html#a8908dbaaacc64c535cea7ffc4b51f868',1,'BSMPT::Baryo::transport_equations::UseVelocityTransportEquations'],['../structBSMPT_1_1Baryo_1_1GSL__integration__mubl.html#a046c2d9c0e8d98e7c9c25ec7a3c5ab02',1,'BSMPT::Baryo::GSL_integration_mubl::UseVelocityTransportEquations']]],
+  ['usevelocitytransportequations_11',['UseVelocityTransportEquations',['../classBSMPT_1_1Baryo_1_1transport__equations.html#a8908dbaaacc64c535cea7ffc4b51f868',1,'BSMPT::Baryo::transport_equations::UseVelocityTransportEquations'],['../structBSMPT_1_1Baryo_1_1GSL__integration__mubl.html#a046c2d9c0e8d98e7c9c25ec7a3c5ab02',1,'BSMPT::Baryo::GSL_integration_mubl::UseVelocityTransportEquations']]],
   ['usevtreesimplified_12',['UseVTreeSimplified',['../classBSMPT_1_1Class__Potential__Origin.html#a26745f900d20213c8beddc10ab44698d',1,'BSMPT::Class_Potential_Origin']]]
 ];

@@ -1,30 +1,9 @@
 var classBSMPT_1_1BounceActionInt =
 [
-    [ "ActionStatus", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ff", [
-      [ "Success", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffa505a83f220c02df2f85c3810cd9ceb38", null ],
-      [ "NotCalculated", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffa90a0ffb1cc27df7493c875b893d923bb", null ],
-      [ "Integration1DFailed", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffafcd586599c0e3f20b21dfddd1bb25ab1", null ],
-      [ "PathDeformationNotConverged", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffa9ad8064250bd42d70f437c43841b7b90", null ],
-      [ "PathDeformationCrashed", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffa591b65f8d93bc2437ecce45a23a64bf0", null ],
-      [ "FalseVacuumNotMinimum", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffad55aad455be32ade0af0bd6ee1c30188", null ],
-      [ "BackwardsPropagationFailed", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffa0adc2d36c04e4970aca41d14e8aa8c60", null ],
-      [ "NeverUndershootOvershoot", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffade7d8a23f15788a324b3b261d3a467bd", null ],
-      [ "UndershootOvershootNegativeGrad", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffae358be4a4e07ac966c497dd87d3c366b", null ],
-      [ "NotEnoughPointsForSpline", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ffa34b0517934000d24141f5ad04d6ef24c", null ]
-    ] ],
-    [ "Integration1DStatus", "classBSMPT_1_1BounceActionInt.html#a2f3feb2cc85873eb12de9c961c56314b", [
-      [ "Converged", "classBSMPT_1_1BounceActionInt.html#a2f3feb2cc85873eb12de9c961c56314bada5418b1eb4e80d05f2c1c7c4fa1b6ec", null ],
-      [ "NotConverged", "classBSMPT_1_1BounceActionInt.html#a2f3feb2cc85873eb12de9c961c56314badbbde5ea220b09db210c62e8926a02c5", null ]
-    ] ],
-    [ "PathDeformationStatus", "classBSMPT_1_1BounceActionInt.html#ac2647c816f414debde47db27d5b52326", [
-      [ "Converged", "classBSMPT_1_1BounceActionInt.html#ac2647c816f414debde47db27d5b52326ada5418b1eb4e80d05f2c1c7c4fa1b6ec", null ],
-      [ "NotConverged", "classBSMPT_1_1BounceActionInt.html#ac2647c816f414debde47db27d5b52326adbbde5ea220b09db210c62e8926a02c5", null ]
-    ] ],
-    [ "UndershootOvershootStatus", "classBSMPT_1_1BounceActionInt.html#a03efb7c6b290961c4892471f55e164af", [
-      [ "Converged", "classBSMPT_1_1BounceActionInt.html#a03efb7c6b290961c4892471f55e164afada5418b1eb4e80d05f2c1c7c4fa1b6ec", null ],
-      [ "Undershoot", "classBSMPT_1_1BounceActionInt.html#a03efb7c6b290961c4892471f55e164afa484e87517a9fb82503c66cf6e043fb44", null ],
-      [ "Overshoot", "classBSMPT_1_1BounceActionInt.html#a03efb7c6b290961c4892471f55e164afab354c90391c52d303604c54703749474", null ]
-    ] ],
+    [ "ActionStatus", "classBSMPT_1_1BounceActionInt.html#ad0e65e97ac71874b3d21db50d8cbd1ff", null ],
+    [ "Integration1DStatus", "classBSMPT_1_1BounceActionInt.html#a2f3feb2cc85873eb12de9c961c56314b", null ],
+    [ "PathDeformationStatus", "classBSMPT_1_1BounceActionInt.html#ac2647c816f414debde47db27d5b52326", null ],
+    [ "UndershootOvershootStatus", "classBSMPT_1_1BounceActionInt.html#a03efb7c6b290961c4892471f55e164af", null ],
     [ "BounceActionInt", "classBSMPT_1_1BounceActionInt.html#a9fe7ef616a673ec2603f1cbea847224e", null ],
     [ "BounceActionInt", "classBSMPT_1_1BounceActionInt.html#addd14beac6a70fe7152ec3ecd80592b6", null ],
     [ "BounceActionInt", "classBSMPT_1_1BounceActionInt.html#a4511691cd660bf2efa86ba7869bb4d14", null ],
