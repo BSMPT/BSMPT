@@ -6,7 +6,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 Program: BSMPT version 4.0.0
 
-Released by: Philipp Basler, Lisa Biermann, Margarete Mühlleitner, Jonas Müller, Rui Santos and João Viana
+Released by: Philipp Basler, Lisa Biermann, Margarete Mühlleitner, Jonas Müller, Johann Plotnikov, Rui Santos and João Viana
 
 [![GitHub Discussions](https://img.shields.io/badge/%20GitHub-%20Discussions-gray.svg?longCache=true&logo=github&colorB=purple)](https://github.com/BSMPT/BSMPT/discussions)
 [![Unit tests](https://github.com/BSMPT/BSMPT/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/BSMPT/BSMPT/actions/workflows/test.yml)
