@@ -666,7 +666,7 @@ public:
 
   /**
    * @brief Derive the Chapman-Jouget velocity from PT strength and false phase
-   * sound velocity using Eq. (55) of 2004.06995
+   * sound velocity using Eq. (21) of https://arxiv.org/pdf/1004.4187
    */
   void CalcChapmanJougetVelocity();
 
