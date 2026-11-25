@@ -160,7 +160,8 @@ try
           << linestr << sep << parameters.second << sep
           << output.status.status_nlo_stability << sep
           << output.status.status_ewsr << sep << output.status.status_tracing
-          << sep << output.status.status_coex_pairs << sep << time << sep;
+          << sep << output.status.status_coex_pairs << sep
+          << output.status.status_last_phase_ew << sep << time << sep;
 
       if ((output.status.status_tracing == StatusTracing::Success) &&
           (output.status.status_coex_pairs == StatusCoexPair::Success))
